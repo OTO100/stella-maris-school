@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-two-col] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-grid-3] { grid-template-columns: 1fr !important; }
+    [data-grid-2] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 620px) { [data-hero-title] { font-size: 42px !important; } }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Our Learning hero" style="position:relative; isolation:isolate; overflow:hidden; background:#6C142C; color:#FAF8F5;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:-70px; top:-90px; width:300px; height:auto; fill:#DFCB7E; stroke:none; opacity:.07;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:230px; bottom:-50px; width:130px; height:auto; fill:#DFCB7E; stroke:none; opacity:.06;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px 60px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F; flex-shrink:0;"></span><a href="Our School.dc.html" style="color:#DFCB7E;" style-hover="color:#FAF8F5;">Our School</a> · Our learning</p>
+      <h1 data-hero-title="" style="margin-top:16px; max-width:20ch; font-size:56px; font-weight:600; line-height:1.06; letter-spacing:-.02em;">School programmes &amp; curriculum</h1>
+      <p style="margin-top:22px; max-width:62ch; font-size:19px; line-height:1.7; color:rgba(250,248,245,.92);">To support every student to attain their highest possible educational achievement and grow a love of lifelong learning in a safe, inclusive and supportive environment.</p>
+    </div>
+  
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section data-screen-label="Curriculum" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:76px 24px; display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">What we teach</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Two curricula, woven together</h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+        <p>At Stella Maris we follow the New Zealand Curriculum for our learners. The curriculum focuses on sequenced, coherent knowledge and practices that reflect how each learning area helps students to understand, interpret, and contribute in the world.</p>
+        <p>As a Catholic school we also follow <em>Tō Tātou Whakapono — Our Faith</em>, the Catholic Religious Education curriculum. This provides guidance for rich learning about God, the Good News, our story and being Church, carefully weaving together the heart of the Catholic faith so that this knowledge may connect with the lives of our students and whānau.</p>
+        <p>The knowledge in the seven learning areas of the New Zealand Curriculum is carefully selected for the New Zealand context. It includes national and global content, including knowledge that reflects te ao Māori, our place in the Pacific, and our multicultural society.</p>
+        <p>The curriculum is laid out in deliberate, year-by-year teaching sequences within and across learning areas. Each step builds on what has come before, allowing students to revisit key ideas and deepen their understanding over time — so we can identify and respond to learning needs before knowledge gaps compound.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Literacy and maths" style="background:#FAF8F5; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:76px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Foundations</p>
+      <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Literacy and maths</h2>
+      <p style="margin-top:18px; max-width:66ch; font-size:17.5px; line-height:1.78; color:#57534E;">Developing students' literacy and maths knowledge and skills provides them with capabilities that are critical for communication, creativity, participating in society, and being lifelong learners.</p>
+
+      <ul data-grid-3="" style="margin-top:40px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:20px;">
+        <li style="padding:32px 30px 34px; border-radius:20px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Years 0–3 · Reading &amp; writing</p>
+          <h3 style="margin-top:12px; font-size:25px; line-height:1.22; color:#6C142C;">Little Learners Love Literacy</h3>
+          <p style="margin-top:12px; font-size:16px; line-height:1.72; color:#57534E;">Liz Kane's programme for our youngest learners — one of the Structured Literacy options New Zealand schools began in 2025.</p>
+        </li>
+        <li style="padding:32px 30px 34px; border-radius:20px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Years 4–6 · Reading &amp; writing</p>
+          <h3 style="margin-top:12px; font-size:25px; line-height:1.22; color:#6C142C;">The Code</h3>
+          <p style="margin-top:12px; font-size:16px; line-height:1.72; color:#57534E;">Explicit teaching of reading and writing knowledge and skills, continuing the structured literacy pathway through the senior school.</p>
+        </li>
+        <li style="padding:32px 30px 34px; border-radius:20px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Years 1–6 · Maths &amp; statistics</p>
+          <h3 style="margin-top:12px; font-size:25px; line-height:1.22; color:#6C142C;">Maths — No Problem!</h3>
+          <p style="margin-top:12px; font-size:16px; line-height:1.72; color:#57534E;">A clear teaching sequence for the explicit teaching of the mathematics knowledge and skills that are foundational to being numerate.</p>
+        </li>
+      </ul>
+      <p style="margin-top:28px; max-width:72ch; font-size:16.5px; line-height:1.75; color:#57534E;">Reading, writing and vocabulary development are also embedded across all learning areas, so students apply that knowledge everywhere they learn.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Responsive environments" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:76px 24px; display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">In the classroom</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Responsive learning environments</h2>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+        <p>Students learn best when they feel a sense of belonging, are valued, and are supported to succeed. Responsive learning environments promote engagement, wellbeing, and equitable access to learning across all learning areas.</p>
+        <p>Teachers play a key role by recognising and responding to students' interests, needs, and ways of learning in everyday teaching. They also make sure that teaching and learning is non-sexist, non-racist, and non-discriminatory.</p>
+        <p>Year-by-year teaching sequences set out clearly what students need to know and be able to do. That clarity supports teachers to design environments where every student can access rich, challenging content, and to plan teaching, learning and assessment that supports all students to progress and achieve personal excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="assessment" data-screen-label="Assessment" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:76px 24px;">
+      <div data-two-col="" style="display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+        <div>
+          <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Progress</p>
+          <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Assessment &amp; reporting</h2>
+          <p style="margin-top:20px; padding:20px 22px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4; border-left:4px solid #AC973F; font-size:16.5px; line-height:1.7; color:#44403C;">Parents receive a written report at mid-year and at the end of the year outlining their child's progress and achievement against the New Zealand Curriculum.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+          <p>Teachers actively assess student progress in relation to the year-by-year teaching sequences of all learning areas, using effective assessment practices. Progress markers describe the level of proficiency expected at the end of each year of learning in reading, writing, and maths — proficiency at the end of each year signals readiness to engage in the next year of learning.</p>
+          <p>To ensure consistency in how teachers make and communicate informed decisions about progress, Stella Maris uses common progress descriptors for each student.</p>
+        </div>
+      </div>
+
+      <ul style="margin-top:44px; display:flex; flex-direction:column; gap:2px;">
+        <li style="display:grid; grid-template-columns:200px 1fr; gap:28px; padding:22px 4px; border-top:1px solid #E7E0D4;">
+          <p style="font-family:Gabarito, sans-serif; font-size:22px; color:#6C142C;">Emerging</p>
+          <p style="font-size:16.5px; line-height:1.7; color:#57534E;">Students require support to meet curriculum expectations for their year level and/or goals as described in their personalised learning plan.</p>
+        </li>
+        <li style="display:grid; grid-template-columns:200px 1fr; gap:28px; padding:22px 4px; border-top:1px solid #E7E0D4;">
+          <p style="font-family:Gabarito, sans-serif; font-size:22px; color:#6C142C;">Developing</p>
+          <p style="font-size:16.5px; line-height:1.7; color:#57534E;">Students are making some progress towards curriculum expectations for their year level.</p>
+        </li>
+        <li style="display:grid; grid-template-columns:200px 1fr; gap:28px; padding:22px 4px; border-top:1px solid #E7E0D4;">
+          <p style="font-family:Gabarito, sans-serif; font-size:22px; color:#6C142C;">Consolidating</p>
+          <p style="font-size:16.5px; line-height:1.7; color:#57534E;">Students are meeting many curriculum expectations for their year level and are steadily strengthening their understanding across learning areas.</p>
+        </li>
+        <li style="display:grid; grid-template-columns:200px 1fr; gap:28px; padding:22px 4px; border-top:1px solid #E7E0D4;">
+          <p style="font-family:Gabarito, sans-serif; font-size:22px; color:#6C142C;">Proficient</p>
+          <p style="font-size:16.5px; line-height:1.7; color:#57534E;">Students are meeting curriculum expectations for their year level.</p>
+        </li>
+        <li style="display:grid; grid-template-columns:200px 1fr; gap:28px; padding:22px 4px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4;">
+          <p style="font-family:Gabarito, sans-serif; font-size:22px; color:#6C142C;">Exceeding</p>
+          <p style="font-size:16.5px; line-height:1.7; color:#57534E;">Students are exceeding curriculum expectations for their year level.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="support" data-screen-label="Learning support" style="background:#FAF8F5; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:76px 24px; display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Every learner</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Learning support</h2>
+        <p style="margin-top:20px; font-size:16px; line-height:1.7; color:#57534E;">Our SENCo, Mel Hogg, coordinates learning support alongside classroom teachers and whānau.</p>
+        <a href="mailto:melh@stellamaris.school.nz" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">melh@stellamaris.school.nz <span aria-hidden="true">→</span></a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+        <p>At Stella Maris Catholic Primary School, the board and staff ensure that every student is able to attain their highest possible standard in educational achievement and that the school is inclusive of, and caters for, students with differing needs.</p>
+        <p>We have high aspirations for every student, reduce barriers to education, and support all students to develop sound skills in literacy and numeracy.</p>
+        <p>We provide learning support for students who may have a range of individual learning support needs. We take a collaborative approach and involve the student, their parents and caregivers, and others as needed, to best support the student.</p>
+        <p style="font-size:14.5px; color:#78716C;">Education and Training Act 2020, s 127(1)(a), (c)</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Attendance note" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:56px 24px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+      <p style="max-width:70ch; font-size:17.5px; line-height:1.75; color:#44403C;">Student attendance plays an important role in progress and achievement, and lifting attendance is a shared responsibility. The more often students attend school, the better they do, the happier they are, and the better they are set up for life.</p>
+      <a href="Absences.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; border:1px solid #D6CCBA; background:#FFFCF7; font-size:15.5px; font-weight:600; color:#1C1917; white-space:nowrap;" style-hover="border-color:#AC973F; color:#6C142C;">Absences &amp; attendance <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section data-screen-label="Coming soon" style="background:#FFFCF7;">
+    <div style="max-width:1152px; margin:0 auto; padding:72px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Growing this section</p>
+      <h2 style="margin-top:14px; font-size:34px; font-weight:600; line-height:1.15; letter-spacing:-.02em; color:#1C1917;">More of our learning, coming through the year</h2>
+      <p style="margin-top:16px; max-width:64ch; font-size:17px; line-height:1.75; color:#57534E;">We'll add these as content and photography come together — each becomes a section on this page rather than a new page in the menu.</p>
+      <ul data-grid-3="" style="margin-top:32px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:2px 32px;">
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Religious education</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Te Ao Māori &amp; Te Tiriti o Waitangi</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Sports</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">The arts — music, art, drama</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">E-learning &amp; digital technology</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Student wellbeing</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">EOTC — trips, swimming, camp</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Shine Challenge</li>
+        <li style="padding:15px 2px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4; font-size:16.5px; color:#57534E;">Stella Stars</li>
+      </ul>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

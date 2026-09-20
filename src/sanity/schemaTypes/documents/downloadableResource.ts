@@ -58,6 +58,20 @@ export const downloadableResource = defineType({
       description: "Show at the top of the Resources page.",
       initialValue: false,
     }),
+    defineField({
+      name: "placement",
+      title: "Show on",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        list: [
+          { title: "Our School — parent information", value: "about" },
+          { title: "Our Community — plans & reports", value: "reports" },
+          { title: "Enrolment", value: "enrolment" },
+          { title: "Footer", value: "footer" },
+        ],
+      },
+    }),
   ],
   orderings: [
     {

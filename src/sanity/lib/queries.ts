@@ -5,6 +5,7 @@ const linkItemFields = /* groq */ `
   linkDestination,
   linkType,
   siteRoute,
+  anchor,
   href,
   openInNewTab,
   "pageSlug": page->slug.current,
@@ -28,7 +29,6 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     homeCtas[]{${linkItemFields}},
     homeHighlightSlides[]{_key, title, description, published, image, link{${linkItemFields}}},
     homeHeroBackground,
-    innerPageHeroes[]{ pageKey, image },
     specialCharacterSummary,
     contactAddress,
     contactEmail,
@@ -39,6 +39,12 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     absenceUrl,
     newsletterUrl,
     policiesUrl,
+    kindoUrl,
+    termDatesUrl,
+    eroUrl,
+    calendarUrl,
+    parishUrl,
+    dioceseUrl,
     alertEnabled,
     alertSeverity,
     alertTitle,
@@ -63,7 +69,6 @@ export const NAVIGATION_QUERY = defineQuery(`
       landingLink{${linkItemFields}},
       children[]{${linkItemFields}}
     },
-    footerLinks[]{${linkItemFields}},
     footerTagline
   }
 `);
@@ -78,12 +83,115 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(`
     _updatedAt,
     title,
     slug,
+    layout,
     excerpt,
+    lead,
     heroImage,
-    body,
+    hubCardsHeading,
+    hubCards[]{
+      title,
+      body,
+      link{${linkItemFields}}
+    },
+    sections[]{
+      heading,
+      body
+    },
+    resources[]{
+      label,
+      description,
+      url,
+      "fileUrl": file.asset->url,
+      "fileName": file.asset->originalFilename
+    },
     seoTitle,
     seoDescription,
     ogImage
+  }
+`);
+
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_type == "aboutPage" && _id == "aboutPage"][0]{
+    heroSubtitle,
+    principalWelcome,
+    specialCharacter,
+    specialCharacterQuote,
+    specialCharacterQuoteCite,
+    encounteringChrist[]{_key, title, body},
+    ctaHeading,
+    ctaBody
+  }
+`);
+
+export const COMMUNITY_PAGE_QUERY = defineQuery(`
+  *[_type == "communityPage" && _id == "communityPage"][0]{
+    heroSubtitle,
+    staffIntro,
+    ptfaTitle,
+    ptfaDescription,
+    boardTitle,
+    boardDescription,
+    reportsIntro
+  }
+`);
+
+export const ENROLMENT_PAGE_QUERY = defineQuery(`
+  *[_type == "enrolmentPage" && _id == "enrolmentPage"][0]{
+    heroSubtitle,
+    valuePropositionTitle,
+    valueProposition,
+    whyCards[]{_key, title, body},
+    applicationSteps[]{_key, title, body},
+    preferenceTitle,
+    preferenceBody,
+    feesTitle,
+    feesDescription,
+    feeRows[]{_key, title, body},
+    ctaHeading,
+    ctaBody
+  }
+`);
+
+export const LEARNING_PAGE_QUERY = defineQuery(`
+  *[_type == "learningPage" && _id == "learningPage"][0]{
+    heroSubtitle,
+    curriculumTitle,
+    curriculumIntro,
+    religiousEducation,
+    programmesTitle,
+    programmes[]{_key, title, years, body},
+    environmentsTitle,
+    environmentsBody,
+    assessmentIntro,
+    supportTitle,
+    supportBody,
+    attendanceNote
+  }
+`);
+
+export const STAFF_PAGE_QUERY = defineQuery(`
+  *[_type == "staffPage" && _id == "staffPage"][0]{
+    heroSubtitle,
+    teams[]{_key, key, title, yearRange, meaning}
+  }
+`);
+
+export const ABSENCES_PAGE_QUERY = defineQuery(`
+  *[_type == "absencesPage" && _id == "absencesPage"][0]{
+    heroSubtitle,
+    intro,
+    attendanceTitle,
+    attendanceDescription,
+    ctaHeading,
+    ctaBody
+  }
+`);
+
+export const PARISH_PAGE_QUERY = defineQuery(`
+  *[_type == "parishPage" && _id == "parishPage"][0]{
+    heroSubtitle,
+    sectionTitle,
+    body
   }
 `);
 
@@ -174,6 +282,7 @@ export const DOWNLOADABLE_RESOURCES_QUERY = defineQuery(`
     _id,
     title,
     category,
+    placement,
     publishedAt,
     description,
     featured,
@@ -183,11 +292,19 @@ export const DOWNLOADABLE_RESOURCES_QUERY = defineQuery(`
 `);
 
 export const STAFF_MEMBERS_QUERY = defineQuery(`
-  *[_type == "staff"] | order(sortOrder asc, name asc)[0...12]{
+  *[_type == "staff"] | order(sortOrder asc, name asc){
     _id,
     name,
     role,
+    email,
+    group,
+    className,
+    yearLevel,
+    isTeamLeader,
+    showOnContact,
     bio,
-    photo
+    photo,
+    "photoUrl": photo.asset->url,
+    sortOrder
   }
 `);

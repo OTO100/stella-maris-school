@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-grid-4] { grid-template-columns: 1fr 1fr !important; }
+    [data-grid-2] { grid-template-columns: 1fr !important; }
+    [data-team] { grid-template-columns: 1fr !important; gap: 24px !important; }
+  }
+  @media (max-width: 560px) {
+    [data-grid-4] { grid-template-columns: 1fr !important; }
+    [data-hero-title] { font-size: 42px !important; }
+  }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Staff hero" style="position:relative; isolation:isolate; overflow:hidden; background:#6C142C; color:#FAF8F5;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:-70px; top:-90px; width:300px; height:auto; fill:#DFCB7E; stroke:none; opacity:.07;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:230px; bottom:-50px; width:130px; height:auto; fill:#DFCB7E; stroke:none; opacity:.06;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px 60px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F; flex-shrink:0;"></span><a href="Our Community.dc.html" style="color:#DFCB7E;" style-hover="color:#FAF8F5;">Our Community</a> · Staff</p>
+      <h1 data-hero-title="" style="margin-top:16px; font-size:56px; font-weight:600; line-height:1.06; letter-spacing:-.02em;">Our staff</h1>
+      <p style="margin-top:22px; max-width:58ch; font-size:19px; line-height:1.7; color:rgba(250,248,245,.92);">Teachers, leaders and support staff for 2026. Email any of us directly — the office is always happy to point you the right way.</p>
+    </div>
+  
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section data-screen-label="Leadership" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:72px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Senior leadership team</p>
+      <h2 style="margin-top:14px; font-size:36px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Leading our school</h2>
+      <ul data-grid-4="" style="margin-top:36px; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:20px;">
+        <li style="display:flex; flex-direction:column; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4; overflow:hidden;">
+          <div style="aspect-ratio:4/5; background:#F0EBE3; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:Gabarito, sans-serif; font-size:44px; color:rgba(108,20,44,.35);">CC</span>
+          </div>
+          <div style="padding:22px 22px 26px;">
+            <h3 style="font-size:22px; line-height:1.2; color:#1C1917;">Catherine Cyprian</h3>
+            <p style="margin-top:6px; font-size:14.5px; font-weight:500; color:#8A7A46;">Principal</p>
+            <a href="mailto:principal@stellamaris.school.nz" style="display:block; margin-top:12px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">principal@stellamaris.school.nz</a>
+          </div>
+        </li>
+        <li style="display:flex; flex-direction:column; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4; overflow:hidden;">
+          <div style="aspect-ratio:4/5; background:#F0EBE3; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:Gabarito, sans-serif; font-size:44px; color:rgba(108,20,44,.35);">OH</span>
+          </div>
+          <div style="padding:22px 22px 26px;">
+            <h3 style="font-size:22px; line-height:1.2; color:#1C1917;">Olwyn Hobman</h3>
+            <p style="margin-top:6px; font-size:14.5px; font-weight:500; color:#8A7A46;">Associate Principal Years 4–6 · Curriculum Leader</p>
+            <a href="mailto:olwyn@stellamaris.school.nz" style="display:block; margin-top:12px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">olwyn@stellamaris.school.nz</a>
+          </div>
+        </li>
+        <li style="display:flex; flex-direction:column; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4; overflow:hidden;">
+          <div style="aspect-ratio:4/5; background:#F0EBE3; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:Gabarito, sans-serif; font-size:44px; color:rgba(108,20,44,.35);">MH</span>
+          </div>
+          <div style="padding:22px 22px 26px;">
+            <h3 style="font-size:22px; line-height:1.2; color:#1C1917;">Mel Hogg</h3>
+            <p style="margin-top:6px; font-size:14.5px; font-weight:500; color:#8A7A46;">Associate Principal Years 0–3 · SENCo</p>
+            <a href="mailto:melh@stellamaris.school.nz" style="display:block; margin-top:12px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">melh@stellamaris.school.nz</a>
+          </div>
+        </li>
+        <li style="display:flex; flex-direction:column; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4; overflow:hidden;">
+          <div style="aspect-ratio:4/5; background:#F0EBE3; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:Gabarito, sans-serif; font-size:44px; color:rgba(108,20,44,.35);">KH</span>
+          </div>
+          <div style="padding:22px 22px 26px;">
+            <h3 style="font-size:22px; line-height:1.2; color:#1C1917;">Karl Hobman</h3>
+            <p style="margin-top:6px; font-size:14.5px; font-weight:500; color:#8A7A46;">Director of Religious Studies</p>
+            <a href="mailto:karl@stellamaris.school.nz" style="display:block; margin-top:12px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">karl@stellamaris.school.nz</a>
+          </div>
+        </li>
+      </ul>
+      <p style="margin-top:18px; font-size:14px; color:#78716C;">Leadership photographs to be added — placeholders show initials until then.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Office" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div data-grid-2="" style="max-width:1152px; margin:0 auto; padding:56px 24px; display:grid; grid-template-columns:1fr 1.6fr; gap:48px; align-items:center;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">First point of contact</p>
+        <h2 style="margin-top:12px; font-size:32px; font-weight:600; line-height:1.15; letter-spacing:-.02em; color:#1C1917;">School office</h2>
+      </div>
+      <ul style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <li style="padding:22px 24px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Katherine Craig</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">School Administrator</p>
+          <a href="mailto:achieve@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">achieve@stellamaris.school.nz</a>
+        </li>
+        <li style="padding:22px 24px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Colleen Smith</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Office Administrator</p>
+          <a href="mailto:colleen@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">colleen@stellamaris.school.nz</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Marama team" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-team="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Years 0–3</p>
+        <h2 style="margin-top:12px; font-size:38px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#6C142C;">Mārama Team</h2>
+        <p style="margin-top:14px; font-size:16.5px; line-height:1.72; color:#57534E;">Mārama signifies the clarity and light that comes with new learning.</p>
+        <div style="margin-top:22px; padding-top:20px; border-top:1px solid #E7E0D4; font-size:15px; line-height:1.7; color:#57534E;">
+          <p><strong style="color:#1C1917; font-weight:600;">Team Leader</strong><br>Diana Pearson</p>
+          <p style="margin-top:12px;"><strong style="color:#1C1917; font-weight:600;">Associate Principal</strong><br>Mel Hogg</p>
+        </div>
+      </div>
+      <ul style="display:flex; flex-direction:column; gap:2px;">
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Isla MacDiarmid</span>
+            <a href="mailto:isla.macdiarmid@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">isla.macdiarmid@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Anne</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 1</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Erica Mainwaring</span>
+            <a href="mailto:erica@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">erica@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Benedict</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 1</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Monica Allemann</span>
+            <a href="mailto:monica@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">monica@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Clare</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 1</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Karl Hobman</span>
+            <a href="mailto:karl@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">karl@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Mary</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 2</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Jenny Bentley</span>
+            <a href="mailto:jenny@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">jenny@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Nicholas</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 2</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Diana Pearson</span>
+            <a href="mailto:diana@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">diana@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Lucy</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 3</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Nada Boric</span>
+            <a href="mailto:nada@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">nada@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Francis</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 3</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Ahi team" style="background:#FAF8F5; border-bottom:1px solid #E7E0D4;">
+    <div data-team="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Years 4–6</p>
+        <h2 style="margin-top:12px; font-size:38px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#6C142C;">Ahi Team</h2>
+        <p style="margin-top:14px; font-size:16.5px; line-height:1.72; color:#57534E;">Ahi symbolises the inner fire and passion for learning as students grow older.</p>
+        <div style="margin-top:22px; padding-top:20px; border-top:1px solid #E7E0D4; font-size:15px; line-height:1.7; color:#57534E;">
+          <p><strong style="color:#1C1917; font-weight:600;">Team Leader</strong><br>Tracey Law</p>
+          <p style="margin-top:12px;"><strong style="color:#1C1917; font-weight:600;">Associate Principal</strong><br>Olwyn Hobman</p>
+        </div>
+      </div>
+      <ul style="display:flex; flex-direction:column; gap:2px;">
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Michelle Kleingeld</span>
+            <a href="mailto:michelle@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">michelle@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Peter</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 4</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Chantell Vermeulen</span>
+            <a href="mailto:chantell.vermeulen@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">chantell.vermeulen@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St John</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 4</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Becky Buckley</span>
+            <a href="mailto:becky.buckley@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">becky.buckley@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Anthony</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 4</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Tina Hunt</span>
+            <a href="mailto:tina@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">tina@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Augustine</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 5</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Natasha Kain</span>
+            <a href="mailto:natasha@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">natasha@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Dominic</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 5</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Karen Bessone</span>
+            <a href="mailto:karen.bessone@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">karen.bessone@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Patrick</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 5</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Tracey Law</span>
+            <a href="mailto:tracey@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">tracey@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Therese</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 6</span>
+          </span>
+        </li>
+        <li style="display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:18px 4px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4;">
+          <span style="min-width:0;">
+            <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Phoebe Cunningham-Tyler</span>
+            <a href="mailto:phoebe@stellamaris.school.nz" style="display:block; margin-top:3px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">phoebe@stellamaris.school.nz</a>
+          </span>
+          <span style="display:flex; align-items:center; gap:10px; white-space:nowrap;">
+            <span style="font-family:Gabarito, sans-serif; font-size:19px; color:#6C142C;">St Joseph</span>
+            <span style="padding:4px 12px; border-radius:999px; background:#F5EDEE; font-size:13px; font-weight:600; color:#8A2038;">Year 6</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Support staff" style="background:#FFFCF7;">
+    <div data-team="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:300px 1fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Alongside our teachers</p>
+        <h2 style="margin-top:12px; font-size:38px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#6C142C;">Support staff</h2>
+      </div>
+      <div>
+        <ul style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <li style="padding:22px 24px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Steve Flemwell</h3>
+            <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Property Manager</p>
+            <a href="mailto:stephen@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">stephen@stellamaris.school.nz</a>
+          </li>
+          <li style="padding:22px 24px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Kevin Kemble</h3>
+            <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Caretaker</p>
+          </li>
+        </ul>
+        <h3 style="margin-top:36px; font-size:24px; line-height:1.2; color:#1C1917;">Teacher aides</h3>
+        <ul style="margin-top:18px; display:flex; flex-wrap:wrap; gap:10px;">
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Lorraine Budding</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Brooke Fowler</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Nicky Jordan</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Karen Lloyd</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Sarin Lork</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Sandy McCauley</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Brooke McKenzie</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Monica McKernan</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Lucian Moura</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Lauren Muriwai-Mumby</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Mel Shimwell</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Catherine White</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Lola Wilson</li>
+          <li style="padding:9px 18px; border-radius:999px; background:#FAF8F5; border:1px solid #E7E0D4; font-size:15.5px; color:#44403C;">Bec Wood</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

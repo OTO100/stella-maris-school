@@ -1,168 +1,308 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import type { Metadata } from "next";
 
-import type { EventPreviewItem } from "@/components/events-preview";
-import { EventsPreview } from "@/components/events-preview";
 import { PageHero } from "@/components/page-hero";
-import { innerPageHeroBackground, type InnerPageHeroRow } from "@/lib/inner-page-hero";
+import { PlaceholderPanel } from "@/components/placeholder-panel";
+import { resourceFileUrl } from "@/lib/resources";
+import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SITE_SETTINGS_QUERY, UPCOMING_EVENTS_QUERY } from "@/sanity/lib/queries";
+import {
+  COMMUNITY_PAGE_QUERY,
+  DOWNLOADABLE_RESOURCES_QUERY,
+  SITE_SETTINGS_QUERY,
+  STAFF_MEMBERS_QUERY,
+} from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Community",
-  description:
-    "PTFA, events, uniform, partnerships, and how whānau get involved.",
+export const metadata: Metadata = PAGE_META.community;
+
+type StaffMember = {
+  name?: string | null;
+  role?: string | null;
+  email?: string | null;
+  group?: string[] | null;
+  sortOrder?: number | null;
 };
 
+const SLT_FALLBACK: StaffMember[] = [
+  { name: "Catherine Cyprian", role: "Principal", email: "principal@stellamaris.school.nz", group: ["slt"], sortOrder: 10 },
+  { name: "Karl Hobman", role: "Director of Religious Studies", email: "karl@stellamaris.school.nz", group: ["slt"], sortOrder: 40 },
+  { name: "Olwyn Hobman", role: "Associate Principal Years 4–6", email: "olwyn@stellamaris.school.nz", group: ["slt"], sortOrder: 20 },
+  { name: "Mel Hogg", role: "Associate Principal Years 0–3 · SENCo", email: "melh@stellamaris.school.nz", group: ["slt"], sortOrder: 30 },
+];
+
 export default async function CommunityPage() {
-  let facebookUrl: string | undefined;
-  let upcomingEvents: EventPreviewItem[] = [];
-  let innerPageHeroes: InnerPageHeroRow[] | undefined;
+  let copy: Record<string, unknown> | null = null;
+  let settings: Record<string, unknown> | null = null;
+  let staff: StaffMember[] = [];
+  let resources: Array<{
+    title?: string | null;
+    placement?: string[] | null;
+    fileUrl?: string | null;
+  }> = [];
+
   try {
-    const [settingsResult, eventsResult] = await Promise.all([
+    const [page, site, people, downloads] = await Promise.all([
+      sanityFetch({ query: COMMUNITY_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
-      sanityFetch({ query: UPCOMING_EVENTS_QUERY, stega: false }),
+      sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
+      sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
     ]);
-    facebookUrl = settingsResult.data?.facebookUrl as string | undefined;
-    upcomingEvents = (eventsResult.data ?? []) as EventPreviewItem[];
-    innerPageHeroes = settingsResult.data?.innerPageHeroes as
-      | InnerPageHeroRow[]
-      | undefined;
+    copy = page.data as Record<string, unknown> | null;
+    settings = site.data as Record<string, unknown> | null;
+    staff = (people.data as StaffMember[]) ?? [];
+    resources = (downloads.data as typeof resources) ?? [];
   } catch {
-    /* optional */
+    /* CMS unavailable */
   }
 
-  const banner = innerPageHeroBackground(innerPageHeroes, "community");
+  const slt = (staff.length ? staff : SLT_FALLBACK)
+    .filter((person) => person.group?.includes("slt"))
+    .sort((a, b) => (a.sortOrder ?? 100) - (b.sortOrder ?? 100))
+    .slice(0, 4);
+  const preview = slt.length ? slt : SLT_FALLBACK;
+
+  const financials = resourceFileUrl(resources, "reports", PUBLIC_DOCS.financials, "financial");
+  const scheme = resourceFileUrl(resources, "reports", PUBLIC_DOCS.enrolmentScheme, "enrolment");
+  const policiesUrl = settings?.policiesUrl as string | undefined;
+  const eroUrl = settings?.eroUrl as string | undefined;
 
   return (
-    <article className="pb-16">
+    <>
       <PageHero
-        eyebrow="Whānau connections"
-        title="Community"
-        subtitle="Partnerships with parish, PTFA, coaches, helpers, and fundraisers — everyone pitching in strengthens our learners."
-        backgroundImageSrc={banner?.src}
-        backgroundImageAlt={banner?.alt}
+        eyebrow="Our Community"
+        title="A community based on family"
+        subtitle={
+          (copy?.heroSubtitle as string | undefined) ??
+          "Students, teachers, parents and extended family joining together, wholeheartedly committed to the education of our young people."
+        }
       />
 
-      <section className="mx-auto mt-14 max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="order-2 overflow-hidden rounded-[var(--radius-hero)] border border-[var(--color-border)] bg-[var(--color-cream-deep)] lg:order-1">
-            <div
-              className="aspect-[4/3] bg-gradient-to-bl from-[var(--color-accent)]/25 to-[var(--color-brand)]/10"
-              role="img"
-              aria-label="Students and whānau gathering at a school event"
-            />
-          </div>
-          <div className="order-1 lg:order-2">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
-              Parish & voluntary groups
-            </h2>
-            <p className="mt-5 leading-relaxed text-[var(--color-ink-muted)]">
-              Celebrate liturgy together, organise hospitality, support sacramental
-              programmes — your parish connection enriches our school life.
-            </p>
-            {facebookUrl ? (
-              <a
-                href={facebookUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-6 inline-flex rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold text-[var(--color-cream)] hover:bg-[var(--color-brand-muted)]"
-              >
-                Facebook updates
-              </a>
-            ) : (
-              <p className="mt-6 text-sm text-[var(--color-ink-muted)]">
-                Contact the office for the latest community group updates.
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
-          PTFA & fundraising
-        </h2>
-        <p className="mt-5 max-w-3xl leading-relaxed text-[var(--color-ink-muted)]">
-          Volunteers coordinate events — second-hand uniform swaps, quizzes,
-          working bees — channelling energy into learner resources and joyous
-          school memories.
-        </p>
-      </section>
-
-      <section className="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
-          Uniform
-        </h2>
-        <p className="mt-5 max-w-3xl leading-relaxed text-[var(--color-ink-muted)]">
-          Outfit students with tidy, sun-safe attire that signals belonging —
-          supplier links and sizing guidance can anchor here alongside second-hand
-          exchanges coordinated by helpers.
-        </p>
-      </section>
-
-      <section className="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-        <div className="mb-10 border-b border-[var(--color-border)] pb-8">
-          <p className="section-eyebrow text-[var(--color-accent)]">
-            Moments that matter
-          </p>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
-            School life snapshots
-          </h2>
-          <p className="mt-4 max-w-3xl text-[var(--color-ink-muted)]">
-            Use joyful photography within sections rather than maintaining a lone
-            gallery page — authenticity beats polish.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {["Culture", "Sport", "Service"].map((title) => (
-            <figure
-              key={title}
-              className="overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-card)]"
-            >
-              <div
-                className="aspect-[4/5] bg-gradient-to-t from-[var(--color-heading)]/5 via-[var(--color-cream)] to-[var(--color-gold)]/10"
-                role="presentation"
-                aria-hidden
-              />
-              <figcaption className="p-4 text-center text-sm font-semibold text-[var(--color-heading)]">
-                {title}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-        <div className="mb-10 flex flex-col justify-between gap-4 border-b border-[var(--color-border)] pb-8 sm:flex-row sm:items-end">
+      <section
+        id="staff"
+        className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-surface)]"
+      >
+        <div className="page-wrap section-pad grid items-center gap-14 min-[901px]:grid-cols-[1fr_1.2fr]">
           <div>
-            <p className="section-eyebrow text-[var(--color-accent)]">
-              Upcoming
+            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              The people here
             </p>
-            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
-              Featured events
-            </h2>
+            <h2 className="mt-3.5 text-[38px] leading-[1.12]">Staff</h2>
+            <p className="mt-[18px] text-[17.5px] leading-[1.75] text-[var(--color-ink-muted)]">
+              {(copy?.staffIntro as string | undefined) ??
+                "Our senior leadership team, office, the Mārama and Ahi teaching teams, and the support staff who make our days run."}
+            </p>
+            <Link href="/community/staff" className="btn-brand mt-[26px]">
+              Meet the staff <span aria-hidden>→</span>
+            </Link>
           </div>
-          <Link
-            href="/news"
-            className="inline-flex text-sm font-semibold text-[var(--color-accent)] hover:underline"
-          >
-            See news & calendars
-          </Link>
+          <ul className="grid gap-4 min-[621px]:grid-cols-2">
+            {preview.map((person) => (
+              <li
+                key={person.name}
+                className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-6"
+              >
+                <h3 className="text-[20px] leading-[1.2]">{person.name}</h3>
+                <p className="mt-1 text-[14.5px] font-medium text-[var(--color-olive)]">
+                  {person.role}
+                </p>
+                {person.email ? (
+                  <a href={`mailto:${person.email}`} className="mt-2.5 block break-all text-[14px]">
+                    {person.email}
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
         </div>
-        <EventsPreview events={upcomingEvents} />
       </section>
 
-      <div className="mx-auto mt-16 max-w-6xl px-4 text-center sm:px-6">
-        <Link
-          href="/contact"
-          className="inline-flex rounded-full bg-[var(--color-brand)] px-8 py-3 text-sm font-semibold text-[var(--color-cream)] hover:bg-[var(--color-brand-muted)]"
-        >
-          Reach the office
-        </Link>
-      </div>
-    </article>
+      <section
+        id="ptfa"
+        className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]"
+      >
+        <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.2fr]">
+          <div>
+            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              Parents, teachers & friends
+            </p>
+            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+              {(copy?.ptfaTitle as string | undefined) ?? "PTFA"}
+            </h2>
+          </div>
+          <div>
+            <p className="max-w-[60ch] text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+              {(copy?.ptfaDescription as string | undefined) ??
+                "Our PTFA brings whānau together — running events, fundraising for learning resources, and making sure new families feel at home. Everyone is welcome, whether you can give an hour a term or a whole Saturday."}
+            </p>
+            <PlaceholderPanel
+              className="mt-7"
+              label="To come"
+              title="PTFA details"
+            >
+              PTFA statement, current members, and an events calendar with
+              sign-up links for helpers.
+            </PlaceholderPanel>
+            <Link href="/contact" className="mt-[22px] inline-flex items-center gap-2 text-[15.5px] font-semibold">
+              Get in touch about helping <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="board"
+        className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-surface)]"
+      >
+        <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.2fr]">
+          <div>
+            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              Governance
+            </p>
+            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+              {(copy?.boardTitle as string | undefined) ?? "School board"}
+            </h2>
+            <p className="mt-[18px] text-[17px] leading-[1.75] text-[var(--color-ink-muted)]">
+              {(copy?.boardDescription as string | undefined) ??
+                "The board sets the strategic direction of the school alongside the principal, safeguards our special character, and is accountable for how the school's resources are used."}
+            </p>
+          </div>
+          <div>
+            <PlaceholderPanel label="To come" title="Board details">
+              Board statement, member names and photos, and the meeting
+              calendar.
+            </PlaceholderPanel>
+            <ul className="mt-6">
+              <li className="border-t border-[var(--color-border)] py-[18px]">
+                <p className="text-[18px] font-semibold">Meeting minutes</p>
+                <p className="mt-1.5 text-[15.5px] leading-[1.65] text-[var(--color-ink-muted)]">
+                  Email the school office for a copy of board minutes —{" "}
+                  <a href="mailto:achieve@stellamaris.school.nz">
+                    achieve@stellamaris.school.nz
+                  </a>
+                </p>
+              </li>
+              <li className="border-y border-[var(--color-border)] py-[18px]">
+                <p className="text-[18px] font-semibold">Attendance at meetings</p>
+                <p className="mt-1.5 text-[15.5px] leading-[1.65] text-[var(--color-ink-muted)]">
+                  Board meetings are open to the public. Contact the office if
+                  you'd like to attend.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="reports" className="scroll-mt-28 bg-[var(--color-cream)]">
+        <div className="page-wrap section-pad">
+          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            Accountability
+          </p>
+          <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            Plans, reports & policies
+          </h2>
+          <p className="mt-4 max-w-[62ch] text-[17.5px] leading-[1.75] text-[var(--color-ink-muted)]">
+            {(copy?.reportsIntro as string | undefined) ??
+              "Published by the board for our community, as required by the Education and Training Act 2020."}
+          </p>
+          <ul className="mt-9 grid gap-4 min-[621px]:grid-cols-2 min-[901px]:grid-cols-3">
+            <li>
+              <a
+                href={financials}
+                className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+              >
+                <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                  Available now
+                </span>
+                <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                  Annual Financial Statements 2025
+                </span>
+                <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                  Download PDF ↓
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={scheme}
+                className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+              >
+                <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                  Available now
+                </span>
+                <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                  Enrolment scheme
+                </span>
+                <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                  Download PDF ↓
+                </span>
+              </a>
+            </li>
+            <li>
+              {policiesUrl ? (
+                <a
+                  href={policiesUrl}
+                  className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                    External link
+                  </span>
+                  <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                    School policies & procedures
+                  </span>
+                  <span className="mt-2.5 text-[15px] leading-[1.65] text-[var(--color-ink-muted)]">
+                    Maintained online in SchoolDocs.
+                  </span>
+                  <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                    Open SchoolDocs ↗
+                  </span>
+                </a>
+              ) : (
+                <PlaceholderPanel label="To link" title="School policies & procedures">
+                  Maintained online in SchoolDocs.
+                </PlaceholderPanel>
+              )}
+            </li>
+            <li>
+              <PlaceholderPanel label="To upload" title="Strategic & annual plan" />
+            </li>
+            <li>
+              <PlaceholderPanel label="To upload" title="Attendance management plan">
+                <Link href="/absences#plan" className="mt-3 inline-flex text-[14.5px] font-semibold">
+                  Attendance information →
+                </Link>
+              </PlaceholderPanel>
+            </li>
+            <li>
+              {eroUrl ? (
+                <a
+                  href={eroUrl}
+                  className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                    External link
+                  </span>
+                  <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                    ERO report
+                  </span>
+                  <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                    Read the report ↗
+                  </span>
+                </a>
+              ) : (
+                <PlaceholderPanel label="To link" title="ERO report" />
+              )}
+            </li>
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }

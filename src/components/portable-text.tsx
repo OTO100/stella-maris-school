@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 
+import { CardGrid, type CardGridItem } from "@/components/card-grid";
+import { resolveLinkItem, type LinkItemResolved } from "@/lib/nav-href";
 import { urlForImage } from "@/sanity/lib/image";
 
 type ImageBlockValue = {
@@ -8,6 +10,36 @@ type ImageBlockValue = {
   asset?: unknown;
   alt?: string;
 };
+
+type SectionLinksBlockValue = {
+  _type?: "sectionLinks";
+  heading?: string | null;
+  columns?: number | null;
+  cards?: Array<{
+    title?: string | null;
+    body?: string | null;
+    link?: LinkItemResolved | null;
+  }> | null;
+};
+
+function sectionLinksToGridItems(
+  block: SectionLinksBlockValue | undefined,
+): CardGridItem[] {
+  if (!block?.cards?.length) return [];
+  const items: CardGridItem[] = [];
+  for (const card of block.cards) {
+    const title = card.title?.trim();
+    if (!title) continue;
+    const resolved = resolveLinkItem(card.link ?? undefined);
+    items.push({
+      title,
+      body: card.body?.trim() || null,
+      href: resolved?.href ?? null,
+      linkLabel: resolved?.label ?? "Learn more",
+    });
+  }
+  return items;
+}
 
 const components: PortableTextComponents = {
   block: {
@@ -84,6 +116,23 @@ const components: PortableTextComponents = {
             sizes="(max-width: 768px) 100vw, 720px"
           />
         </figure>
+      );
+    },
+    sectionLinks: ({ value }: { value?: SectionLinksBlockValue }) => {
+      const items = sectionLinksToGridItems(value);
+      if (!items.length) return null;
+      const columns = (value?.columns === 2 || value?.columns === 4
+        ? value.columns
+        : 3) as 2 | 3 | 4;
+      return (
+        <div className="my-10">
+          {value?.heading?.trim() ? (
+            <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)]">
+              {value.heading.trim()}
+            </h2>
+          ) : null}
+          <CardGrid items={items} columns={columns} />
+        </div>
       );
     },
   },

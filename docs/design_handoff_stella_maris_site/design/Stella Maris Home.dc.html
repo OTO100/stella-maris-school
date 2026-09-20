@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-two-col] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-values-grid] { grid-template-columns: repeat(3, minmax(0,1fr)) !important; }
+    [data-grid-4] { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 620px) {
+    [data-values-grid] { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+    [data-grid-4] { grid-template-columns: 1fr !important; }
+    [data-hero-title] { font-size: 44px !important; }
+  }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Hero" style="position:relative; isolation:isolate; overflow:hidden; color:#FAF8F5;">
+    <img src="assets/hero-home.webp" alt="Stella Maris Catholic Primary School" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2;">
+    <div aria-hidden="true" style="position:absolute; inset:0; z-index:-1; background:linear-gradient(105deg, rgba(78,14,32,.94) 0%, rgba(108,20,44,.86) 46%, rgba(108,20,44,.55) 100%);"></div>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:-1; right:-70px; top:-80px; width:340px; height:auto; fill:#DFCB7E; stroke:none; opacity:.13;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:-1; right:250px; bottom:-70px; width:150px; height:auto; fill:#DFCB7E; stroke:none; opacity:.10;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:96px 24px 88px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F;"></span>Silverdale, Auckland · Years 1–6</p>
+      <h1 data-hero-title="" style="margin-top:18px; max-width:17ch; font-size:70px; font-weight:600; line-height:1.03; letter-spacing:-.02em;">Stella Maris Catholic Primary School</h1>
+      <p style="margin-top:24px; max-width:50ch; font-size:19.5px; line-height:1.68; color:rgba(250,248,245,.94);">We follow Jesus' way and live the Marian Values — and in doing so, we shine for God.</p>
+      <div style="margin-top:36px; display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="Enrolment.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:#AC973F; color:#1C1917; font-size:16px; font-weight:600; box-shadow:0 10px 28px -12px rgba(0,0,0,.6); transition:transform .18s ease, background .18s ease;" style-hover="background:#C9B25E; color:#1C1917; transform:translateY(-2px);">Enrolment information <span aria-hidden="true">→</span></a>
+        <a href="Our School.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; border:1px solid rgba(250,248,245,.45); color:#FAF8F5; font-size:16px; font-weight:600; transition:background .18s ease;" style-hover="background:rgba(255,255,255,.12); color:#FAF8F5;">About our school</a>
+      </div>
+    </div>
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section data-screen-label="Vision" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:80px 24px; display:grid; grid-template-columns:1fr 1.2fr; gap:64px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Haere mai</p>
+        <h2 style="margin-top:14px; font-size:44px; font-weight:600; line-height:1.08; letter-spacing:-.02em; color:#1C1917;">A community based on family</h2>
+        <a href="Our School.dc.html#principal" style="margin-top:28px; display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; background:#6C142C; color:#FAF8F5; font-size:15.5px; font-weight:600;" style-hover="background:#8A2038;">Read the principal's message <span aria-hidden="true">→</span></a>
+      </div>
+      <figure style="position:relative; border-radius:20px; overflow:hidden; background:#FAF8F5; border:1px solid #E7E0D4; border-left:4px solid #AC973F; padding:34px 36px; box-shadow:0 18px 40px -28px rgba(108,20,44,.45);">
+        <span aria-hidden="true" style="position:absolute; right:26px; top:6px; font-family:Gabarito, sans-serif; font-size:110px; line-height:1; color:rgba(172,151,63,.16); user-select:none;">”</span>
+        <blockquote style="position:relative; font-family:'Work Sans', sans-serif; font-size:21px; font-style:italic; line-height:1.62; color:#44403C;">The Stella Maris community is based on family. This extended family consists of students, teachers, parents, and extended family joining together to form a community that is wholeheartedly committed to the education of our young people.</blockquote>
+        <p style="margin-top:20px; font-size:17px; line-height:1.72; color:#57534E;">We value the development of the whole person — integrating spiritual development, academic success, cultural awareness, and a high level of sporting participation, in the context of our Catholic tradition.</p>
+        <figcaption style="margin-top:24px; display:flex; align-items:center; gap:14px; border-top:1px solid #E7E0D4; padding-top:20px;">
+          <span style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:999px; background:#F0EBE3; color:#6C142C; font-family:Gabarito, sans-serif; font-size:18px; font-weight:600;">CC</span>
+          <span>
+            <span style="display:block; font-size:15.5px; font-weight:600; color:#1C1917;">Catherine Cyprian</span>
+            <span style="display:block; font-size:13.5px; color:#57534E;">Principal</span>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section data-screen-label="Values" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:76px 24px;">
+      <div style="display:flex; align-items:end; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+        <div>
+          <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Ngā uara — our values</p>
+          <h2 style="margin-top:14px; font-size:40px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#1C1917;">The Marian Values</h2>
+        </div>
+        <a href="Our School.dc.html#values" style="font-size:15.5px; font-weight:600; color:#6C142C; display:inline-flex; align-items:center; gap:7px;" style-hover="color:#8A2038;">What each value means <span aria-hidden="true">→</span></a>
+      </div>
+      <ul data-values-grid="" style="margin-top:44px; display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:20px 16px;">
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-faith.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Whakapono</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Faith</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-love.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Aroha</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Love</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-wisdom.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Whakaaronui</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Wisdom</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-whanaungatanga.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Whanaungatanga</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Belonging</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-kaitiakitanga.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Kaitiakitanga</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Guardianship</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="Our School.dc.html#values" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding:22px 14px 24px; border-radius:18px; border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="color:#6C142C; background:#FFFCF7; border-color:#E7E0D4; transform:translateY(-4px); box-shadow:0 16px 32px -24px rgba(108,20,44,.55);">
+            <img src="assets/value-service.png" alt="" style="width:100%; max-width:120px; aspect-ratio:1; object-fit:contain; display:block; mix-blend-mode:multiply;">
+            <span>
+              <span style="display:block; font-family:Gabarito, sans-serif; font-size:20px; line-height:1.2; color:#6C142C;">Āwhina</span>
+              <span style="display:block; margin-top:4px; font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#8A7A46;">Service</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Explore" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:76px 24px;">
+      <h2 style="font-size:36px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Find your way around</h2>
+      <ul data-grid-4="" style="margin-top:36px; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;">
+        <li>
+          <a href="Our School.dc.html" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FAF8F5; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-family:Gabarito, sans-serif; font-size:25px; line-height:1.2; color:#1C1917;">Our School</span>
+            <span style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#57534E;">Principal's message, special character, values and parent information.</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Explore →</span>
+          </a>
+        </li>
+        <li>
+          <a href="Our Learning.dc.html" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FAF8F5; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-family:Gabarito, sans-serif; font-size:25px; line-height:1.2; color:#1C1917;">Our learning</span>
+            <span style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#57534E;">Curriculum, structured literacy and maths, assessment and support.</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Explore →</span>
+          </a>
+        </li>
+        <li>
+          <a href="Our Community.dc.html" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FAF8F5; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-family:Gabarito, sans-serif; font-size:25px; line-height:1.2; color:#1C1917;">Our Community</span>
+            <span style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#57534E;">Staff, PTFA, the school board, and our plans and reports.</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Explore →</span>
+          </a>
+        </li>
+        <li>
+          <a href="Parish.dc.html" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FAF8F5; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-family:Gabarito, sans-serif; font-size:25px; line-height:1.2; color:#1C1917;">Hibiscus Coast Parish</span>
+            <span style="margin-top:10px; font-size:15.5px; line-height:1.65; color:#57534E;">Our parish connection, liturgy and sacramental programmes.</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Explore →</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Everyday links" style="background:#FAF8F5; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1.4fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">For current families</p>
+        <h2 style="margin-top:14px; font-size:36px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Everyday links</h2>
+        <p style="margin-top:16px; font-size:16.5px; line-height:1.72; color:#57534E;">Day-to-day notices and payments live in our apps. The handbook covers everything else.</p>
+      </div>
+      <ul style="display:flex; flex-direction:column; gap:2px;">
+        <li>
+          <a href="Absences.dc.html" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 18px; border-top:1px solid #E7E0D4; border-radius:12px; transition:background .18s ease, padding-left .18s ease;" style-hover="background:#FFFCF7; padding-left:28px;">
+            <span>
+              <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Report an absence</span>
+              <span style="display:block; margin-top:3px; font-size:15px; color:#57534E;">Hero app, phone or email</span>
+            </span>
+            <span aria-hidden="true" style="color:#6C142C; font-size:19px;">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 18px; border-top:1px solid #E7E0D4; border-radius:12px; transition:background .18s ease, padding-left .18s ease;" style-hover="background:#FFFCF7; padding-left:28px;">
+            <span>
+              <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Hero app</span>
+              <span style="display:block; margin-top:3px; font-size:15px; color:#57534E;">Notices, attendance and reports</span>
+            </span>
+            <span aria-hidden="true" style="color:#6C142C; font-size:19px;">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 18px; border-top:1px solid #E7E0D4; border-radius:12px; transition:background .18s ease, padding-left .18s ease;" style-hover="background:#FFFCF7; padding-left:28px;">
+            <span>
+              <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Kindo</span>
+              <span style="display:block; margin-top:3px; font-size:15px; color:#57534E;">Payments and permission slips</span>
+            </span>
+            <span aria-hidden="true" style="color:#6C142C; font-size:19px;">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 18px; border-top:1px solid #E7E0D4; border-radius:12px; transition:background .18s ease, padding-left .18s ease;" style-hover="background:#FFFCF7; padding-left:28px;">
+            <span>
+              <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Newsletters &amp; term dates</span>
+              <span style="display:block; margin-top:3px; font-size:15px; color:#57534E;">What's coming up this term</span>
+            </span>
+            <span aria-hidden="true" style="color:#6C142C; font-size:19px;">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="assets/docs/Parent-Information-Handbook-2026.pdf" style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:20px 18px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4; border-radius:12px; transition:background .18s ease, padding-left .18s ease;" style-hover="background:#FFFCF7; padding-left:28px;">
+            <span>
+              <span style="display:block; font-size:19px; font-weight:600; color:#1C1917;">Parent Information Handbook 2026</span>
+              <span style="display:block; margin-top:3px; font-size:15px; color:#57534E;">One document, everything in it</span>
+            </span>
+            <span aria-hidden="true" style="color:#6C142C; font-size:19px;">↓</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="position:relative; isolation:isolate; overflow:hidden; background:#4E0E20; color:#FAF8F5; border-top:6px solid #AC973F;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:-1; left:-60px; bottom:-80px; width:260px; height:auto; fill:#DFCB7E; stroke:none; opacity:.12;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+      <div>
+        <h2 style="font-size:34px; font-weight:600; line-height:1.15; letter-spacing:-.02em;">Thinking about Stella Maris for your child?</h2>
+        <p style="margin-top:12px; max-width:52ch; font-size:17px; line-height:1.7; color:rgba(250,248,245,.92);">We'd love to show you around. Start with our enrolment information, or simply give the office a call.</p>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="Enrolment.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:#AC973F; color:#1C1917; font-size:16px; font-weight:600;" style-hover="background:#C9B25E; color:#1C1917;">Enrolment information <span aria-hidden="true">→</span></a>
+        <a href="tel:+6494279189" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; border:1px solid rgba(250,248,245,.45); color:#FAF8F5; font-size:16px; font-weight:600;" style-hover="background:rgba(255,255,255,.12); color:#FAF8F5;">09 427 9189</a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

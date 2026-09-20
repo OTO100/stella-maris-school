@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-two-col] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-grid-2] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 620px) { [data-hero-title] { font-size: 42px !important; } }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+  input, textarea, select { font-family: "Work Sans", system-ui, sans-serif; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Contact hero" style="position:relative; isolation:isolate; overflow:hidden; background:#6C142C; color:#FAF8F5;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:-70px; top:-90px; width:300px; height:auto; fill:#DFCB7E; stroke:none; opacity:.07;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:230px; bottom:-50px; width:130px; height:auto; fill:#DFCB7E; stroke:none; opacity:.06;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px 60px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F; flex-shrink:0;"></span>Contact us</p>
+      <h1 data-hero-title="" style="margin-top:16px; font-size:56px; font-weight:600; line-height:1.06; letter-spacing:-.02em;">Get in touch</h1>
+      <p style="margin-top:22px; max-width:56ch; font-size:19px; line-height:1.7; color:rgba(250,248,245,.94);">Our office team is the best first call for anything — enrolment, absences, accounts, or a question about your child's day.</p>
+    </div>
+  
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section data-screen-label="Details and enquiry" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;">
+      <div>
+        <h2 style="font-size:32px; font-weight:600; line-height:1.15; letter-spacing:-.02em; color:#1C1917;">Stella Maris Catholic Primary School</h2>
+        <ul style="margin-top:28px; display:flex; flex-direction:column; gap:2px;">
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Address</p>
+            <p style="margin-top:6px; font-size:18px; color:#1C1917;">50 Silverdale Street<br>Silverdale 0944, Auckland</p>
+          </li>
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Phone</p>
+            <a href="tel:+6494279189" style="display:block; margin-top:6px; font-size:19px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">09 427 9189</a>
+          </li>
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Email</p>
+            <a href="mailto:achieve@stellamaris.school.nz" style="display:block; margin-top:6px; font-size:18px; font-weight:600; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">achieve@stellamaris.school.nz</a>
+          </li>
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Office hours</p>
+            <p style="margin-top:6px; font-size:18px; color:#1C1917;">8:00am – 3:30pm, term time</p>
+          </li>
+        </ul>
+        <h3 style="margin-top:40px; font-size:24px; line-height:1.2; color:#1C1917;">Who to ask</h3>
+        <ul data-grid-2="" style="margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <li style="padding:20px 22px; border-radius:14px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <p style="font-size:17px; font-weight:600; color:#1C1917;">Katherine Craig</p>
+            <p style="margin-top:4px; font-size:14px; color:#8A7A46;">School Administrator</p>
+          </li>
+          <li style="padding:20px 22px; border-radius:14px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <p style="font-size:17px; font-weight:600; color:#1C1917;">Colleen Smith</p>
+            <p style="margin-top:4px; font-size:14px; color:#8A7A46;">Office Administrator</p>
+            <a href="mailto:colleen@stellamaris.school.nz" style="display:block; margin-top:8px; font-size:13.5px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">colleen@stellamaris.school.nz</a>
+          </li>
+          <li style="padding:20px 22px; border-radius:14px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <p style="font-size:17px; font-weight:600; color:#1C1917;">Catherine Cyprian</p>
+            <p style="margin-top:4px; font-size:14px; color:#8A7A46;">Principal</p>
+            <a href="mailto:principal@stellamaris.school.nz" style="display:block; margin-top:8px; font-size:13.5px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">principal@stellamaris.school.nz</a>
+          </li>
+          <li style="padding:20px 22px; border-radius:14px; background:#FAF8F5; border:1px solid #E7E0D4;">
+            <p style="font-size:17px; font-weight:600; color:#1C1917;">Mel Hogg</p>
+            <p style="margin-top:4px; font-size:14px; color:#8A7A46;">Learning support · SENCo</p>
+            <a href="mailto:melh@stellamaris.school.nz" style="display:block; margin-top:8px; font-size:13.5px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">melh@stellamaris.school.nz</a>
+          </li>
+        </ul>
+      </div>
+
+      <div style="padding:36px 34px 38px; border-radius:22px; background:#FAF8F5; border:1px solid #E7E0D4;">
+        <h2 style="font-size:30px; font-weight:600; line-height:1.15; letter-spacing:-.02em; color:#1C1917;">Send us a message</h2>
+        <p style="margin-top:10px; font-size:16px; line-height:1.68; color:#57534E;">We'll come back to you within one school day.</p>
+        <div style="margin-top:26px; display:flex; flex-direction:column; gap:18px;">
+          <label style="display:block;">
+            <span style="display:block; font-size:14px; font-weight:600; color:#44403C;">Your name</span>
+            <input type="text" style="margin-top:7px; width:100%; min-height:48px; padding:12px 16px; border:1px solid #D6CCBA; border-radius:12px; background:#FFFCF7; font-size:16px; color:#1C1917;">
+          </label>
+          <label style="display:block;">
+            <span style="display:block; font-size:14px; font-weight:600; color:#44403C;">Email</span>
+            <input type="email" style="margin-top:7px; width:100%; min-height:48px; padding:12px 16px; border:1px solid #D6CCBA; border-radius:12px; background:#FFFCF7; font-size:16px; color:#1C1917;">
+          </label>
+          <label style="display:block;">
+            <span style="display:block; font-size:14px; font-weight:600; color:#44403C;">Phone <span style="font-weight:400; color:#78716C;">(optional)</span></span>
+            <input type="tel" style="margin-top:7px; width:100%; min-height:48px; padding:12px 16px; border:1px solid #D6CCBA; border-radius:12px; background:#FFFCF7; font-size:16px; color:#1C1917;">
+          </label>
+          <label style="display:block;">
+            <span style="display:block; font-size:14px; font-weight:600; color:#44403C;">What's this about?</span>
+            <select style="margin-top:7px; width:100%; min-height:48px; padding:12px 16px; border:1px solid #D6CCBA; border-radius:12px; background:#FFFCF7; font-size:16px; color:#1C1917;">
+              <option>Enrolment enquiry</option>
+              <option>Book a school tour</option>
+              <option>Accounts &amp; fees</option>
+              <option>Something about my child</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label style="display:block;">
+            <span style="display:block; font-size:14px; font-weight:600; color:#44403C;">Message</span>
+            <textarea rows="5" style="margin-top:7px; width:100%; padding:12px 16px; border:1px solid #D6CCBA; border-radius:12px; background:#FFFCF7; font-size:16px; color:#1C1917; resize:vertical;"></textarea>
+          </label>
+          <button type="button" style="min-height:52px; padding:14px 28px; border:0; border-radius:999px; background:#6C142C; color:#FAF8F5; font-family:inherit; font-size:16px; font-weight:600; cursor:pointer;" style-hover="background:#8A2038;">Send message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Quick links" style="background:#F0EBE3;">
+    <div style="max-width:1152px; margin:0 auto; padding:56px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+      <p style="font-size:18px; color:#44403C;">Reporting an absence instead?</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="Absences.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; background:#6C142C; color:#FAF8F5; font-size:15.5px; font-weight:600;" style-hover="background:#8A2038;">Report an absence <span aria-hidden="true">→</span></a>
+        <a href="Enrolment.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; border:1px solid #D6CCBA; background:#FFFCF7; color:#1C1917; font-size:15.5px; font-weight:600;" style-hover="border-color:#AC973F; color:#6C142C;">Enrolment information</a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

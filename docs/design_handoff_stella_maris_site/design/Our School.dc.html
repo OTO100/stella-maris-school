@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-two-col] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-values-grid] { grid-template-columns: 1fr !important; }
+    [data-info-grid] { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 620px) {
+    [data-info-grid] { grid-template-columns: 1fr !important; }
+    [data-hero-title] { font-size: 42px !important; }
+  }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Our School hero" style="position:relative; isolation:isolate; overflow:hidden; background:#6C142C; color:#FAF8F5;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:-70px; top:-90px; width:300px; height:auto; fill:#DFCB7E; stroke:none; opacity:.07;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:230px; bottom:-50px; width:130px; height:auto; fill:#DFCB7E; stroke:none; opacity:.06;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:72px 24px 66px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F; flex-shrink:0;"></span>Our School</p>
+      <h1 data-hero-title="" style="margin-top:16px; max-width:20ch; font-size:60px; font-weight:600; line-height:1.05; letter-spacing:-.02em;">Stella Maris — Star of the Sea</h1>
+      <p style="margin-top:22px; max-width:58ch; font-size:19px; line-height:1.7; color:rgba(250,248,245,.92);">A state-integrated Catholic primary school in Silverdale for Years 1–6. Our school is founded on the Marian Values, and all we undertake is underpinned by them.</p>
+      <ul style="margin-top:34px; display:flex; gap:12px; flex-wrap:wrap;">
+        <li><a href="#principal" style="display:inline-flex; padding:11px 20px; border-radius:999px; border:1px solid rgba(250,248,245,.4); font-size:14.5px; font-weight:600; color:#FAF8F5;" style-hover="background:rgba(255,255,255,.12);">Principal's message</a></li>
+        <li><a href="#character" style="display:inline-flex; padding:11px 20px; border-radius:999px; border:1px solid rgba(250,248,245,.4); font-size:14.5px; font-weight:600; color:#FAF8F5;" style-hover="background:rgba(255,255,255,.12);">Values &amp; special character</a></li>
+        <li><a href="Our Learning.dc.html" style="display:inline-flex; padding:11px 20px; border-radius:999px; border:1px solid rgba(250,248,245,.4); font-size:14.5px; font-weight:600; color:#FAF8F5;" style-hover="background:rgba(255,255,255,.12);">Our learning</a></li>
+        <li><a href="#parent-information" style="display:inline-flex; padding:11px 20px; border-radius:999px; border:1px solid rgba(250,248,245,.4); font-size:14.5px; font-weight:600; color:#FAF8F5;" style-hover="background:rgba(255,255,255,.12);">Parent information</a></li>
+      </ul>
+    </div>
+  
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section id="principal" data-screen-label="Principal's message" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:80px 24px; display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+      <div style="position:sticky; top:96px;">
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Welcome</p>
+        <h2 style="margin-top:14px; font-size:40px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#1C1917;">Principal's message</h2>
+        <div style="margin-top:26px; display:flex; align-items:center; gap:16px; padding:18px 20px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <span style="display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:999px; background:#F0EBE3; color:#6C142C; font-family:Gabarito, sans-serif; font-size:22px; font-weight:600; flex-shrink:0;">CC</span>
+          <span>
+            <span style="display:block; font-size:16px; font-weight:600; color:#1C1917;">Catherine Cyprian</span>
+            <span style="display:block; font-size:14px; color:#57534E;">Principal</span>
+            <a href="mailto:principal@stellamaris.school.nz" style="display:block; margin-top:2px; font-size:13.5px; color:#6C142C;" style-hover="color:#8A2038;">principal@stellamaris.school.nz</a>
+          </span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+        <p style="font-family:Gabarito, sans-serif; font-size:22px; line-height:1.6; color:#1C1917;">Dear Parent or Caregiver — thank you for your interest in Stella Maris Primary School. I welcome your inquiry and consideration of our school community as a place for your child's education.</p>
+        <p>Stella Maris has a strong academic focus and each child is encouraged to take responsibility for their learning, valuing knowledge, truth and faith, under the guidance of dedicated teachers and support staff. At Stella Maris we value the development of the whole person, integrating spiritual development, academic success, cultural prowess and awareness, and a high level of sporting participation and skill in the context of our Catholic tradition.</p>
+        <p>The Stella Maris community is based on family. This extended family consists of students, teachers, parents, and extended family joining together to form a community that is wholeheartedly committed to the education of our young people.</p>
+        <p>As a Catholic school, all we undertake is underpinned by Gospel and Marian Values. Our school is founded on the Marian Values and these values are explicit within our school environment. There is an expectation that the actions and behaviour of all in our school community are guided by these values.</p>
+        <p>We encourage and indeed expect that our students will become lifelong learners, each developing the Spirit of Stella Maris to take with them out into the workplace and adult life. You will find the Spirit of Stella Maris evident in our students and staff, our approach to learning, friendships, and achievement. Confidence, persistence, resilience, self-reliance are all guiding foundations for carving out a successful pathway through life. These attributes are encapsulated in Learner Capabilities and are reflected in the teaching and learning programme at Stella Maris.</p>
+        <p>Central to the mission of Stella Maris School is the promotion of excellence. Our commitment to our parents is to support, encourage, nurture, and challenge individual development for all our students and to provide a learning environment which meets their present and future needs.</p>
+        <p>I look forward to welcoming you and your family into the Stella Maris community.</p>
+        <p style="margin-top:8px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:20px; color:#6C142C;">God Bless — Mā te Atua koe e manaaki</p>
+        <p style="font-size:16px; color:#57534E;"><strong style="color:#1C1917; font-weight:600;">Catherine Cyprian</strong><br>Principal</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="character" data-screen-label="Special character" style="background:#FAF8F5; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:80px 24px;">
+      <div data-two-col="" style="display:grid; grid-template-columns:1fr 1.45fr; gap:64px; align-items:start;">
+        <div>
+          <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Special character</p>
+          <h2 style="margin-top:14px; font-size:40px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#1C1917;">Our name, our faith</h2>
+          <p style="margin-top:20px; font-size:17px; line-height:1.75; color:#57534E;">Stella Maris, Star of the Sea, is one of the most ancient titles for Our Lady. The name was chosen to honour her and acknowledge her as our protector in Aotearoa, this land surrounded by the sea.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:20px; font-size:17.5px; line-height:1.78; color:#44403C; max-width:64ch;">
+          <p>In using this title, we see Our Lady as our guide or leader, someone who could navigate the stars, who watches over us and leads us to Jesus. In following Jesus' way and living the Marian Values we shine for God.</p>
+          <p>We follow the Marian Values that are deeply rooted in the Gospels. These values are demonstrated by Mary, our Mother and guide. They lead us to a stronger relationship with Her Son, Jesus.</p>
+          <p>Our Religious Education curriculum is <em>Tō Tātou Whakapono — Our Faith</em>, finalised in 2021, covering Catholic education in Aotearoa New Zealand from Year 1 through to Year 13. It provides guidance for rich learning through four themes: God, The Good News, Our Story and Being Church. It carefully weaves together and scaffolds the heart of the Catholic faith so that this knowledge may connect with the lives of our students and whānau.</p>
+          <blockquote style="padding:24px 28px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4; border-left:4px solid #AC973F; font-size:19px; font-style:italic; line-height:1.65; color:#44403C;">Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school's Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”
+            <cite style="display:block; margin-top:14px; font-family:'Work Sans', sans-serif; font-style:normal; font-size:13.5px; font-weight:600; letter-spacing:.04em; color:#78716C;">Tō Tātou Whakapono — Our Faith, 2021</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div style="margin-top:64px;">
+        <h3 style="font-size:28px; font-weight:600; letter-spacing:-.015em; color:#1C1917;">Encountering Christ</h3>
+        <p style="margin-top:12px; max-width:62ch; font-size:17px; line-height:1.75; color:#57534E;">Alongside the Religious Education lessons that occur most days, we provide our students with opportunities to encounter Christ.</p>
+        <ul data-info-grid="" style="margin-top:28px; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;">
+          <li style="padding:24px 24px 26px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Daily</p>
+            <p style="margin-top:10px; font-family:Gabarito, sans-serif; font-size:21px; line-height:1.3; color:#1C1917;">Prayer in every class</p>
+          </li>
+          <li style="padding:24px 24px 26px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Fortnightly</p>
+            <p style="margin-top:10px; font-family:Gabarito, sans-serif; font-size:21px; line-height:1.3; color:#1C1917;">Class-led liturgies</p>
+            <p style="margin-top:8px; font-size:14.5px; line-height:1.6; color:#57534E;">A wonderful opportunity for whānau to join us.</p>
+          </li>
+          <li style="padding:24px 24px 26px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">With our parish</p>
+            <p style="margin-top:10px; font-family:Gabarito, sans-serif; font-size:21px; line-height:1.3; color:#1C1917;">Atrium &amp; whole-school Masses</p>
+            <p style="margin-top:8px; font-size:14.5px; line-height:1.6; color:#57534E;">Children lead parts of the Mass, led by our parish priest.</p>
+          </li>
+          <li style="padding:24px 24px 26px; border-radius:16px; background:#FFFCF7; border:1px solid #E7E0D4;">
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">At assembly</p>
+            <p style="margin-top:10px; font-family:Gabarito, sans-serif; font-size:21px; line-height:1.3; color:#1C1917;">Special Character certificates</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="values" data-screen-label="Marian Values" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div style="max-width:1152px; margin:0 auto; padding:80px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Ngā uara — our values</p>
+      <h2 style="margin-top:14px; font-size:40px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#1C1917;">The Marian Values</h2>
+      <p style="margin-top:18px; max-width:62ch; font-size:17.5px; line-height:1.75; color:#57534E;">There is an expectation that the actions and behaviour of everyone in our school community is guided by these six values.</p>
+
+      <ul data-values-grid="" style="margin-top:44px; display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-faith.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Whakapono</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Faith</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“For we live by faith, not by sight.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">2 Corinthians 5:7</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">At Stella Maris the Marian value of faith lies at the heart of our community. Inspired by Mary's unwavering trust in God, we foster an environment where we are encouraged to develop a personal relationship with Christ, guided by Mary's example of humility, devotion and obedience to God's will. We nurture the growth of each other's faith, instilling a sense of hope, trust and reverence for Jesus Christ.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Our Lady, Most Faithful, to pray for us.</p>
+          </div>
+        </li>
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-love.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Aroha</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Love</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“Let us love one another, for love is God.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">1 John 4:7</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">Inspired by the compassionate heart of Mary, we foster a safe and nurturing environment where love is celebrated, practised and instilled in the hearts of our students, staff and families. Through our interactions we model the unconditional love that Mary embodies. We strive to create a school community that radiates love, compassion and empathy, where every person is valued, respected and cared for.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Our Lady, Compassionate Mother, to pray for us.</p>
+          </div>
+        </li>
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-wisdom.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Whakaaronui</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Wisdom</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“The one who gets wisdom loves life; the one who cherishes understanding will soon prosper.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">Proverbs 19:8</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">Inspired by our Catholic faith and by Mary, the epitome of wisdom, we strive to instil a deep reverence for learning, a hunger for knowledge, and a lifelong pursuit of truth. We challenge and equip each other with critical thinking skills, intellectual curiosity, and the ability to think independently. Our commitment to the Marian Value of wisdom is a guiding light as we build a solid foundation of knowledge, faith and wisdom.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Our Lady, Seat of Wisdom, to pray for us.</p>
+          </div>
+        </li>
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-whanaungatanga.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Whanaungatanga</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Belonging</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“In Christ we form one body and every member belongs to all the others.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">Romans 12:5</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">By embracing the value of belonging, we aim to create a school environment that mirrors the love and acceptance of Mary. We celebrate diversity, recognising that each person brings unique gifts and experiences to our school community. Through collaboration and teamwork, we strive to build strong relationships, fostering a genuine sense of belonging and a spirit of unity among all.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Our Lady, Mother of the Church, to pray for us.</p>
+          </div>
+        </li>
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-kaitiakitanga.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Kaitiakitanga</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Guardianship</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“The Lord God took the man into the garden of Eden to cultivate it and keep it.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">Genesis 2:15</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">Inspired by the example of Mary, who cared for and protected Jesus, we believe that as guardians of God's creation it is our duty to safeguard and preserve the environment, all living creatures, and the resources entrusted to us. We aim to nurture a lifelong commitment to environmental stewardship, ensuring a sustainable future for generations to come.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Mary, Mother of our Creator, to pray for us.</p>
+          </div>
+        </li>
+        <li style="display:grid; grid-template-columns:96px 1fr; gap:24px; padding:30px 30px 32px; border-radius:20px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <img src="assets/value-service.png" alt="" style="width:96px; height:96px; object-fit:contain; display:block; mix-blend-mode:multiply;">
+          <div style="min-width:0;">
+            <h3 style="font-size:27px; line-height:1.2; color:#6C142C;">Āwhina</h3>
+            <p style="margin-top:2px; font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#8A7A46;">Service</p>
+            <p style="margin-top:14px; font-family:'Work Sans', sans-serif; font-style:italic; font-size:17.5px; line-height:1.55; color:#44403C;">“Truly I tell you, whatever you did for one of the least of these brothers and sisters of mine, you did for me.” <span style="font-style:normal; font-family:'Work Sans', sans-serif; font-size:13.5px; color:#78716C;">Matthew 25:40</span></p>
+            <p style="margin-top:14px; font-size:16px; line-height:1.72; color:#57534E;">We draw inspiration from the life and teachings of Mary, whose unwavering dedication to service continues to guide us. We believe that service is not just an action but a way of life. Through acts of service we instil the importance of reaching out to others, embracing their needs, and uplifting those in need of support.</p>
+            <p style="margin-top:14px; padding-top:14px; border-top:1px solid #E7E0D4; font-size:15px; font-style:italic; color:#6C142C;">We ask Our Lady, Mirror of Justice, to pray for us.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="Learning teaser" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1.2fr; gap:56px; align-items:center;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Our learning</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Structured teaching, sequenced year by year</h2>
+        <a href="Our Learning.dc.html" style="margin-top:26px; display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; background:#6C142C; color:#FAF8F5; font-size:15.5px; font-weight:600;" style-hover="background:#8A2038;">School programmes &amp; curriculum <span aria-hidden="true">→</span></a>
+      </div>
+      <div>
+        <p style="font-size:17.5px; line-height:1.78; color:#44403C;">We follow the New Zealand Curriculum and, as a Catholic school, <em>Tō Tātou Whakapono — Our Faith</em>. Literacy is taught through Little Learners Love Literacy in Years 0–3 and The Code in Years 4–6; maths through Maths — No Problem!</p>
+        <ul style="margin-top:22px; display:flex; flex-wrap:wrap; gap:8px;">
+          <li style="padding:7px 14px; border-radius:999px; background:#FFFCF7; border:1px solid #E7E0D4; font-size:14px; font-weight:500; color:#57534E;">Structured literacy</li>
+          <li style="padding:7px 14px; border-radius:999px; background:#FFFCF7; border:1px solid #E7E0D4; font-size:14px; font-weight:500; color:#57534E;">Structured maths</li>
+          <li style="padding:7px 14px; border-radius:999px; background:#FFFCF7; border:1px solid #E7E0D4; font-size:14px; font-weight:500; color:#57534E;">Religious education</li>
+          <li style="padding:7px 14px; border-radius:999px; background:#FFFCF7; border:1px solid #E7E0D4; font-size:14px; font-weight:500; color:#57534E;">Assessment &amp; reporting</li>
+          <li style="padding:7px 14px; border-radius:999px; background:#FFFCF7; border:1px solid #E7E0D4; font-size:14px; font-weight:500; color:#57534E;">Learning support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="parent-information" data-screen-label="Parent information" style="background:#FFFCF7;">
+    <div style="max-width:1152px; margin:0 auto; padding:80px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">For current families</p>
+      <h2 style="margin-top:14px; font-size:40px; font-weight:600; line-height:1.1; letter-spacing:-.02em; color:#1C1917;">Parent information</h2>
+      <p style="margin-top:18px; max-width:62ch; font-size:17.5px; line-height:1.75; color:#57534E;">We keep one master Parent Information Handbook so there is a single, current source of everything families need — conduct, allergies, buses, SKIDS, uniform and daily routines.</p>
+
+      <a href="assets/docs/Parent-Information-Handbook-2026.pdf" style="margin-top:32px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:28px 32px; border-radius:20px; background:#6C142C; color:#FAF8F5;" style-hover="background:#8A2038; color:#FAF8F5;">
+        <span style="min-width:0;">
+          <span style="display:block; font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#DFCB7E;">Start here</span>
+          <span style="display:block; margin-top:8px; font-family:Gabarito, sans-serif; font-size:28px; line-height:1.2;">Parent Information Handbook 2026</span>
+          <span style="display:block; margin-top:6px; font-size:15px; color:rgba(250,248,245,.88);">PDF · everything in one place</span>
+        </span>
+        <span style="display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; background:#AC973F; color:#1C1917; font-size:15.5px; font-weight:600; white-space:nowrap;">Download <span aria-hidden="true">↓</span></span>
+      </a>
+
+      <ul data-info-grid="" style="margin-top:36px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px;">
+        <li id="fees" style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">School fees</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">Attendance dues, curriculum charges and voluntary contributions, plus financial assistance and how to pay through Kindo. Current amounts are confirmed by the office.</p>
+          <a href="Contact.dc.html" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Ask the office <span aria-hidden="true">→</span></a>
+        </li>
+        <li style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">School policies &amp; procedures</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">Our policies are maintained online in SchoolDocs and are always the current version.</p>
+          <a href="#" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Open SchoolDocs <span aria-hidden="true">↗</span></a>
+        </li>
+        <li style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">ERO report</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">Our latest Education Review Office report on the school's performance and next steps.</p>
+          <a href="#" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Read the report <span aria-hidden="true">↗</span></a>
+        </li>
+        <li id="apps" style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">School apps</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">Hero for notices, absences and reporting. Kindo for payments and permission slips. Download links and setup help.</p>
+          <a href="#" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Get set up <span aria-hidden="true">→</span></a>
+        </li>
+        <li style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">Buses &amp; SKIDS</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">Transport routes and eligibility, and before- and after-school care on site with SKIDS.</p>
+          <a href="assets/docs/Parent-Information-Handbook-2026.pdf" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">See the handbook <span aria-hidden="true">↓</span></a>
+        </li>
+        <li style="padding:26px 26px 28px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:21px; line-height:1.25; color:#1C1917;">Allergies &amp; student safety</h3>
+          <p style="margin-top:10px; font-size:15.5px; line-height:1.68; color:#57534E;">How we keep learners with allergies safe, and what we ask of families.</p>
+          <a href="assets/docs/Parent-Information-Handbook-2026.pdf" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">See the handbook <span aria-hidden="true">↓</span></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="position:relative; isolation:isolate; overflow:hidden; background:#4E0E20; color:#FAF8F5; border-top:6px solid #AC973F;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:-1; left:-60px; bottom:-80px; width:260px; height:auto; fill:#DFCB7E; stroke:none; opacity:.12;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+      <div>
+        <h2 style="font-size:34px; font-weight:600; line-height:1.15; letter-spacing:-.02em;">Come and see learning in action</h2>
+        <p style="margin-top:12px; max-width:52ch; font-size:17px; line-height:1.7; color:rgba(250,248,245,.9);">Contact the office to arrange a visit, or start an enrolment enquiry.</p>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="Enrolment.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; background:#AC973F; color:#1C1917; font-size:16px; font-weight:600;" style-hover="background:#C9B25E; color:#1C1917;">Enrolment information <span aria-hidden="true">→</span></a>
+        <a href="Contact.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:999px; border:1px solid rgba(250,248,245,.45); color:#FAF8F5; font-size:16px; font-weight:600;" style-hover="background:rgba(255,255,255,.12); color:#FAF8F5;">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

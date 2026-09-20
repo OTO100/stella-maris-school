@@ -1,21 +1,26 @@
 import Image from "next/image";
 
-/** Official Stella Maris Catholic Primary School wordmark (see `public/stella-maris-logo.png`). */
 export function BrandMark({
   className,
   priority,
+  variant = "header",
 }: {
   className?: string;
-  /** Set true in the site header for faster LCP. */
   priority?: boolean;
+  variant?: "header" | "footer";
 }) {
+  const src =
+    variant === "footer" ? "/logo-reversed.png" : "/logo-transparent.png";
+  const height = variant === "footer" ? 56 : 62;
+  const width = Math.round(height * (280 / 84));
+
   return (
     <Image
-      src="/stella-maris-logo.png"
-      alt=""
-      width={280}
-      height={84}
-      sizes="(max-width: 640px) 140px, 180px"
+      src={src}
+      alt="Stella Maris Catholic Primary School"
+      width={width}
+      height={height}
+      sizes={`${height + 20}px`}
       priority={priority}
       className={`object-contain object-left ${className ?? ""}`}
     />

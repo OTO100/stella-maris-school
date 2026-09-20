@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useMemo, useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -78,14 +79,14 @@ export function HomeHighlightCarousel({ slides }: Props) {
   if (!slides.length) return null;
 
   return (
-    <section className="border-y border-[var(--color-border)] bg-[var(--color-surface)] py-14 lg:py-16">
+    <section className="section-pad section-wash border-y border-[var(--color-border)]">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="section-eyebrow text-[var(--color-accent)]">
               Highlights
             </p>
-            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-[var(--color-heading)] sm:text-3xl">
+            <h2 className="mt-3 font-display text-display-md font-semibold leading-tight tracking-tight text-[var(--color-heading)]">
               Life at Stella Maris
             </h2>
             <p className="mt-2 max-w-xl text-[var(--color-ink-muted)]">
@@ -100,7 +101,7 @@ export function HomeHighlightCarousel({ slides }: Props) {
               className="rounded-full border border-[var(--color-border)] bg-[var(--color-cream)] p-3 text-[var(--color-heading)] transition hover:bg-[var(--color-surface)] hover:border-[var(--color-gold)]/60"
               aria-label="Previous slide"
             >
-              <Chevron direction="prev" />
+              <ChevronLeft className="size-5" aria-hidden />
             </button>
             <button
               type="button"
@@ -108,7 +109,7 @@ export function HomeHighlightCarousel({ slides }: Props) {
               className="rounded-full border border-[var(--color-border)] bg-[var(--color-cream)] p-3 text-[var(--color-heading)] transition hover:bg-[var(--color-surface)] hover:border-[var(--color-gold)]/60"
               aria-label="Next slide"
             >
-              <Chevron direction="next" />
+              <ChevronRight className="size-5" aria-hidden />
             </button>
           </div>
         </div>
@@ -153,11 +154,9 @@ export function HomeHighlightCarousel({ slides }: Props) {
                       </p>
                     ) : null}
                     {href ? (
-                      <span className="mt-4 inline-flex text-sm font-semibold text-[var(--color-accent)]">
+                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-accent)]">
                         Learn more
-                        <span aria-hidden className="ml-1">
-                          →
-                        </span>
+                        <ArrowRight className="size-4" aria-hidden />
                       </span>
                     ) : null}
                   </div>
@@ -206,22 +205,3 @@ export function HomeHighlightCarousel({ slides }: Props) {
   );
 }
 
-function Chevron({ direction }: { direction: "prev" | "next" }) {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      {direction === "prev" ? (
-        <path d="M15 18l-6-6 6-6" />
-      ) : (
-        <path d="M9 18l6-6-6-6" />
-      )}
-    </svg>
-  );
-}

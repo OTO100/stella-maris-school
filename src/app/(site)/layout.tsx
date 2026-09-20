@@ -2,11 +2,10 @@ import { SiteAlert } from "@/components/site-alert";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { isSiteAlertActive, siteAlertDismissKey } from "@/lib/site-alert";
+import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import {
   defaultPrimaryNavigation,
-  resolveNavLinks,
   resolvePrimaryNavigation,
-  type LinkItemResolved,
   type NavPrimaryItemRaw,
 } from "@/lib/nav-href";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -23,7 +22,6 @@ export default async function SiteLayout({
 }) {
   let navigation: {
     primaryNavigation?: NavPrimaryItemRaw[] | null;
-    footerLinks?: LinkItemResolved[] | null;
     footerTagline?: string | null;
   } | null = null;
 
@@ -44,50 +42,12 @@ export default async function SiteLayout({
     (settings?.schoolName as string | undefined) ?? fallbackSchoolName;
 
   let primaryNav = resolvePrimaryNavigation(navigation);
-  if (!primaryNav.length) {
+  const cmsNavHasGroups = navigation?.primaryNavigation?.some(
+    (item) => item.variant === "group",
+  );
+  const resolvedNavHasGroups = primaryNav.some((item) => item.kind === "group");
+  if (!primaryNav.length || (cmsNavHasGroups && !resolvedNavHasGroups)) {
     primaryNav = defaultPrimaryNavigation();
-  }
-
-  let footer = resolveNavLinks(navigation?.footerLinks ?? null);
-  if (!footer.length) {
-    footer = [
-      {
-        href: "/about",
-        label: "About",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-      {
-        href: "/learning",
-        label: "Learning",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-      {
-        href: "/community",
-        label: "Community",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-      {
-        href: "/enrolment",
-        label: "Enrolment",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-      {
-        href: "/news",
-        label: "News",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-      {
-        href: "/contact",
-        label: "Contact",
-        useAnchor: false,
-        openInNewTab: false,
-      },
-    ];
   }
 
   const alertFields = settings as import("@/lib/site-alert").SiteSettingsAlertFields | null;
@@ -111,12 +71,17 @@ export default async function SiteLayout({
       <SiteHeader
         schoolName={schoolName}
         primaryNav={primaryNav}
-        absenceUrl={(settings?.absenceUrl as string | null) ?? null}
+        links={{
+          phone: (settings?.contactPhone as string | null) ?? null,
+          email: (settings?.contactEmail as string | null) ?? null,
+          heroAppUrl: (settings?.heroAppUrl as string | null) ?? null,
+          newsletterUrl: (settings?.newsletterUrl as string | null) ?? null,
+          termDatesUrl: (settings?.termDatesUrl as string | null) ?? null,
+        }}
       />
       <div className="flex flex-1 flex-col">{children}</div>
       <SiteFooter
         schoolName={schoolName}
-        footerLinks={footer}
         tagline={(navigation?.footerTagline as string | null) ?? null}
         contact={{
           address: (settings?.contactAddress as string | null) ?? null,
@@ -124,8 +89,13 @@ export default async function SiteLayout({
           phone: (settings?.contactPhone as string | null) ?? null,
           hours: (settings?.officeHours as string | null) ?? null,
         }}
-        policiesUrl={(settings?.policiesUrl as string | null) ?? null}
-        facebookUrl={(settings?.facebookUrl as string | null) ?? null}
+        familyLinks={{
+          heroAppUrl: (settings?.heroAppUrl as string | null) ?? null,
+          kindoUrl: (settings?.kindoUrl as string | null) ?? null,
+          newsletterUrl: (settings?.newsletterUrl as string | null) ?? null,
+          policiesUrl: (settings?.policiesUrl as string | null) ?? null,
+          handbookUrl: PUBLIC_DOCS.handbook,
+        }}
       />
     </>
   );

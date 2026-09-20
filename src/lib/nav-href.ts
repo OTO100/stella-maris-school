@@ -8,6 +8,7 @@ export type LinkItemResolved = {
   /** New model */
   linkDestination?: string | null;
   siteRoute?: string | null;
+  anchor?: string | null;
   /** Legacy internal */
   linkType?: string | null;
   pageSlug?: string | null;
@@ -16,6 +17,13 @@ export type LinkItemResolved = {
   href?: string | null;
   openInNewTab?: boolean | null;
 };
+
+function withAnchor(path: string, anchor?: string | null): string {
+  if (!anchor?.trim()) return path;
+  const fragment = anchor.trim().replace(/^#/, "");
+  if (!fragment) return path;
+  return `${path.split("#")[0]}#${fragment}`;
+}
 
 export type ResolvedLink = {
   href: string;
@@ -60,7 +68,7 @@ export function resolveLinkItem(
     const path = normalizeHref(item.siteRoute ?? undefined);
     if (!path || !isKnownSiteRoute(path)) return null;
     return {
-      href: path,
+      href: withAnchor(path, item.anchor),
       label,
       useAnchor: false,
       openInNewTab: tab,
@@ -70,7 +78,7 @@ export function resolveLinkItem(
     const slug = item.pageSlug?.trim();
     if (!slug) return null;
     return {
-      href: `/${slug}`,
+      href: withAnchor(`/${slug}`, item.anchor),
       label,
       useAnchor: false,
       openInNewTab: tab,
@@ -200,7 +208,7 @@ export function resolvePrimaryNavigation(
 }
 
 export function defaultPrimaryNavigation(): ResolvedNavPrimaryItem[] {
-  const mk = (
+  const simple = (
     key: string,
     href: string,
     label: string,
@@ -214,13 +222,65 @@ export function defaultPrimaryNavigation(): ResolvedNavPrimaryItem[] {
       openInNewTab: false,
     },
   });
+
+  const group = (
+    key: string,
+    groupLabel: string,
+    landing: ResolvedLink,
+    children: ResolvedLink[],
+  ): ResolvedNavPrimaryItem => ({
+    kind: "group",
+    key,
+    groupLabel,
+    landing,
+    children,
+  });
+
+  const link = (
+    href: string,
+    label: string,
+    extra?: Partial<ResolvedLink>,
+  ): ResolvedLink => ({
+    href,
+    label,
+    useAnchor: extra?.useAnchor ?? false,
+    openInNewTab: extra?.openInNewTab ?? false,
+  });
+
   return [
-    mk("fb-home", "/", "Home"),
-    mk("fb-about", "/about", "About"),
-    mk("fb-learning", "/learning", "Learning"),
-    mk("fb-community", "/community", "Community"),
-    mk("fb-enrolment", "/enrolment", "Enrolment"),
-    mk("fb-contact", "/contact", "Contact"),
+    group("fb-our-school", "Our School", link("/about", "Our School overview"), [
+      link("/about#principal", "Principal's message"),
+      link("/about#character", "Values & special character"),
+      link("/about/our-learning", "Our learning"),
+      link("/about#parent-information", "Parent information"),
+      link("/docs/Parent-Information-Handbook-2026.pdf", "Parent handbook", {
+        useAnchor: true,
+      }),
+      link("/about#fees", "School fees"),
+      link("/about#parent-information", "Policies & ERO report"),
+      link("/about#apps", "School app"),
+    ]),
+    group(
+      "fb-our-community",
+      "Our Community",
+      link("/community", "Our Community overview"),
+      [
+        link("/community/staff", "Staff"),
+        link("/community#ptfa", "PTFA"),
+        link("/community#board", "School board"),
+        link("/community#reports", "Plans & reports"),
+        link(
+          "/docs/Annual-Financial-Statements-2025.pdf",
+          "Financial statements",
+          { useAnchor: true },
+        ),
+        link("/absences#plan", "Attendance management plan"),
+      ],
+    ),
+    simple("fb-enrolment", "/enrolment", "Enrolment"),
+    simple("fb-absences", "/absences", "Absences"),
+    simple("fb-contact", "/contact", "Contact"),
+    simple("fb-parish", "/parish", "Parish"),
   ];
 }
 

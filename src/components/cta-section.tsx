@@ -1,51 +1,65 @@
 import type { ReactNode } from "react";
 
+import { StarMark } from "@/components/star-mark";
+
 type Props = {
-  eyebrow?: string;
   heading: string;
   body?: string | null;
+  eyebrow?: string;
   variant?: "brand" | "surface";
   children?: ReactNode;
   className?: string;
 };
 
 export function CTASection({
-  eyebrow,
   heading,
   body,
-  variant = "brand",
   children,
   className = "",
+  variant = "brand",
 }: Props) {
-  const wrap =
-    variant === "brand"
-      ? "bg-[var(--color-brand)] text-[var(--color-cream)]"
-      : "border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-heading)]";
-  const sub =
-    variant === "brand"
-      ? "text-[var(--color-cream)]/85"
-      : "text-[var(--color-ink-muted)]";
-  const eyebrowCls =
-    variant === "brand"
-      ? "text-[var(--color-gold-light)]"
-      : "text-[var(--color-accent)]";
+  if (variant === "surface") {
+    return (
+      <section
+        className={`rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-10 sm:px-10 ${className}`}
+      >
+        <h2 className="font-display text-[32px] leading-[1.12] font-semibold tracking-[-0.02em]">
+          {heading}
+        </h2>
+        {body ? (
+          <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-[var(--color-ink-muted)]">
+            {body}
+          </p>
+        ) : null}
+        {children ? <div className="mt-8">{children}</div> : null}
+      </section>
+    );
+  }
 
   return (
-    <section className={`${wrap} rounded-[var(--radius-hero)] px-6 py-10 sm:px-10 sm:py-12 ${className}`}>
-      {eyebrow ? (
-        <p className={`section-eyebrow ${eyebrowCls}`}>
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-        {heading}
-      </h2>
-      {body ? (
-        <p className={`mt-4 max-w-2xl text-sm leading-relaxed sm:text-base ${sub}`}>
-          {body}
-        </p>
-      ) : null}
-      {children ? <div className="mt-8">{children}</div> : null}
+    <section
+      className={`relative overflow-hidden border-t-[6px] border-[var(--color-gold)] bg-[var(--color-brand-muted)] text-[var(--color-cream)] ${className}`}
+    >
+      <StarMark
+        size={220}
+        opacity={0.12}
+        className="pointer-events-none absolute -bottom-10 -left-8"
+      />
+      <div className="page-wrap relative flex flex-col items-start justify-between gap-8 py-16 min-[901px]:flex-row min-[901px]:items-center">
+        <div>
+          <h2 className="max-w-[18ch] font-display text-[32px] leading-[1.12] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[40px]">
+            {heading}
+          </h2>
+          {body ? (
+            <p className="mt-3 max-w-[52ch] text-[17px] leading-[1.7] text-[rgba(250,248,245,.92)]">
+              {body}
+            </p>
+          ) : null}
+        </div>
+        {children ? (
+          <div className="flex flex-wrap gap-3.5">{children}</div>
+        ) : null}
+      </div>
     </section>
   );
 }

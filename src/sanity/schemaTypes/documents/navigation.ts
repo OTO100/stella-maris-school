@@ -20,6 +20,8 @@ export const navigation = defineType({
       title: "Footer links",
       type: "array",
       of: [{ type: "linkItem" }],
+      hidden: true,
+      description: "Unused — the public footer is fixed to the design.",
     }),
     defineField({
       name: "footerTagline",

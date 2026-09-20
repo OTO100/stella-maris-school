@@ -4,8 +4,6 @@ import { SITE_ROUTE_OPTIONS } from "@/lib/site-routes";
 
 const destinationList = [
   { title: "Site page (menu route)", value: "siteRoute" },
-  { title: "CMS page (custom slug)", value: "cmsPage" },
-  { title: "News post", value: "newsPost" },
   { title: "File download (PDF, etc.)", value: "file" },
   { title: "External URL", value: "external" },
 ] as const;
@@ -116,6 +114,16 @@ export const linkItem = defineType({
       initialValue: false,
       description:
         "For external links and downloads. Internal pages usually open in the same tab.",
+    }),
+    defineField({
+      name: "anchor",
+      title: "In-page anchor",
+      type: "string",
+      description:
+        "Optional fragment without #, e.g. principal — appended as #principal.",
+      hidden: ({ parent }) =>
+        parent?.linkDestination !== "siteRoute" &&
+        parent?.linkDestination !== "cmsPage",
     }),
   ],
   preview: {

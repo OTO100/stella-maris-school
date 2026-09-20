@@ -1,16 +1,25 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { Outfit } from "next/font/google";
+import { Gabarito, Work_Sans } from "next/font/google";
 import { VisualEditing } from "next-sanity/visual-editing";
 
+import { ogImageMetadata } from "@/lib/metadata-helpers";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const gabarito = Gabarito({
+  variable: "--font-gabarito",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 const fallbackTitle = "Stella Maris Catholic Primary School";
@@ -21,6 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
   let description =
     "Stella Maris Catholic Primary School — faith, learning, and community.";
   let title = fallbackTitle;
+  let ogImages: { url: string; width: number; height: number; alt?: string }[] =
+    [];
 
   try {
     const result = await sanityFetch({
@@ -31,6 +42,9 @@ export async function generateMetadata(): Promise<Metadata> {
     if (data?.schoolName) title = data.schoolName;
     if (data?.defaultSeoDescription) description = data.defaultSeoDescription;
     if (data?.siteUrl) siteUrl = data.siteUrl;
+    if (data?.defaultOgImage) {
+      ogImages = ogImageMetadata(data.defaultOgImage) as typeof ogImages;
+    }
   } catch {
     /* use fallbacks */
   }
@@ -45,6 +59,8 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       siteName: title,
+      description,
+      ...(ogImages.length ? { images: ogImages } : {}),
     },
   };
 }
@@ -57,7 +73,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} h-full antialiased`}
+      className={`${gabarito.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         {children}

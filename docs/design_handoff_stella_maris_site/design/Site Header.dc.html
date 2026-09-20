@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 940px) {
+    [data-nav-desktop] { display: none !important; }
+    [data-nav-burger] { display: flex !important; }
+  }
+  @media (max-width: 720px) {
+    [data-utility-links] { display: none !important; }
+  }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%;">
+
+  <a href="#main" style="position:absolute; left:-9999px; top:0; z-index:60; padding:12px 20px; border-radius:0 0 10px 0; background:#6C142C; color:#FAF8F5; font-size:15px; font-weight:600;" style-focus="left:0;">Skip to main content</a>
+
+  <div style="background:#4E0E20; color:rgba(250,248,245,.82); font-size:13px;">
+    <div style="max-width:1152px; margin:0 auto; padding:8px 24px; display:flex; align-items:center; justify-content:space-between; gap:12px 24px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <a href="tel:+6494279189" style="color:rgba(250,248,245,.82); display:flex; align-items:center; gap:7px;" style-hover="color:#FAF8F5;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"></path></svg>
+          09 427 9189
+        </a>
+        <a href="mailto:achieve@stellamaris.school.nz" style="color:rgba(250,248,245,.82); display:flex; align-items:center; gap:7px;" style-hover="color:#FAF8F5;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+          achieve@stellamaris.school.nz
+        </a>
+      </div>
+      <div data-utility-links="" style="display:flex; align-items:center; gap:18px;">
+        <a href="Absences.dc.html" style="color:rgba(250,248,245,.82);" style-hover="color:#FAF8F5;">Report an absence</a>
+        <a href="#" style="color:rgba(250,248,245,.82);" style-hover="color:#FAF8F5;">Hero app</a>
+        <a href="#" style="color:rgba(250,248,245,.82);" style-hover="color:#FAF8F5;">Newsletters</a>
+        <a href="#" style="color:rgba(250,248,245,.82);" style-hover="color:#FAF8F5;">Term dates</a>
+      </div>
+    </div>
+  </div>
+
+  <header style="position:sticky; top:0; z-index:40; background:rgba(255,252,247,.96); backdrop-filter:blur(10px); border-bottom:1px solid #E7E0D4; box-shadow:0 1px 0 rgba(108,20,44,.04);">
+    <div onMouseLeave="{{ closeMenus }}" style="position:relative; max-width:1152px; margin:0 auto; padding:22px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px 24px;">
+      <a href="Stella Maris Home.dc.html" aria-label="Stella Maris Catholic Primary School — Home" style="display:block; flex-shrink:0;">
+        <img src="assets/logo-transparent.png" alt="Stella Maris Catholic Primary School" style="height:62px; width:auto; display:block;">
+      </a>
+
+      <nav aria-label="Primary" data-nav-desktop="" style="display:flex; align-items:center; justify-content:flex-end; gap:2px; flex:1 1 auto; min-width:0;">
+        <button type="button" onClick="{{ toggleSchool }}" onMouseEnter="{{ openSchoolMenu }}" aria-expanded="{{ schoolOpen }}" style="display:flex; align-items:center; gap:5px; padding:9px 12px; border:0; border-radius:8px; background:transparent; font-family:inherit; font-size:15px; font-weight:500; color:#292524; cursor:pointer; white-space:nowrap;" style-hover="background:#F0EBE3; color:#6C142C;">Our School
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <button type="button" onClick="{{ toggleCommunity }}" onMouseEnter="{{ openCommunityMenu }}" aria-expanded="{{ communityOpen }}" style="display:flex; align-items:center; gap:5px; padding:9px 12px; border:0; border-radius:8px; background:transparent; font-family:inherit; font-size:15px; font-weight:500; color:#292524; cursor:pointer; white-space:nowrap;" style-hover="background:#F0EBE3; color:#6C142C;">Our Community
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <a href="Enrolment.dc.html" onMouseEnter="{{ closeMenus }}" style="padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; white-space:nowrap; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Enrolment</a>
+        <a href="Absences.dc.html" onMouseEnter="{{ closeMenus }}" style="padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; white-space:nowrap; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Absences</a>
+        <a href="Contact.dc.html" onMouseEnter="{{ closeMenus }}" style="padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; white-space:nowrap; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Contact</a>
+        <a href="Parish.dc.html" onMouseEnter="{{ closeMenus }}" style="padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; white-space:nowrap; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Parish</a>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:10px; flex-shrink:0; white-space:nowrap;">
+        <a href="Enrolment.dc.html" style="padding:10px 20px; border-radius:999px; background:#6C142C; font-size:14px; font-weight:600; color:#FAF8F5;" style-hover="background:#8A2038;">Enrol now</a>
+        <button type="button" data-nav-burger="" onClick="{{ toggleMobile }}" aria-label="Open menu" aria-expanded="{{ mobileOpen }}" style="display:none; align-items:center; justify-content:center; width:44px; height:44px; border:1px solid #E7E0D4; border-radius:10px; background:transparent; cursor:pointer;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6C142C" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </div>
+
+      <sc-if value="{{ schoolOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute; left:24px; right:24px; top:100%; padding-top:8px;">
+        <div style="display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:32px; padding:28px 30px; border:1px solid #E7E0D4; border-top:3px solid #AC973F; border-radius:0 0 18px 18px; background:#FFFCF7; box-shadow:0 24px 48px -16px rgba(108,20,44,.22);">
+          <div>
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Our School</p>
+            <h3 style="margin-top:10px; font-size:22px; line-height:1.25; color:#1C1917;">A Catholic primary school in Silverdale</h3>
+            <p style="margin-top:10px; font-size:14.5px; line-height:1.6; color:#57534E;">Years 1–6, state integrated, co-educational — founded on the Marian Values.</p>
+            <a href="Our School.dc.html" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Our School overview <span aria-hidden="true">→</span></a>
+          </div>
+          <ul style="display:flex; flex-direction:column; gap:1px;">
+            <li><a href="Our School.dc.html#principal" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Principal's message</a></li>
+            <li><a href="Our School.dc.html#character" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Values &amp; special character</a></li>
+            <li><a href="Our Learning.dc.html" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Our learning</a></li>
+            <li><a href="Our School.dc.html#parent-information" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Parent information</a></li>
+          </ul>
+          <ul style="display:flex; flex-direction:column; gap:1px;">
+            <li><a href="assets/docs/Parent-Information-Handbook-2026.pdf" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Parent handbook</a></li>
+            <li><a href="Our School.dc.html#fees" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">School fees</a></li>
+            <li><a href="Our School.dc.html#parent-information" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Policies &amp; ERO report</a></li>
+            <li><a href="Our School.dc.html#apps" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">School app</a></li>
+          </ul>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ communityOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute; left:24px; right:24px; top:100%; padding-top:8px;">
+        <div style="display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:32px; padding:28px 30px; border:1px solid #E7E0D4; border-top:3px solid #AC973F; border-radius:0 0 18px 18px; background:#FFFCF7; box-shadow:0 24px 48px -16px rgba(108,20,44,.22);">
+          <div>
+            <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Our Community</p>
+            <h3 style="margin-top:10px; font-size:22px; line-height:1.25; color:#1C1917;">Staff, board and whānau</h3>
+            <p style="margin-top:10px; font-size:14.5px; line-height:1.6; color:#57534E;">The people who make Stella Maris, and how our school is governed.</p>
+            <a href="Our Community.dc.html" style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Our Community overview <span aria-hidden="true">→</span></a>
+          </div>
+          <ul style="display:flex; flex-direction:column; gap:1px;">
+            <li><a href="Staff.dc.html" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Staff</a></li>
+            <li><a href="Our Community.dc.html#ptfa" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">PTFA</a></li>
+            <li><a href="Our Community.dc.html#board" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">School board</a></li>
+          </ul>
+          <ul style="display:flex; flex-direction:column; gap:1px;">
+            <li><a href="Our Community.dc.html#reports" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Plans &amp; reports</a></li>
+            <li><a href="assets/docs/Annual-Financial-Statements-2025.pdf" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Financial statements</a></li>
+            <li><a href="Absences.dc.html#plan" style="display:block; padding:9px 12px; border-radius:8px; font-size:15px; font-weight:500; color:#292524;" style-hover="background:#F0EBE3; color:#6C142C;">Attendance management plan</a></li>
+          </ul>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid #E7E0D4; background:#FFFCF7; max-height:70vh; overflow-y:auto;">
+      <div style="padding:14px 24px 22px; display:flex; flex-direction:column; gap:2px;">
+        <a href="Our School.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Our School</a>
+        <a href="Our Learning.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px 12px 28px; border-radius:10px; font-size:16px; font-weight:500; color:#57534E;" style-hover="background:#F0EBE3;">Our learning</a>
+        <a href="Our Community.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Our Community</a>
+        <a href="Staff.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px 12px 28px; border-radius:10px; font-size:16px; font-weight:500; color:#57534E;" style-hover="background:#F0EBE3;">Staff</a>
+        <a href="Enrolment.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Enrolment</a>
+        <a href="Absences.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Absences</a>
+        <a href="Contact.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Contact</a>
+        <a href="Parish.dc.html" style="display:flex; align-items:center; min-height:52px; padding:12px 14px; border-radius:10px; font-size:17px; font-weight:600; color:#292524;" style-hover="background:#F0EBE3;">Hibiscus Coast Parish</a>
+        <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <a href="Absences.dc.html" style="display:flex; align-items:center; justify-content:center; min-height:52px; padding:12px 16px; border-radius:999px; border:1px solid #E7E0D4; font-size:15px; font-weight:600; color:#1C1917;" style-hover="border-color:rgba(172,151,63,.6);">Report absence</a>
+          <a href="Enrolment.dc.html" style="display:flex; align-items:center; justify-content:center; min-height:52px; padding:12px 16px; border-radius:999px; background:#6C142C; font-size:15px; font-weight:600; color:#FAF8F5;" style-hover="background:#8A2038;">Enrol now</a>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </header>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:220}}">
+class Component extends DCLogic {
+  state = { menu: null, mobileOpen: false };
+  open(name) { this.setState({ menu: name }); }
+  toggle(name) { this.setState((s) => ({ menu: s.menu === name ? null : name })); }
+  renderVals() {
+    return {
+      schoolOpen: this.state.menu === 'school',
+      communityOpen: this.state.menu === 'community',
+      mobileOpen: this.state.mobileOpen,
+      openSchoolMenu: () => this.open('school'),
+      openCommunityMenu: () => this.open('community'),
+      toggleSchool: () => this.toggle('school'),
+      toggleCommunity: () => this.toggle('community'),
+      closeMenus: () => this.setState({ menu: null }),
+      toggleMobile: () => this.setState((s) => ({ mobileOpen: !s.mobileOpen })),
+    };
+  }
+}
+</script>
+</body>
+</html>

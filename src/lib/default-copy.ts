@@ -18,9 +18,10 @@ export const defaultSchoolCopy = {
     "Nau mai, haere mai. At Stella Maris Catholic Primary School we walk alongside whānau to grow confident, kind young people. Our learners are encouraged to aim high, serve others, and take pride in who they are — grounded in Gospel values, strong teaching, and a close-knit community.",
   specialCharacter:
     "Our Catholic special character is lived every day: in prayer and liturgy, religious education, and the way we treat one another. We strive to be a place where tamariki experience the love of God through caring relationships, clear expectations, and opportunities to lead and serve.",
-  homeHeroEyebrow: "Kia ora · Silverdale, Auckland",
+  homeHeroEyebrow: "Silverdale, Auckland · Years 1–6",
+  homeHeroTitle: "Stella Maris Catholic Primary School",
   homeHeroSubtitle:
-    "State integrated, co-educational, Years 1–6 — quality learning in a Catholic environment.",
+    "We follow Jesus' way and live the Marian Values — and in doing so, we shine for God.",
   whenuaAcknowledgement:
     "We honour Te Tiriti o Waitangi and acknowledge the mana whenua of this rohe. We are committed to partnership, protection, and participation in our learning community.",
   newsEmpty:
@@ -32,8 +33,8 @@ export const defaultSchoolCopy = {
       id: "learning",
       title: "Learning that lifts every child",
       description:
-        "Structured literacy, inquiry, and inclusive support — all within a caring Catholic environment.",
-      href: "/learning",
+        "Structured literacy, inquiry, and inclusive support — grounded in the Marian Values.",
+      href: "/about/our-learning",
     },
     {
       id: "community",

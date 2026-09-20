@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&amp;family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+  @media (max-width: 900px) {
+    [data-two-col] { grid-template-columns: 1fr !important; gap: 40px !important; }
+    [data-grid-3] { grid-template-columns: 1fr !important; }
+    [data-grid-2] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 620px) { [data-hero-title] { font-size: 42px !important; } }
+  body { margin: 0; background: #FAF8F5; color: #292524; font-family: "Work Sans", system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #6C142C; text-decoration: none; }
+  a:hover { color: #8A2038; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, p, figure, blockquote { margin: 0; }
+  h1, h2, h3 { font-family: Gabarito, system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; text-wrap: pretty; }
+  blockquote { text-wrap: pretty; }
+</style>
+</helmet>
+
+<div style="width:100%; background:#FAF8F5;">
+
+  <dc-import name="Site Header" hint-size="100%,160px"></dc-import>
+
+  <section id="main" data-screen-label="Our Community hero" style="position:relative; isolation:isolate; overflow:hidden; background:#6C142C; color:#FAF8F5;">
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:-70px; top:-90px; width:300px; height:auto; fill:#DFCB7E; stroke:none; opacity:.07;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <svg aria-hidden="true" viewBox="0 0 100 100" style="position:absolute; z-index:0; right:230px; bottom:-50px; width:130px; height:auto; fill:#DFCB7E; stroke:none; opacity:.06;"><path d="M50.0 0.0 L61.3 22.7 L79.0 21.0 L77.3 38.7 L100.0 50.0 L77.3 61.3 L79.0 79.0 L61.3 77.3 L50.0 100.0 L38.7 77.3 L21.0 79.0 L22.7 61.3 L0.0 50.0 L22.7 38.7 L21.0 21.0 L38.7 22.7Z"></path></svg>
+    <div style="position:relative; max-width:1152px; margin:0 auto; padding:64px 24px 60px;">
+      <p style="display:flex; align-items:center; gap:12px; font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:#DFCB7E;"><span aria-hidden="true" style="display:block; width:34px; height:2px; background:#AC973F; flex-shrink:0;"></span>Our Community</p>
+      <h1 data-hero-title="" style="margin-top:16px; max-width:20ch; font-size:56px; font-weight:600; line-height:1.06; letter-spacing:-.02em;">A community based on family</h1>
+      <p style="margin-top:22px; max-width:60ch; font-size:19px; line-height:1.7; color:rgba(250,248,245,.92);">Students, teachers, parents and extended family joining together, wholeheartedly committed to the education of our young people.</p>
+    </div>
+  
+    <div aria-hidden="true" style="position:relative; height:6px; background:linear-gradient(90deg, #AC973F 0%, #DFCB7E 45%, #AC973F 100%);"></div>
+  </section>
+
+  <section id="staff" data-screen-label="Staff" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1.2fr; gap:56px; align-items:center;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">The people here</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Staff</h2>
+        <p style="margin-top:18px; font-size:17.5px; line-height:1.75; color:#57534E;">Our senior leadership team, office, the Mārama and Ahi teaching teams, and the support staff who make our days run.</p>
+        <a href="Staff.dc.html" style="margin-top:26px; display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:999px; background:#6C142C; color:#FAF8F5; font-size:15.5px; font-weight:600;" style-hover="background:#8A2038;">Meet the staff <span aria-hidden="true">→</span></a>
+      </div>
+      <ul data-grid-2="" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <li style="padding:24px 26px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Catherine Cyprian</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Principal</p>
+          <a href="mailto:principal@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">principal@stellamaris.school.nz</a>
+        </li>
+        <li style="padding:24px 26px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Karl Hobman</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Director of Religious Studies</p>
+          <a href="mailto:karl@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">karl@stellamaris.school.nz</a>
+        </li>
+        <li style="padding:24px 26px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Olwyn Hobman</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Associate Principal Years 4–6</p>
+          <a href="mailto:olwyn@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">olwyn@stellamaris.school.nz</a>
+        </li>
+        <li style="padding:24px 26px; border-radius:16px; background:#FAF8F5; border:1px solid #E7E0D4;">
+          <h3 style="font-size:20px; line-height:1.2; color:#1C1917;">Mel Hogg</h3>
+          <p style="margin-top:5px; font-size:14.5px; font-weight:500; color:#8A7A46;">Associate Principal Years 0–3 · SENCo</p>
+          <a href="mailto:melh@stellamaris.school.nz" style="display:block; margin-top:10px; font-size:14px; color:#6C142C; word-break:break-all;" style-hover="color:#8A2038;">melh@stellamaris.school.nz</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ptfa" data-screen-label="PTFA" style="background:#F0EBE3; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1.2fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Parents, teachers &amp; friends</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">PTFA</h2>
+      </div>
+      <div>
+        <p style="font-size:17.5px; line-height:1.78; color:#44403C; max-width:60ch;">Our PTFA brings whānau together — running events, fundraising for learning resources, and making sure new families feel at home. Everyone is welcome, whether you can give an hour a term or a whole Saturday.</p>
+        <div style="margin-top:28px; padding:24px 26px; border-radius:16px; background:#FFFCF7; border:1px dashed #C9BCA4;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">To come</p>
+          <p style="margin-top:8px; font-size:16px; line-height:1.7; color:#57534E;">PTFA statement, current members, and an events calendar with sign-up links for helpers.</p>
+        </div>
+        <a href="Contact.dc.html" style="margin-top:22px; display:inline-flex; align-items:center; gap:8px; font-size:15.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Get in touch about helping <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="board" data-screen-label="School board" style="background:#FFFCF7; border-bottom:1px solid #E7E0D4;">
+    <div data-two-col="" style="max-width:1152px; margin:0 auto; padding:72px 24px; display:grid; grid-template-columns:1fr 1.2fr; gap:56px; align-items:start;">
+      <div>
+        <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Governance</p>
+        <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">School board</h2>
+        <p style="margin-top:18px; font-size:17px; line-height:1.75; color:#57534E;">The board sets the strategic direction of the school alongside the principal, safeguards our special character, and is accountable for how the school's resources are used.</p>
+      </div>
+      <div>
+        <div style="padding:24px 26px; border-radius:16px; background:#FAF8F5; border:1px dashed #C9BCA4;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">To come</p>
+          <p style="margin-top:8px; font-size:16px; line-height:1.7; color:#57534E;">Board statement, member names and photos, and the meeting calendar.</p>
+        </div>
+        <ul style="margin-top:24px; display:flex; flex-direction:column; gap:2px;">
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4;">
+            <p style="font-size:18px; font-weight:600; color:#1C1917;">Meeting minutes</p>
+            <p style="margin-top:5px; font-size:15.5px; line-height:1.65; color:#57534E;">Email the school office for a copy of board minutes — <a href="mailto:achieve@stellamaris.school.nz" style="color:#6C142C;" style-hover="color:#8A2038;">achieve@stellamaris.school.nz</a></p>
+          </li>
+          <li style="padding:18px 4px; border-top:1px solid #E7E0D4; border-bottom:1px solid #E7E0D4;">
+            <p style="font-size:18px; font-weight:600; color:#1C1917;">Attendance at meetings</p>
+            <p style="margin-top:5px; font-size:15.5px; line-height:1.65; color:#57534E;">Board meetings are open to the public. Contact the office if you'd like to attend.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="reports" data-screen-label="Plans and reports" style="background:#FAF8F5;">
+    <div style="max-width:1152px; margin:0 auto; padding:76px 24px;">
+      <p style="font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Accountability</p>
+      <h2 style="margin-top:14px; font-size:38px; font-weight:600; line-height:1.12; letter-spacing:-.02em; color:#1C1917;">Plans, reports &amp; policies</h2>
+      <p style="margin-top:16px; max-width:62ch; font-size:17.5px; line-height:1.75; color:#57534E;">Published by the board for our community, as required by the Education and Training Act 2020.</p>
+
+      <ul data-grid-3="" style="margin-top:36px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px;">
+        <li>
+          <a href="assets/docs/Annual-Financial-Statements-2025.pdf" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Available now</span>
+            <span style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">Annual Financial Statements 2025</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Download PDF ↓</span>
+          </a>
+        </li>
+        <li>
+          <a href="assets/docs/Stella-Maris-Enrolment-Scheme.pdf" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">Available now</span>
+            <span style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">Enrolment scheme</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Download PDF ↓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex; flex-direction:column; height:100%; padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px solid #E7E0D4; border-top:3px solid #AC973F; box-shadow:0 2px 4px -2px rgba(108,20,44,.06); transition:transform .2s ease, box-shadow .2s ease, background .2s ease;" style-hover="background:#FFFDF9; transform:translateY(-4px); box-shadow:0 22px 40px -26px rgba(108,20,44,.55);">
+            <span style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">External link</span>
+            <span style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">School policies &amp; procedures</span>
+            <span style="margin-top:10px; font-size:15px; line-height:1.65; color:#57534E;">Maintained online in SchoolDocs.</span>
+            <span style="margin-top:auto; padding-top:18px; font-size:14.5px; font-weight:600; color:#6C142C;">Open SchoolDocs ↗</span>
+          </a>
+        </li>
+        <li style="padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px dashed #C9BCA4;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">To upload</p>
+          <p style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">Strategic &amp; annual plan</p>
+        </li>
+        <li style="padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px dashed #C9BCA4;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">To upload</p>
+          <p style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">Attendance management plan</p>
+          <a href="Absences.dc.html" style="display:inline-block; margin-top:12px; font-size:14.5px; font-weight:600; color:#6C142C;" style-hover="color:#8A2038;">Attendance information →</a>
+        </li>
+        <li style="padding:28px 28px 30px; border-radius:18px; background:#FFFCF7; border:1px dashed #C9BCA4;">
+          <p style="font-size:11.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#AC973F;">To link</p>
+          <p style="margin-top:12px; font-family:Gabarito, sans-serif; font-size:25px; line-height:1.22; color:#1C1917;">ERO report</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <dc-import name="Site Footer" hint-size="100%,480px"></dc-import>
+
+</div>
+</x-dc>
+</body>
+</html>

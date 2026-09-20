@@ -42,43 +42,33 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/our-community",
-        destination: "/community",
-        permanent: true,
-      },
-      {
-        source: "/our-community/:path*",
-        destination: "/community",
-        permanent: true,
-      },
-      {
         source: "/news-information",
-        destination: "/news",
+        destination: "/",
         permanent: true,
       },
       {
         source: "/news-information/:path*",
-        destination: "/news",
+        destination: "/",
         permanent: true,
       },
       {
         source: "/classroom-team-notices",
-        destination: "/learning",
+        destination: "/about/our-learning",
         permanent: true,
       },
       {
         source: "/classroom-team-notices/:path*",
-        destination: "/learning",
+        destination: "/about/our-learning",
         permanent: true,
       },
       {
         source: "/calendar",
-        destination: "/news",
+        destination: "/",
         permanent: true,
       },
       {
         source: "/calendar/:path*",
-        destination: "/news",
+        destination: "/",
         permanent: true,
       },
       {
@@ -113,12 +103,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/ptfa",
-        destination: "/community",
-        permanent: true,
-      },
-      {
-        source: "/ptfa/:path*",
-        destination: "/community",
+        destination: "/community#ptfa",
         permanent: true,
       },
       {
@@ -127,8 +112,28 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/our-school/our-learning",
+        destination: "/about/our-learning",
+        permanent: true,
+      },
+      {
         source: "/our-school/:path*",
         destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/our-community",
+        destination: "/community",
+        permanent: true,
+      },
+      {
+        source: "/our-community/staff",
+        destination: "/community/staff",
+        permanent: true,
+      },
+      {
+        source: "/our-community/:path*",
+        destination: "/community",
         permanent: true,
       },
       {
@@ -139,6 +144,76 @@ const nextConfig: NextConfig = {
       {
         source: "/our-people/:path*",
         destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/learning",
+        destination: "/about/our-learning",
+        permanent: true,
+      },
+      {
+        source: "/learning/:path*",
+        destination: "/about/our-learning",
+        permanent: true,
+      },
+      {
+        source: "/enrol",
+        destination: "/enrolment",
+        permanent: true,
+      },
+      {
+        source: "/enrol/:path*",
+        destination: "/enrolment",
+        permanent: true,
+      },
+      {
+        source: "/absence",
+        destination: "/absences",
+        permanent: true,
+      },
+      {
+        source: "/absence/:path*",
+        destination: "/absences",
+        permanent: true,
+      },
+      {
+        source: "/hibiscus-coast-parish",
+        destination: "/parish",
+        permanent: true,
+      },
+      {
+        source: "/hibiscus-coast-parish/:path*",
+        destination: "/parish",
+        permanent: true,
+      },
+      {
+        source: "/news",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/news/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/resources",
+        destination: "/community",
+        permanent: true,
+      },
+      {
+        source: "/resources/:path*",
+        destination: "/community",
+        permanent: true,
+      },
+      {
+        source: "/events",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/events/:path*",
+        destination: "/",
         permanent: true,
       },
     ];

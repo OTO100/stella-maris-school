@@ -7,7 +7,6 @@ export const siteSettings = defineType({
   groups: [
     { name: "branding", title: "Branding", default: true },
     { name: "home", title: "Homepage" },
-    { name: "pageBanners", title: "Page banners" },
     { name: "contact", title: "Contact & social" },
     { name: "alert", title: "Site alert" },
     { name: "seo", title: "SEO defaults" },
@@ -143,30 +142,6 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
-      name: "innerPageHeroes",
-      title: "Inner page title banners",
-      type: "array",
-      group: "pageBanners",
-      description:
-        "Optional background photos behind section titles (About, Learning, etc.). A heavy brand tint is applied on the site.",
-      of: [{ type: "innerPageHero" }],
-      validation: (Rule) =>
-        Rule.custom((rows) => {
-          const keys =
-            (rows as { pageKey?: string }[] | undefined)
-              ?.map((r) => r.pageKey)
-              .filter((k): k is string => Boolean(k)) ?? [];
-          const seen = new Set<string>();
-          for (const k of keys) {
-            if (seen.has(k)) {
-              return `Each page can only have one banner image. Duplicate: ${k}`;
-            }
-            seen.add(k);
-          }
-          return true;
-        }),
-    }),
-    defineField({
       name: "specialCharacterSummary",
       title: "Special character summary",
       type: "text",
@@ -204,33 +179,80 @@ export const siteSettings = defineType({
       title: "Facebook URL",
       type: "url",
       group: "contact",
+      hidden: true,
+      description: "Not shown on the site (comms via Hero). Kept for later use.",
     }),
     defineField({
       name: "heroAppUrl",
       title: "Hero / app URL",
       type: "url",
       group: "contact",
-      description: "Link to Hero or your school app",
+      description: "Leave blank to hide this link on the site.",
     }),
     defineField({
       name: "absenceUrl",
       title: "Report absence URL",
       type: "url",
       group: "contact",
-      description:
-        "Where whānau report absences (e.g. Hero app). Shown in the header and contact page.",
+      hidden: true,
+      description: "Absences are reported via Hero, phone or email on /absences.",
     }),
     defineField({
       name: "newsletterUrl",
       title: "Newsletter signup URL",
       type: "url",
       group: "contact",
+      description: "Leave blank to hide this link on the site.",
     }),
     defineField({
       name: "policiesUrl",
       title: "Policies (SchoolDocs or similar)",
       type: "url",
       group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "kindoUrl",
+      title: "Kindo payments URL",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "termDatesUrl",
+      title: "Term dates URL",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "eroUrl",
+      title: "ERO report URL",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "calendarUrl",
+      title: "School calendar URL",
+      type: "url",
+      group: "contact",
+      hidden: true,
+      description: "Not linked in v1. Term dates use the field above when set.",
+    }),
+    defineField({
+      name: "parishUrl",
+      title: "Hibiscus Coast Parish website",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "dioceseUrl",
+      title: "Catholic Diocese of Auckland URL",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
     }),
     defineField({
       name: "alertEnabled",
