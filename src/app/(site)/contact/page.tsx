@@ -21,7 +21,7 @@ type StaffMember = {
 
 const CONTACT_FALLBACK: StaffMember[] = [
   { name: "Katherine Craig", role: "School Administrator", showOnContact: true, sortOrder: 50 },
-  { name: "Colleen Smith", role: "Office Administrator", email: "colleen@stellamaris.school.nz", showOnContact: true, sortOrder: 60 },
+  { name: "Olwyn Hobman", role: "Associate Principal Years 4–6", email: "olwyn@stellamaris.school.nz", showOnContact: true, sortOrder: 20 },
   { name: "Catherine Cyprian", role: "Principal", email: "principal@stellamaris.school.nz", showOnContact: true, sortOrder: 10 },
   { name: "Mel Hogg", role: "Learning support · SENCo", email: "melh@stellamaris.school.nz", showOnContact: true, sortOrder: 30 },
 ];

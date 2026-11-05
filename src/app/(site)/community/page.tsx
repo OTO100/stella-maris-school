@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
 import { PlaceholderPanel } from "@/components/placeholder-panel";
+import { BOARD_EMAIL_FALLBACK, PTFA_EMAIL_FALLBACK } from "@/lib/app-links";
 import { resourceFileUrl } from "@/lib/resources";
 import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { PAGE_META } from "@/lib/page-meta";
@@ -68,6 +69,10 @@ export default async function CommunityPage() {
   const scheme = resourceFileUrl(resources, "reports", PUBLIC_DOCS.enrolmentScheme, "enrolment");
   const policiesUrl = settings?.policiesUrl as string | undefined;
   const eroUrl = settings?.eroUrl as string | undefined;
+  const ptfaEmail = (settings?.ptfaEmail as string | undefined) || PTFA_EMAIL_FALLBACK;
+  const boardEmail = (settings?.boardEmail as string | undefined) || BOARD_EMAIL_FALLBACK;
+  const strategicPlanUrl = copy?.strategicPlanUrl as string | undefined;
+  const attendancePlanUrl = copy?.attendancePlanUrl as string | undefined;
 
   return (
     <>
@@ -145,9 +150,14 @@ export default async function CommunityPage() {
               PTFA statement, current members, and an events calendar with
               sign-up links for helpers.
             </PlaceholderPanel>
-            <Link href="/contact" className="mt-[22px] inline-flex items-center gap-2 text-[15.5px] font-semibold">
-              Get in touch about helping <span aria-hidden>→</span>
-            </Link>
+            <a
+              href={`mailto:${ptfaEmail}`}
+              className="mt-[22px] inline-flex items-center gap-2 text-[15.5px] font-semibold"
+            >
+              {(copy?.ptfaHelpText as string | undefined) ?? "Get in touch about helping"}{" "}
+              <span aria-hidden>→</span>
+            </a>
+            <p className="mt-1.5 text-[14.5px] text-[var(--color-ink-muted)]">{ptfaEmail}</p>
           </div>
         </div>
       </section>
@@ -178,17 +188,17 @@ export default async function CommunityPage() {
               <li className="border-t border-[var(--color-border)] py-[18px]">
                 <p className="text-[18px] font-semibold">Meeting minutes</p>
                 <p className="mt-1.5 text-[15.5px] leading-[1.65] text-[var(--color-ink-muted)]">
-                  Email the school office for a copy of board minutes —{" "}
-                  <a href="mailto:achieve@stellamaris.school.nz">
-                    achieve@stellamaris.school.nz
-                  </a>
+                  {(copy?.boardMinutesText as string | undefined) ??
+                    "Email the Board for a copy of board minutes —"}{" "}
+                  <a href={`mailto:${boardEmail}`}>{boardEmail}</a>
                 </p>
               </li>
               <li className="border-y border-[var(--color-border)] py-[18px]">
                 <p className="text-[18px] font-semibold">Attendance at meetings</p>
                 <p className="mt-1.5 text-[15.5px] leading-[1.65] text-[var(--color-ink-muted)]">
-                  Board meetings are open to the public. Contact the office if
-                  you'd like to attend.
+                  {(copy?.boardMeetingText as string | undefined) ??
+                    "Board meetings are open to the public. To attend a meeting, or with any queries for the Board, please email"}{" "}
+                  <a href={`mailto:${boardEmail}`}>{boardEmail}</a>
                 </p>
               </li>
             </ul>
@@ -269,14 +279,52 @@ export default async function CommunityPage() {
               )}
             </li>
             <li>
-              <PlaceholderPanel label="To upload" title="Strategic & annual plan" />
+              {strategicPlanUrl ? (
+                <a
+                  href={strategicPlanUrl}
+                  className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                    Available now
+                  </span>
+                  <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                    Strategic &amp; annual plan
+                  </span>
+                  <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                    Download ↓
+                  </span>
+                </a>
+              ) : (
+                <PlaceholderPanel label="To upload" title="Strategic & annual plan" />
+              )}
             </li>
             <li>
-              <PlaceholderPanel label="To upload" title="Attendance management plan">
-                <Link href="/absences#plan" className="mt-3 inline-flex text-[14.5px] font-semibold">
-                  Attendance information →
-                </Link>
-              </PlaceholderPanel>
+              {attendancePlanUrl ? (
+                <a
+                  href={attendancePlanUrl}
+                  className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                    Available now
+                  </span>
+                  <span className="mt-3 font-display text-[25px] leading-[1.22]">
+                    Attendance management plan
+                  </span>
+                  <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                    Download ↓
+                  </span>
+                </a>
+              ) : (
+                <PlaceholderPanel label="To upload" title="Attendance management plan">
+                  <Link href="/absences#plan" className="mt-3 inline-flex text-[14.5px] font-semibold">
+                    Attendance information →
+                  </Link>
+                </PlaceholderPanel>
+              )}
             </li>
             <li>
               {eroUrl ? (

@@ -180,6 +180,18 @@ export type StaffPage = {
   }>;
 };
 
+export type ParishPage = {
+  _id: string;
+  _type: "parishPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  heroSubtitle?: string;
+  sectionTitle?: string;
+  body?: string;
+  massTimes?: string;
+};
+
 export type LearningPage = {
   _id: string;
   _type: "learningPage";
@@ -213,8 +225,11 @@ export type AbsencesPage = {
   _rev: string;
   heroSubtitle?: string;
   intro?: string;
+  methodsTitle?: string;
+  whatToTell?: Array<string>;
   attendanceTitle?: string;
   attendanceDescription?: string;
+  attendanceBody?: BlockContent;
   ctaHeading?: string;
   ctaBody?: string;
 };
@@ -263,6 +278,19 @@ export type CommunityPage = {
   ptfaDescription?: string;
   boardTitle?: string;
   boardDescription?: string;
+  ptfaHelpText?: string;
+  boardMinutesText?: string;
+  boardMeetingText?: string;
+  strategicPlanFile?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  attendancePlanFile?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
   reportsIntro?: string;
 };
 
@@ -280,6 +308,31 @@ export type AboutPage = {
   encounteringChrist?: Array<{
     title?: string;
     body?: string;
+    _key: string;
+  }>;
+  ourLadyImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+  };
+  parentInfoCards?: Array<{
+    key?: string;
+    title?: string;
+    body?: string;
+    links?: Array<{
+      label?: string;
+      url?: string;
+      file?: {
+        asset?: SanityFileAssetReference;
+        media?: unknown;
+        _type: "file";
+      };
+      _key: string;
+    }>;
     _key: string;
   }>;
   ctaHeading?: string;
@@ -349,27 +402,36 @@ export type SiteSettings = {
     alt?: string;
     _type: "image";
   };
-  innerPageHeroes?: Array<
-    {
-      _key: string;
-    } & InnerPageHero
-  >;
   specialCharacterSummary?: string;
   contactAddress?: string;
   contactEmail?: string;
+  absenceEmail?: string;
+  ptfaEmail?: string;
+  boardEmail?: string;
   contactPhone?: string;
   officeHours?: string;
   facebookUrl?: string;
   heroAppUrl?: string;
+  heroAppStoreUrl?: string;
+  heroPlayStoreUrl?: string;
   absenceUrl?: string;
   newsletterUrl?: string;
   policiesUrl?: string;
   kindoUrl?: string;
+  kindoDescription?: string;
   termDatesUrl?: string;
   eroUrl?: string;
   calendarUrl?: string;
   parishUrl?: string;
   dioceseUrl?: string;
+  termDates?: Array<{
+    year?: number;
+    term?: 1 | 2 | 3 | 4;
+    start?: string;
+    end?: string;
+    note?: string;
+    _key: string;
+  }>;
   alertEnabled?: boolean;
   alertSeverity?: "info" | "warning" | "critical";
   alertTitle?: string;
@@ -457,7 +519,7 @@ export type NewsPostReference = {
 export type LinkItem = {
   _type: "linkItem";
   label?: string;
-  linkDestination?: "siteRoute" | "cmsPage" | "newsPost" | "file" | "external";
+  linkDestination?: "siteRoute" | "file" | "external";
   siteRoute?:
     | "/"
     | "/about"
@@ -468,8 +530,8 @@ export type LinkItem = {
     | "/absences"
     | "/contact"
     | "/parish"
-    | "/news"
-    | "/resources";
+    | "/privacy"
+    | "/accessibility";
   page?: PageReference;
   newsPost?: NewsPostReference;
   file?: {
@@ -576,27 +638,6 @@ export type SimpleBlockContent = Array<{
   _type: "block";
   _key: string;
 }>;
-
-export type InnerPageHero = {
-  _type: "innerPageHero";
-  pageKey?:
-    | "about"
-    | "community"
-    | "learning"
-    | "contact"
-    | "enrolment"
-    | "absences"
-    | "resources"
-    | "news";
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-};
 
 export type HomeHighlightSlide = {
   _type: "homeHighlightSlide";
@@ -723,6 +764,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAssetReference
   | DownloadableResource
   | StaffPage
+  | ParishPage
   | LearningPage
   | AbsencesPage
   | EnrolmentPage
@@ -741,7 +783,6 @@ export type AllSanitySchemaTypes =
   | NewsPost
   | Page
   | SimpleBlockContent
-  | InnerPageHero
   | HomeHighlightSlide
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -754,7 +795,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{    _id,    _updatedAt,    schoolName,    tagline,    intro,    homeStats[]{_key, label, value},    principalMessage,    principalPhoto,    homeHeroEyebrow,    homeHeroTitle,    homeHeroSubtitle,    homeCtas[]{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},    homeHighlightSlides[]{_key, title, description, published, image, link{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url}},    homeHeroBackground,    innerPageHeroes[]{ pageKey, image },    specialCharacterSummary,    contactAddress,    contactEmail,    contactPhone,    officeHours,    facebookUrl,    heroAppUrl,    absenceUrl,    newsletterUrl,    policiesUrl,    kindoUrl,    termDatesUrl,    eroUrl,    calendarUrl,    parishUrl,    dioceseUrl,    alertEnabled,    alertSeverity,    alertTitle,    alertMessage,    alertLinkLabel,    alertLinkUrl,    alertStart,    alertEnd,    defaultSeoDescription,    defaultOgImage,    siteUrl  }
+// Query: *[_type == "siteSettings" && _id == "siteSettings"][0]{    _id,    _updatedAt,    schoolName,    tagline,    intro,    homeStats[]{_key, label, value},    principalMessage,    principalPhoto,    homeHeroEyebrow,    homeHeroTitle,    homeHeroSubtitle,    homeCtas[]{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},    homeHighlightSlides[]{_key, title, description, published, image, link{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url}},    homeHeroBackground,    specialCharacterSummary,    contactAddress,    contactEmail,    contactPhone,    officeHours,    facebookUrl,    heroAppUrl,    heroAppStoreUrl,    heroPlayStoreUrl,    kindoDescription,    absenceEmail,    ptfaEmail,    boardEmail,    termDates[]{_key, year, term, start, end, note},    absenceUrl,    newsletterUrl,    policiesUrl,    kindoUrl,    termDatesUrl,    eroUrl,    calendarUrl,    parishUrl,    dioceseUrl,    alertEnabled,    alertSeverity,    alertTitle,    alertMessage,    alertLinkLabel,    alertLinkUrl,    alertStart,    alertEnd,    defaultSeoDescription,    defaultOgImage,    siteUrl  }
 export type SITE_SETTINGS_QUERY_RESULT = {
   _id: "siteSettings";
   _updatedAt: string;
@@ -780,26 +821,20 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   homeHeroSubtitle: string | null;
   homeCtas: Array<{
     label: string | null;
-    linkDestination:
-      | "cmsPage"
-      | "external"
-      | "file"
-      | "newsPost"
-      | "siteRoute"
-      | null;
+    linkDestination: "external" | "file" | "siteRoute" | null;
     linkType: null;
     siteRoute:
       | "/"
       | "/about"
       | "/about/our-learning"
       | "/absences"
+      | "/accessibility"
       | "/community"
       | "/community/staff"
       | "/contact"
       | "/enrolment"
-      | "/news"
       | "/parish"
-      | "/resources"
+      | "/privacy"
       | null;
     anchor: string | null;
     href: string | null;
@@ -823,26 +858,20 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     } | null;
     link: {
       label: string | null;
-      linkDestination:
-        | "cmsPage"
-        | "external"
-        | "file"
-        | "newsPost"
-        | "siteRoute"
-        | null;
+      linkDestination: "external" | "file" | "siteRoute" | null;
       linkType: null;
       siteRoute:
         | "/"
         | "/about"
         | "/about/our-learning"
         | "/absences"
+        | "/accessibility"
         | "/community"
         | "/community/staff"
         | "/contact"
         | "/enrolment"
-        | "/news"
         | "/parish"
-        | "/resources"
+        | "/privacy"
         | null;
       anchor: string | null;
       href: string | null;
@@ -860,26 +889,6 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     alt?: string;
     _type: "image";
   } | null;
-  innerPageHeroes: Array<{
-    pageKey:
-      | "about"
-      | "absences"
-      | "community"
-      | "contact"
-      | "enrolment"
-      | "learning"
-      | "news"
-      | "resources"
-      | null;
-    image: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-    } | null;
-  }> | null;
   specialCharacterSummary: string | null;
   contactAddress: string | null;
   contactEmail: string | null;
@@ -887,6 +896,20 @@ export type SITE_SETTINGS_QUERY_RESULT = {
   officeHours: string | null;
   facebookUrl: string | null;
   heroAppUrl: string | null;
+  heroAppStoreUrl: string | null;
+  heroPlayStoreUrl: string | null;
+  kindoDescription: string | null;
+  absenceEmail: string | null;
+  ptfaEmail: string | null;
+  boardEmail: string | null;
+  termDates: Array<{
+    _key: string;
+    year: number | null;
+    term: 1 | 2 | 3 | 4 | null;
+    start: string | null;
+    end: string | null;
+    note: string | null;
+  }> | null;
   absenceUrl: string | null;
   newsletterUrl: string | null;
   policiesUrl: string | null;
@@ -917,33 +940,27 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation" && _id == "navigation"][0]{    primaryNavigation[]{      _key,      variant,      link{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},      groupLabel,      landingLink{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},      children[]{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url}    },    footerLinks[]{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},    footerTagline  }
+// Query: *[_type == "navigation" && _id == "navigation"][0]{    primaryNavigation[]{      _key,      variant,      link{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},      groupLabel,      landingLink{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url},      children[]{  label,  linkDestination,  linkType,  siteRoute,  anchor,  href,  openInNewTab,  "pageSlug": page->slug.current,  "newsSlug": newsPost->slug.current,  "fileUrl": file.asset->url}    },    footerTagline  }
 export type NAVIGATION_QUERY_RESULT = {
   primaryNavigation: Array<{
     _key: string;
     variant: "group" | "simple" | null;
     link: {
       label: string | null;
-      linkDestination:
-        | "cmsPage"
-        | "external"
-        | "file"
-        | "newsPost"
-        | "siteRoute"
-        | null;
+      linkDestination: "external" | "file" | "siteRoute" | null;
       linkType: null;
       siteRoute:
         | "/"
         | "/about"
         | "/about/our-learning"
         | "/absences"
+        | "/accessibility"
         | "/community"
         | "/community/staff"
         | "/contact"
         | "/enrolment"
-        | "/news"
         | "/parish"
-        | "/resources"
+        | "/privacy"
         | null;
       anchor: string | null;
       href: string | null;
@@ -955,26 +972,20 @@ export type NAVIGATION_QUERY_RESULT = {
     groupLabel: string | null;
     landingLink: {
       label: string | null;
-      linkDestination:
-        | "cmsPage"
-        | "external"
-        | "file"
-        | "newsPost"
-        | "siteRoute"
-        | null;
+      linkDestination: "external" | "file" | "siteRoute" | null;
       linkType: null;
       siteRoute:
         | "/"
         | "/about"
         | "/about/our-learning"
         | "/absences"
+        | "/accessibility"
         | "/community"
         | "/community/staff"
         | "/contact"
         | "/enrolment"
-        | "/news"
         | "/parish"
-        | "/resources"
+        | "/privacy"
         | null;
       anchor: string | null;
       href: string | null;
@@ -985,26 +996,20 @@ export type NAVIGATION_QUERY_RESULT = {
     } | null;
     children: Array<{
       label: string | null;
-      linkDestination:
-        | "cmsPage"
-        | "external"
-        | "file"
-        | "newsPost"
-        | "siteRoute"
-        | null;
+      linkDestination: "external" | "file" | "siteRoute" | null;
       linkType: null;
       siteRoute:
         | "/"
         | "/about"
         | "/about/our-learning"
         | "/absences"
+        | "/accessibility"
         | "/community"
         | "/community/staff"
         | "/contact"
         | "/enrolment"
-        | "/news"
         | "/parish"
-        | "/resources"
+        | "/privacy"
         | null;
       anchor: string | null;
       href: string | null;
@@ -1013,36 +1018,6 @@ export type NAVIGATION_QUERY_RESULT = {
       newsSlug: string | null;
       fileUrl: string | null;
     }> | null;
-  }> | null;
-  footerLinks: Array<{
-    label: string | null;
-    linkDestination:
-      | "cmsPage"
-      | "external"
-      | "file"
-      | "newsPost"
-      | "siteRoute"
-      | null;
-    linkType: null;
-    siteRoute:
-      | "/"
-      | "/about"
-      | "/about/our-learning"
-      | "/absences"
-      | "/community"
-      | "/community/staff"
-      | "/contact"
-      | "/enrolment"
-      | "/news"
-      | "/parish"
-      | "/resources"
-      | null;
-    anchor: string | null;
-    href: string | null;
-    openInNewTab: boolean | null;
-    pageSlug: string | null;
-    newsSlug: string | null;
-    fileUrl: string | null;
   }> | null;
   footerTagline: string | null;
 } | null;
@@ -1077,26 +1052,20 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
     body: string | null;
     link: {
       label: string | null;
-      linkDestination:
-        | "cmsPage"
-        | "external"
-        | "file"
-        | "newsPost"
-        | "siteRoute"
-        | null;
+      linkDestination: "external" | "file" | "siteRoute" | null;
       linkType: null;
       siteRoute:
         | "/"
         | "/about"
         | "/about/our-learning"
         | "/absences"
+        | "/accessibility"
         | "/community"
         | "/community/staff"
         | "/contact"
         | "/enrolment"
-        | "/news"
         | "/parish"
-        | "/resources"
+        | "/privacy"
         | null;
       anchor: string | null;
       href: string | null;
@@ -1130,7 +1099,7 @@ export type PAGE_BY_SLUG_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{    heroSubtitle,    principalWelcome,    specialCharacter,    specialCharacterQuote,    specialCharacterQuoteCite,    encounteringChrist[]{_key, title, body},    ctaHeading,    ctaBody  }
+// Query: *[_type == "aboutPage" && _id == "aboutPage"][0]{    heroSubtitle,    principalWelcome,    specialCharacter,    specialCharacterQuote,    specialCharacterQuoteCite,    encounteringChrist[]{_key, title, body},    ourLadyImage,    parentInfoCards[]{_key, key, title, body, links[]{_key, label, url, "fileUrl": file.asset->url}},    ctaHeading,    ctaBody  }
 export type ABOUT_PAGE_QUERY_RESULT = {
   heroSubtitle: string | null;
   principalWelcome: BlockContent | null;
@@ -1142,13 +1111,34 @@ export type ABOUT_PAGE_QUERY_RESULT = {
     title: string | null;
     body: string | null;
   }> | null;
+  ourLadyImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+  } | null;
+  parentInfoCards: Array<{
+    _key: string;
+    key: string | null;
+    title: string | null;
+    body: string | null;
+    links: Array<{
+      _key: string;
+      label: string | null;
+      url: string | null;
+      fileUrl: string | null;
+    }> | null;
+  }> | null;
   ctaHeading: string | null;
   ctaBody: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
 // Variable: COMMUNITY_PAGE_QUERY
-// Query: *[_type == "communityPage" && _id == "communityPage"][0]{    heroSubtitle,    staffIntro,    ptfaTitle,    ptfaDescription,    boardTitle,    boardDescription,    reportsIntro  }
+// Query: *[_type == "communityPage" && _id == "communityPage"][0]{    heroSubtitle,    staffIntro,    ptfaTitle,    ptfaDescription,    boardTitle,    boardDescription,    ptfaHelpText,    boardMinutesText,    boardMeetingText,    "strategicPlanUrl": strategicPlanFile.asset->url,    "attendancePlanUrl": attendancePlanFile.asset->url,    reportsIntro  }
 export type COMMUNITY_PAGE_QUERY_RESULT = {
   heroSubtitle: string | null;
   staffIntro: string | null;
@@ -1156,6 +1146,11 @@ export type COMMUNITY_PAGE_QUERY_RESULT = {
   ptfaDescription: string | null;
   boardTitle: string | null;
   boardDescription: string | null;
+  ptfaHelpText: string | null;
+  boardMinutesText: string | null;
+  boardMeetingText: string | null;
+  strategicPlanUrl: string | null;
+  attendancePlanUrl: string | null;
   reportsIntro: string | null;
 } | null;
 
@@ -1228,14 +1223,28 @@ export type STAFF_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ABSENCES_PAGE_QUERY
-// Query: *[_type == "absencesPage" && _id == "absencesPage"][0]{    heroSubtitle,    intro,    attendanceTitle,    attendanceDescription,    ctaHeading,    ctaBody  }
+// Query: *[_type == "absencesPage" && _id == "absencesPage"][0]{    heroSubtitle,    intro,    methodsTitle,    whatToTell,    attendanceTitle,    attendanceDescription,    attendanceBody,    "attendancePlanUrl": *[_type == "communityPage" && _id == "communityPage"][0].attendancePlanFile.asset->url,    ctaHeading,    ctaBody  }
 export type ABSENCES_PAGE_QUERY_RESULT = {
   heroSubtitle: string | null;
   intro: string | null;
+  methodsTitle: string | null;
+  whatToTell: Array<string> | null;
   attendanceTitle: string | null;
   attendanceDescription: string | null;
+  attendanceBody: BlockContent | null;
+  attendancePlanUrl: string | null;
   ctaHeading: string | null;
   ctaBody: string | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: PARISH_PAGE_QUERY
+// Query: *[_type == "parishPage" && _id == "parishPage"][0]{    heroSubtitle,    sectionTitle,    body,    massTimes  }
+export type PARISH_PAGE_QUERY_RESULT = {
+  heroSubtitle: string | null;
+  sectionTitle: string | null;
+  body: string | null;
+  massTimes: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
@@ -1371,7 +1380,7 @@ export type DOWNLOADABLE_RESOURCES_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: STAFF_MEMBERS_QUERY
-// Query: *[_type == "staff"] | order(sortOrder asc, name asc){    _id,    name,    role,    email,    group,    className,    yearLevel,    isTeamLeader,    showOnContact,    bio,    photo,    sortOrder  }
+// Query: *[_type == "staff"] | order(sortOrder asc, name asc){    _id,    name,    role,    email,    group,    className,    yearLevel,    isTeamLeader,    showOnContact,    bio,    photo,    "photoUrl": photo.asset->url,    sortOrder  }
 export type STAFF_MEMBERS_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
@@ -1398,6 +1407,7 @@ export type STAFF_MEMBERS_QUERY_RESULT = Array<{
     alt?: string;
     _type: "image";
   } | null;
+  photoUrl: string | null;
   sortOrder: number | null;
 }>;
 
@@ -1405,16 +1415,17 @@ export type STAFF_MEMBERS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    _id,\n    _updatedAt,\n    schoolName,\n    tagline,\n    intro,\n    homeStats[]{_key, label, value},\n    principalMessage,\n    principalPhoto,\n    homeHeroEyebrow,\n    homeHeroTitle,\n    homeHeroSubtitle,\n    homeCtas[]{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n    homeHighlightSlides[]{_key, title, description, published, image, link{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n}},\n    homeHeroBackground,\n    innerPageHeroes[]{ pageKey, image },\n    specialCharacterSummary,\n    contactAddress,\n    contactEmail,\n    contactPhone,\n    officeHours,\n    facebookUrl,\n    heroAppUrl,\n    absenceUrl,\n    newsletterUrl,\n    policiesUrl,\n    kindoUrl,\n    termDatesUrl,\n    eroUrl,\n    calendarUrl,\n    parishUrl,\n    dioceseUrl,\n    alertEnabled,\n    alertSeverity,\n    alertTitle,\n    alertMessage,\n    alertLinkLabel,\n    alertLinkUrl,\n    alertStart,\n    alertEnd,\n    defaultSeoDescription,\n    defaultOgImage,\n    siteUrl\n  }\n': SITE_SETTINGS_QUERY_RESULT;
-    '\n  *[_type == "navigation" && _id == "navigation"][0]{\n    primaryNavigation[]{\n      _key,\n      variant,\n      link{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n      groupLabel,\n      landingLink{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n      children[]{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n}\n    },\n    footerLinks[]{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n    footerTagline\n  }\n': NAVIGATION_QUERY_RESULT;
+    '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    _id,\n    _updatedAt,\n    schoolName,\n    tagline,\n    intro,\n    homeStats[]{_key, label, value},\n    principalMessage,\n    principalPhoto,\n    homeHeroEyebrow,\n    homeHeroTitle,\n    homeHeroSubtitle,\n    homeCtas[]{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n    homeHighlightSlides[]{_key, title, description, published, image, link{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n}},\n    homeHeroBackground,\n    specialCharacterSummary,\n    contactAddress,\n    contactEmail,\n    contactPhone,\n    officeHours,\n    facebookUrl,\n    heroAppUrl,\n    heroAppStoreUrl,\n    heroPlayStoreUrl,\n    kindoDescription,\n    absenceEmail,\n    ptfaEmail,\n    boardEmail,\n    termDates[]{_key, year, term, start, end, note},\n    absenceUrl,\n    newsletterUrl,\n    policiesUrl,\n    kindoUrl,\n    termDatesUrl,\n    eroUrl,\n    calendarUrl,\n    parishUrl,\n    dioceseUrl,\n    alertEnabled,\n    alertSeverity,\n    alertTitle,\n    alertMessage,\n    alertLinkLabel,\n    alertLinkUrl,\n    alertStart,\n    alertEnd,\n    defaultSeoDescription,\n    defaultOgImage,\n    siteUrl\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "navigation" && _id == "navigation"][0]{\n    primaryNavigation[]{\n      _key,\n      variant,\n      link{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n      groupLabel,\n      landingLink{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n},\n      children[]{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n}\n    },\n    footerTagline\n  }\n': NAVIGATION_QUERY_RESULT;
     '\n  *[_type == "page" && defined(slug.current)].slug.current\n': PAGE_SLUGS_QUERY_RESULT;
     '\n  *[_type == "page" && slug.current == $slug][0]{\n    _id,\n    _updatedAt,\n    title,\n    slug,\n    layout,\n    excerpt,\n    lead,\n    heroImage,\n    hubCardsHeading,\n    hubCards[]{\n      title,\n      body,\n      link{\n  label,\n  linkDestination,\n  linkType,\n  siteRoute,\n  anchor,\n  href,\n  openInNewTab,\n  "pageSlug": page->slug.current,\n  "newsSlug": newsPost->slug.current,\n  "fileUrl": file.asset->url\n}\n    },\n    sections[]{\n      heading,\n      body\n    },\n    resources[]{\n      label,\n      description,\n      url,\n      "fileUrl": file.asset->url,\n      "fileName": file.asset->originalFilename\n    },\n    seoTitle,\n    seoDescription,\n    ogImage\n  }\n': PAGE_BY_SLUG_QUERY_RESULT;
-    '\n  *[_type == "aboutPage" && _id == "aboutPage"][0]{\n    heroSubtitle,\n    principalWelcome,\n    specialCharacter,\n    specialCharacterQuote,\n    specialCharacterQuoteCite,\n    encounteringChrist[]{_key, title, body},\n    ctaHeading,\n    ctaBody\n  }\n': ABOUT_PAGE_QUERY_RESULT;
-    '\n  *[_type == "communityPage" && _id == "communityPage"][0]{\n    heroSubtitle,\n    staffIntro,\n    ptfaTitle,\n    ptfaDescription,\n    boardTitle,\n    boardDescription,\n    reportsIntro\n  }\n': COMMUNITY_PAGE_QUERY_RESULT;
+    '\n  *[_type == "aboutPage" && _id == "aboutPage"][0]{\n    heroSubtitle,\n    principalWelcome,\n    specialCharacter,\n    specialCharacterQuote,\n    specialCharacterQuoteCite,\n    encounteringChrist[]{_key, title, body},\n    ourLadyImage,\n    parentInfoCards[]{_key, key, title, body, links[]{_key, label, url, "fileUrl": file.asset->url}},\n    ctaHeading,\n    ctaBody\n  }\n': ABOUT_PAGE_QUERY_RESULT;
+    '\n  *[_type == "communityPage" && _id == "communityPage"][0]{\n    heroSubtitle,\n    staffIntro,\n    ptfaTitle,\n    ptfaDescription,\n    boardTitle,\n    boardDescription,\n    ptfaHelpText,\n    boardMinutesText,\n    boardMeetingText,\n    "strategicPlanUrl": strategicPlanFile.asset->url,\n    "attendancePlanUrl": attendancePlanFile.asset->url,\n    reportsIntro\n  }\n': COMMUNITY_PAGE_QUERY_RESULT;
     '\n  *[_type == "enrolmentPage" && _id == "enrolmentPage"][0]{\n    heroSubtitle,\n    valuePropositionTitle,\n    valueProposition,\n    whyCards[]{_key, title, body},\n    applicationSteps[]{_key, title, body},\n    preferenceTitle,\n    preferenceBody,\n    feesTitle,\n    feesDescription,\n    feeRows[]{_key, title, body},\n    ctaHeading,\n    ctaBody\n  }\n': ENROLMENT_PAGE_QUERY_RESULT;
     '\n  *[_type == "learningPage" && _id == "learningPage"][0]{\n    heroSubtitle,\n    curriculumTitle,\n    curriculumIntro,\n    religiousEducation,\n    programmesTitle,\n    programmes[]{_key, title, years, body},\n    environmentsTitle,\n    environmentsBody,\n    assessmentIntro,\n    supportTitle,\n    supportBody,\n    attendanceNote\n  }\n': LEARNING_PAGE_QUERY_RESULT;
     '\n  *[_type == "staffPage" && _id == "staffPage"][0]{\n    heroSubtitle,\n    teams[]{_key, key, title, yearRange, meaning}\n  }\n': STAFF_PAGE_QUERY_RESULT;
-    '\n  *[_type == "absencesPage" && _id == "absencesPage"][0]{\n    heroSubtitle,\n    intro,\n    attendanceTitle,\n    attendanceDescription,\n    ctaHeading,\n    ctaBody\n  }\n': ABSENCES_PAGE_QUERY_RESULT;
+    '\n  *[_type == "absencesPage" && _id == "absencesPage"][0]{\n    heroSubtitle,\n    intro,\n    methodsTitle,\n    whatToTell,\n    attendanceTitle,\n    attendanceDescription,\n    attendanceBody,\n    "attendancePlanUrl": *[_type == "communityPage" && _id == "communityPage"][0].attendancePlanFile.asset->url,\n    ctaHeading,\n    ctaBody\n  }\n': ABSENCES_PAGE_QUERY_RESULT;
+    '\n  *[_type == "parishPage" && _id == "parishPage"][0]{\n    heroSubtitle,\n    sectionTitle,\n    body,\n    massTimes\n  }\n': PARISH_PAGE_QUERY_RESULT;
     '\n  *[_type == "newsPost"] | order(publishedAt desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    publishedAt,\n    excerpt,\n    heroImage\n  }\n': NEWS_POSTS_LIST_QUERY_RESULT;
     '\n  *[_type == "newsPost" && defined(slug.current)].slug.current\n': NEWS_POST_SLUGS_QUERY_RESULT;
     '\n  *[_type == "newsPost" && slug.current == $slug][0]{\n    _id,\n    _updatedAt,\n    title,\n    slug,\n    publishedAt,\n    excerpt,\n    heroImage,\n    body,\n    seoTitle,\n    seoDescription,\n    ogImage\n  }\n': NEWS_POST_BY_SLUG_QUERY_RESULT;
@@ -1424,6 +1435,6 @@ declare module "@sanity/client" {
     '\n  *[_type == "event" && slug.current == $slug][0]{\n    _id,\n    _updatedAt,\n    title,\n    "slug": slug.current,\n    startAt,\n    location,\n    summary,\n    body,\n    linkUrl\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "testimonial" && published == true] | order(sortOrder asc, _createdAt desc)[0...3]{\n    _id,\n    quote,\n    authorName,\n    authorDetail,\n    photo,\n    sortOrder\n  }\n': HOME_TESTIMONIALS_QUERY_RESULT;
     '\n  *[_type == "downloadableResource"] | order(featured desc, publishedAt desc) {\n    _id,\n    title,\n    category,\n    placement,\n    publishedAt,\n    description,\n    featured,\n    "fileUrl": file.asset->url,\n    "fileName": file.asset->originalFilename\n  }\n': DOWNLOADABLE_RESOURCES_QUERY_RESULT;
-    '\n  *[_type == "staff"] | order(sortOrder asc, name asc){\n    _id,\n    name,\n    role,\n    email,\n    group,\n    className,\n    yearLevel,\n    isTeamLeader,\n    showOnContact,\n    bio,\n    photo,\n    sortOrder\n  }\n': STAFF_MEMBERS_QUERY_RESULT;
+    '\n  *[_type == "staff"] | order(sortOrder asc, name asc){\n    _id,\n    name,\n    role,\n    email,\n    group,\n    className,\n    yearLevel,\n    isTeamLeader,\n    showOnContact,\n    bio,\n    photo,\n    "photoUrl": photo.asset->url,\n    sortOrder\n  }\n': STAFF_MEMBERS_QUERY_RESULT;
   }
 }

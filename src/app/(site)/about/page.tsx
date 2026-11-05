@@ -5,8 +5,11 @@ import type { Metadata } from "next";
 import { CTASection } from "@/components/cta-section";
 import { PageHero } from "@/components/page-hero";
 import { PortableTextBlock } from "@/components/portable-text";
+import { heroStoreLinks, KINDO_DESCRIPTION_FALLBACK } from "@/lib/app-links";
 import { MARIAN_VALUES } from "@/lib/marian-values";
+import { findPrincipal, principalPhoto } from "@/lib/principal";
 import { personInitials, resourceFileUrl } from "@/lib/resources";
+import { urlForImage } from "@/sanity/lib/image";
 import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -14,6 +17,7 @@ import {
   ABOUT_PAGE_QUERY,
   DOWNLOADABLE_RESOURCES_QUERY,
   SITE_SETTINGS_QUERY,
+  STAFF_MEMBERS_QUERY,
 } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
@@ -51,9 +55,28 @@ const ENCOUNTERING_FALLBACK = [
   { title: "At assembly", body: "Special Character certificates" },
 ];
 
+type InfoLink = { label: string; href: string; external?: boolean; download?: boolean };
+type InfoCard = {
+  id?: string;
+  title: string;
+  body: string;
+  links: InfoLink[];
+  pending?: string;
+};
+
+function linkProps(link: InfoLink) {
+  return link.external
+    ? { target: "_blank", rel: "noreferrer noopener" }
+    : {};
+}
+
+const OUR_LADY_CAPTION =
+  "Madonna at Prayer — Giovanni Battista Salvi da Sassoferrato";
+
 export default async function AboutPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
+  let staff: Array<{ name?: string | null; role?: string | null; email?: string | null; photo?: unknown }> = [];
   let resources: Array<{
     title?: string | null;
     placement?: string[] | null;
@@ -61,13 +84,15 @@ export default async function AboutPage() {
   }> = [];
 
   try {
-    const [about, site, downloads] = await Promise.all([
+    const [about, site, downloads, people] = await Promise.all([
       sanityFetch({ query: ABOUT_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
       sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
+      sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
     ]);
     copy = about.data as Record<string, unknown> | null;
     settings = site.data as Record<string, unknown> | null;
+    staff = (people.data as typeof staff) ?? [];
     resources = (downloads.data as typeof resources) ?? [];
   } catch {
     /* CMS unavailable */
@@ -76,8 +101,98 @@ export default async function AboutPage() {
   const handbook = resourceFileUrl(resources, "about", PUBLIC_DOCS.handbook, "handbook");
   const policiesUrl = settings?.policiesUrl as string | undefined;
   const eroUrl = settings?.eroUrl as string | undefined;
-  const heroAppUrl = settings?.heroAppUrl as string | undefined;
   const kindoUrl = settings?.kindoUrl as string | undefined;
+  const stores = heroStoreLinks(settings);
+  const principal = findPrincipal(staff);
+  const principalName = principal?.name ?? "Catherine Cyprian";
+  const principalImage = principalPhoto(staff, settings?.principalPhoto, 560);
+  const ourLady = copy?.ourLadyImage as
+    | { alt?: string | null; caption?: string | null }
+    | undefined;
+  const ourLadyUrl = ourLady
+    ? urlForImage(ourLady as never)?.width(640).fit("max").auto("format").url()
+    : null;
+  const ourLadyCaption = ourLady?.caption || OUR_LADY_CAPTION;
+
+  const fallbackCards: InfoCard[] = [
+    {
+      id: "fees",
+      title: "School fees",
+      body: "School fees are not paid through Kindo. They are paid online or at the school office. Current amounts are confirmed by the office.",
+      links: [{ label: "Ask the office", href: "/contact" }],
+    },
+    {
+      title: "School policies & procedures",
+      body: "Our policies are maintained online in SchoolDocs and are always the current version.",
+      links: policiesUrl
+        ? [{ label: "Open SchoolDocs", href: policiesUrl, external: true }]
+        : [],
+      pending: "SchoolDocs link to come",
+    },
+    {
+      title: "ERO report",
+      body: "Our latest Education Review Office report on the school's performance and next steps.",
+      links: eroUrl
+        ? [{ label: "Read the report", href: eroUrl, external: true }]
+        : [],
+      pending: "ERO link to come",
+    },
+    {
+      id: "apps",
+      title: "School apps",
+      body: `Hero is our app for notices, learning updates and reporting. Kindo is used for ${(
+        (settings?.kindoDescription as string | undefined) || KINDO_DESCRIPTION_FALLBACK
+      ).toLowerCase()} — it is not used for school fees or permission slips.`,
+      links: [
+        { label: "Hero for iPhone & iPad", href: stores.appStore, external: true },
+        { label: "Hero for Android", href: stores.playStore, external: true },
+        ...(kindoUrl ? [{ label: "Open Kindo", href: kindoUrl, external: true }] : []),
+      ],
+    },
+    {
+      title: "Buses & SKIDS",
+      body: "Information about school buses and SKIDS before- and after-school care is being prepared. In the meantime, please ask the office.",
+      links: [{ label: "Ask the office", href: "/contact" }],
+    },
+    {
+      title: "Allergies & student safety",
+      body: "Stella Maris is a nut-free school (no nuts or nut products) and a water-only school. Thank you for helping us keep every child safe.",
+      links: [],
+    },
+  ];
+  const cmsCards = (
+    copy?.parentInfoCards as
+      | Array<{
+          key?: string | null;
+          title?: string | null;
+          body?: string | null;
+          links?: Array<{
+            label?: string | null;
+            url?: string | null;
+            fileUrl?: string | null;
+          }> | null;
+        }>
+      | undefined
+  )?.filter((card) => card.title);
+  const infoCards: InfoCard[] = cmsCards?.length
+    ? cmsCards.map((card) => ({
+        id: card.key || undefined,
+        title: card.title!,
+        body: card.body ?? "",
+        links: (card.links ?? []).flatMap((link) => {
+          const href = link.fileUrl || link.url || "";
+          return href && link.label
+            ? [
+                {
+                  label: link.label,
+                  href,
+                  external: /^https?:/.test(href) || Boolean(link.fileUrl),
+                },
+              ]
+            : [];
+        }),
+      }))
+    : fallbackCards;
   const encountering =
     (copy?.encounteringChrist as { title?: string; body?: string }[] | undefined)?.filter(
       (item) => item.title,
@@ -110,13 +225,25 @@ export default async function AboutPage() {
               Welcome
             </p>
             <h2 className="mt-3.5 text-[40px] leading-[1.1]">Principal's message</h2>
+            {principalImage ? (
+              <Image
+                src={principalImage.src}
+                alt={principalImage.alt}
+                width={560}
+                height={560}
+                className="mt-6 aspect-square w-full max-w-[280px] rounded-2xl border border-[var(--color-border)] object-cover shadow-[var(--shadow-card)]"
+                priority
+              />
+            ) : null}
             <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-5 py-[18px]">
-              <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[22px] text-[var(--color-brand)]">
-                {personInitials("Catherine Cyprian")}
-              </span>
+              {principalImage ? null : (
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[22px] text-[var(--color-brand)]">
+                  {personInitials(principalName)}
+                </span>
+              )}
               <span>
                 <span className="block text-base font-semibold text-[var(--color-heading)]">
-                  Catherine Cyprian
+                  {principalName}
                 </span>
                 <span className="block text-[14px] text-[var(--color-ink-muted)]">
                   Principal
@@ -168,6 +295,20 @@ export default async function AboutPage() {
                 Special character
               </p>
               <h2 className="mt-3.5 text-[40px] leading-[1.1]">Our name, our faith</h2>
+              {ourLadyUrl ? (
+                <figure className="mt-6 max-w-[320px]">
+                  <Image
+                    src={ourLadyUrl}
+                    alt={ourLady?.alt || "Our Lady, Star of the Sea"}
+                    width={640}
+                    height={800}
+                    className="h-auto w-full rounded-2xl border border-[var(--color-border)] shadow-[var(--shadow-card)]"
+                  />
+                  <figcaption className="mt-2.5 text-[13.5px] leading-[1.5] text-[var(--color-faint)] italic">
+                    {ourLadyCaption}
+                  </figcaption>
+                </figure>
+              ) : null}
               <p className="mt-5 text-[17px] leading-[1.75] text-[var(--color-ink-muted)]">
                 Stella Maris, Star of the Sea, is one of the most ancient titles
                 for Our Lady. The name was chosen to honour her and acknowledge
@@ -325,8 +466,8 @@ export default async function AboutPage() {
           <h2 className="mt-3.5 text-[40px] leading-[1.1]">Parent information</h2>
           <p className="mt-[18px] max-w-[62ch] text-[17.5px] leading-[1.75] text-[var(--color-ink-muted)]">
             We keep one master Parent Information Handbook so there is a single,
-            current source of everything families need — conduct, allergies,
-            buses, SKIDS, uniform and daily routines.
+            current source of everything families need — conduct, uniform and
+            daily routines.
           </p>
           <a
             href={handbook}
@@ -348,106 +489,44 @@ export default async function AboutPage() {
             </span>
           </a>
           <ul className="mt-9 grid gap-4 min-[621px]:grid-cols-2 min-[901px]:grid-cols-3">
-            <li
-              id="fees"
-              className="scroll-mt-28 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]"
-            >
-              <h3 className="text-[21px] leading-[1.25]">School fees</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                Attendance dues, curriculum charges and voluntary contributions,
-                plus financial assistance and how to pay through Kindo. Current
-                amounts are confirmed by the office.
-              </p>
-              <Link href="/contact" className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
-                Ask the office <span aria-hidden>→</span>
-              </Link>
-            </li>
-            <li className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]">
-              <h3 className="text-[21px] leading-[1.25]">School policies & procedures</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                Our policies are maintained online in SchoolDocs and are always
-                the current version.
-              </p>
-              {policiesUrl ? (
-                <a
-                  href={policiesUrl}
-                  className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Open SchoolDocs <span aria-hidden>↗</span>
-                </a>
-              ) : (
-                <p className="mt-3.5 text-[14.5px] text-[var(--color-faint)]">
-                  SchoolDocs link to come
+            {infoCards.map((card) => (
+              <li
+                key={card.title}
+                id={card.id}
+                className="scroll-mt-28 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]"
+              >
+                <h3 className="text-[21px] leading-[1.25]">{card.title}</h3>
+                <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
+                  {card.body}
                 </p>
-              )}
-            </li>
-            <li className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]">
-              <h3 className="text-[21px] leading-[1.25]">ERO report</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                Our latest Education Review Office report on the school's
-                performance and next steps.
-              </p>
-              {eroUrl ? (
-                <a
-                  href={eroUrl}
-                  className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Read the report <span aria-hidden>↗</span>
-                </a>
-              ) : (
-                <p className="mt-3.5 text-[14.5px] text-[var(--color-faint)]">
-                  ERO link to come
-                </p>
-              )}
-            </li>
-            <li
-              id="apps"
-              className="scroll-mt-28 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]"
-            >
-              <h3 className="text-[21px] leading-[1.25]">School apps</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                Hero for notices, absences and reporting. Kindo for payments and
-                permission slips. Download links and setup help.
-              </p>
-              {heroAppUrl || kindoUrl ? (
-                <a
-                  href={heroAppUrl || kindoUrl}
-                  className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Get set up <span aria-hidden>→</span>
-                </a>
-              ) : (
-                <p className="mt-3.5 text-[14.5px] text-[var(--color-faint)]">
-                  App links to come
-                </p>
-              )}
-            </li>
-            <li className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]">
-              <h3 className="text-[21px] leading-[1.25]">Buses & SKIDS</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                Transport routes and eligibility, and before- and after-school
-                care on site with SKIDS.
-              </p>
-              <a href={handbook} className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
-                See the handbook <span aria-hidden>↓</span>
-              </a>
-            </li>
-            <li className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]">
-              <h3 className="text-[21px] leading-[1.25]">Allergies & student safety</h3>
-              <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
-                How we keep learners with allergies safe, and what we ask of
-                families.
-              </p>
-              <a href={handbook} className="mt-3.5 inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
-                See the handbook <span aria-hidden>↓</span>
-              </a>
-            </li>
+                {card.links.length ? (
+                  <div className="mt-3.5 flex flex-col gap-1.5">
+                    {card.links.map((link) =>
+                      link.href.startsWith("/") ? (
+                        <Link
+                          key={link.label}
+                          href={link.href}
+                          className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
+                        >
+                          {link.label} <span aria-hidden>→</span>
+                        </Link>
+                      ) : (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
+                          {...linkProps(link)}
+                        >
+                          {link.label} <span aria-hidden>{link.external ? "↗" : "→"}</span>
+                        </a>
+                      ),
+                    )}
+                  </div>
+                ) : card.pending ? (
+                  <p className="mt-3.5 text-[14.5px] text-[var(--color-faint)]">{card.pending}</p>
+                ) : null}
+              </li>
+            ))}
           </ul>
         </div>
       </section>

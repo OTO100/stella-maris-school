@@ -1,10 +1,12 @@
 import Link from "next/link";
 
 import { BrandMark } from "@/components/brand-mark";
+import { heroStoreLinks } from "@/lib/app-links";
 import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 
 export type SiteFooterLinks = {
-  heroAppUrl?: string | null;
+  heroAppStoreUrl?: string | null;
+  heroPlayStoreUrl?: string | null;
   kindoUrl?: string | null;
   newsletterUrl?: string | null;
   policiesUrl?: string | null;
@@ -45,13 +47,16 @@ export function SiteFooter({
     { href: "/parish", label: "Hibiscus Coast Parish" },
   ];
 
+  const stores = heroStoreLinks({
+    heroAppStoreUrl: familyLinks?.heroAppStoreUrl,
+    heroPlayStoreUrl: familyLinks?.heroPlayStoreUrl,
+  });
   const family = [
     { href: handbook, label: "Parent handbook", external: true },
-    familyLinks?.heroAppUrl
-      ? { href: familyLinks.heroAppUrl, label: "Hero app", external: true }
-      : null,
+    { href: stores.appStore, label: "Hero app — App Store", external: true },
+    { href: stores.playStore, label: "Hero app — Google Play", external: true },
     familyLinks?.kindoUrl
-      ? { href: familyLinks.kindoUrl, label: "Kindo payments", external: true }
+      ? { href: familyLinks.kindoUrl, label: "Kindo (PTFA & lunches)", external: true }
       : null,
     familyLinks?.newsletterUrl
       ? { href: familyLinks.newsletterUrl, label: "Newsletters", external: true }

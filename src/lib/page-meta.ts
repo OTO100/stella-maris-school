@@ -27,7 +27,7 @@ export const PAGE_META = {
   absences: {
     title: "Absences",
     description:
-      "How to report an absence before 9:00am — Hero app, phone or email — and why every school day matters.",
+      "How to report an absence before 9:00am — by phone or email — and why every school day matters.",
   },
   contact: {
     title: "Contact us",

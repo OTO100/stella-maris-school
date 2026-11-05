@@ -3,20 +3,35 @@ import Link from "next/link";
 
 import { CTASection } from "@/components/cta-section";
 import { PageHero } from "@/components/page-hero";
+import { heroStoreLinks, KINDO_DESCRIPTION_FALLBACK } from "@/lib/app-links";
 import { MARIAN_VALUES } from "@/lib/marian-values";
+import { principalPhoto } from "@/lib/principal";
 import { personInitials } from "@/lib/resources";
+import { formatTermDate, isCurrentTerm, upcomingTerms, type TermDate } from "@/lib/term-dates";
 import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
+import {
+  COMMUNITY_PAGE_QUERY,
+  SITE_SETTINGS_QUERY,
+  STAFF_MEMBERS_QUERY,
+} from "@/sanity/lib/queries";
 import { sanityHeroImage } from "@/lib/inner-page-hero";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   let settings: Record<string, unknown> | null = null;
+  let community: Record<string, unknown> | null = null;
+  let staff: Array<{ name?: string | null; role?: string | null; photo?: unknown }> = [];
   try {
-    const result = await sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false });
+    const [result, communityResult, people] = await Promise.all([
+      sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
+      sanityFetch({ query: COMMUNITY_PAGE_QUERY, stega: false }),
+      sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
+    ]);
     settings = result.data as Record<string, unknown> | null;
+    community = communityResult.data as Record<string, unknown> | null;
+    staff = (people.data as typeof staff) ?? [];
   } catch {
     /* CMS unavailable */
   }
@@ -24,7 +39,7 @@ export default async function HomePage() {
   const schoolName =
     (settings?.schoolName as string | undefined) ??
     "Stella Maris Catholic Primary School";
-  const heroImage = sanityHeroImage(settings?.homeHeroBackground) ?? {
+  const heroImage = sanityHeroImage(settings?.homeHeroBackground, 1400, 1400) ?? {
     src: "/hero-home.webp",
     alt: schoolName,
   };
@@ -33,27 +48,47 @@ export default async function HomePage() {
     (settings?.principalMessage as string | undefined) ??
     "The Stella Maris community is based on family. This extended family consists of students, teachers, parents, and extended family joining together to form a community that is wholeheartedly committed to the education of our young people.";
 
+  const stores = heroStoreLinks(settings);
+  const attendancePlanUrl = community?.attendancePlanUrl as string | undefined;
+  const terms = upcomingTerms(settings?.termDates as TermDate[] | undefined, 2);
+  const principalImage = principalPhoto(staff, settings?.principalPhoto);
+
   const everyday = [
     {
       href: "/absences",
       title: "Report an absence",
-      detail: "Hero app, phone or email",
+      detail: "Phone or email",
       external: false,
     },
-    settings?.heroAppUrl
-      ? {
-          href: settings.heroAppUrl as string,
-          title: "Hero app",
-          detail: "Notices, attendance and reports",
-          external: true,
-        }
-      : null,
+    {
+      href: stores.appStore,
+      title: "Hero app — App Store",
+      detail: "Notices and learning updates for iPhone and iPad",
+      external: true,
+    },
+    {
+      href: stores.playStore,
+      title: "Hero app — Google Play",
+      detail: "Notices and learning updates for Android",
+      external: true,
+    },
     settings?.kindoUrl
       ? {
           href: settings.kindoUrl as string,
           title: "Kindo",
-          detail: "Payments and permission slips",
+          detail:
+            (settings.kindoDescription as string | undefined) ||
+            KINDO_DESCRIPTION_FALLBACK,
           external: true,
+        }
+      : null,
+    attendancePlanUrl
+      ? {
+          href: attendancePlanUrl,
+          title: "Attendance Management Plan",
+          detail: "How we support regular attendance",
+          external: true,
+          download: true,
         }
       : null,
     settings?.newsletterUrl || settings?.termDatesUrl
@@ -115,6 +150,7 @@ export default async function HomePage() {
           (settings?.homeHeroSubtitle as string | undefined) ??
           "We follow Jesus' way and live the Marian Values — and in doing so, we shine for God."
         }
+        layout="split"
         backgroundImageSrc={heroImage.src}
         backgroundImageAlt={heroImage.alt}
         actions={
@@ -158,10 +194,20 @@ export default async function HomePage() {
               high level of sporting participation, in the context of our
               Catholic tradition.
             </p>
-            <figcaption className="mt-6 flex items-center gap-3.5 border-t border-[var(--color-border)] pt-5">
-              <span className="flex size-12 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[18px] text-[var(--color-brand)]">
-                {personInitials("Catherine Cyprian")}
-              </span>
+            <figcaption className="mt-6 flex items-center gap-5 border-t border-[var(--color-border)] pt-5">
+              {principalImage ? (
+                <Image
+                  src={principalImage.src}
+                  alt={principalImage.alt}
+                  width={224}
+                  height={224}
+                  className="size-28 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <span className="flex size-28 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[28px] text-[var(--color-brand)]">
+                  {personInitials("Catherine Cyprian")}
+                </span>
+              )}
               <span>
                 <span className="block text-[15.5px] font-semibold text-[var(--color-heading)]">
                   Catherine Cyprian
@@ -257,6 +303,29 @@ export default async function HomePage() {
               Day-to-day notices and payments live in our apps. The handbook
               covers everything else.
             </p>
+            {terms.length ? (
+              <div className="mt-8 rounded-2xl border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-6 py-6">
+                <h3 className="font-display text-[22px] leading-[1.2] text-[var(--color-heading)]">
+                  Term dates
+                </h3>
+                <ul className="mt-4 flex flex-col gap-4">
+                  {terms.map((t) => (
+                    <li key={`${t.year}-${t.term}`}>
+                      <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                        {t.year} · Term {t.term}
+                        {isCurrentTerm(t) ? " · now" : ""}
+                      </p>
+                      <p className="mt-1 text-[16.5px] text-[var(--color-ink)]">
+                        {formatTermDate(t.start!)} – {formatTermDate(t.end!)}
+                      </p>
+                      {t.note ? (
+                        <p className="mt-0.5 text-[14px] text-[var(--color-ink-muted)]">{t.note}</p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
           <ul className="flex flex-col gap-0.5">
             {everyday.map((item) => {

@@ -36,6 +36,13 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     officeHours,
     facebookUrl,
     heroAppUrl,
+    heroAppStoreUrl,
+    heroPlayStoreUrl,
+    kindoDescription,
+    absenceEmail,
+    ptfaEmail,
+    boardEmail,
+    termDates[]{_key, year, term, start, end, note},
     absenceUrl,
     newsletterUrl,
     policiesUrl,
@@ -118,6 +125,8 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     specialCharacterQuote,
     specialCharacterQuoteCite,
     encounteringChrist[]{_key, title, body},
+    ourLadyImage,
+    parentInfoCards[]{_key, key, title, body, links[]{_key, label, url, "fileUrl": file.asset->url}},
     ctaHeading,
     ctaBody
   }
@@ -131,6 +140,11 @@ export const COMMUNITY_PAGE_QUERY = defineQuery(`
     ptfaDescription,
     boardTitle,
     boardDescription,
+    ptfaHelpText,
+    boardMinutesText,
+    boardMeetingText,
+    "strategicPlanUrl": strategicPlanFile.asset->url,
+    "attendancePlanUrl": attendancePlanFile.asset->url,
     reportsIntro
   }
 `);
@@ -180,8 +194,12 @@ export const ABSENCES_PAGE_QUERY = defineQuery(`
   *[_type == "absencesPage" && _id == "absencesPage"][0]{
     heroSubtitle,
     intro,
+    methodsTitle,
+    whatToTell,
     attendanceTitle,
     attendanceDescription,
+    attendanceBody,
+    "attendancePlanUrl": *[_type == "communityPage" && _id == "communityPage"][0].attendancePlanFile.asset->url,
     ctaHeading,
     ctaBody
   }
@@ -191,7 +209,8 @@ export const PARISH_PAGE_QUERY = defineQuery(`
   *[_type == "parishPage" && _id == "parishPage"][0]{
     heroSubtitle,
     sectionTitle,
-    body
+    body,
+    massTimes
   }
 `);
 

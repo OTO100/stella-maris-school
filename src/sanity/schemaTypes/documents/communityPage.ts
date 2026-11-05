@@ -40,6 +40,36 @@ export const communityPage = defineType({
       rows: 4,
     }),
     defineField({
+      name: "ptfaHelpText",
+      title: "PTFA “get in touch” link text",
+      type: "string",
+      description: "Defaults to “Get in touch about helping”. Emails the PTFA address in Site settings.",
+    }),
+    defineField({
+      name: "boardMinutesText",
+      title: "Board meeting minutes text",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "boardMeetingText",
+      title: "Board meeting attendance text",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "strategicPlanFile",
+      title: "Strategic and Annual Plan",
+      type: "file",
+      options: { accept: ".pdf,.doc,.docx" },
+    }),
+    defineField({
+      name: "attendancePlanFile",
+      title: "Attendance Management Plan",
+      type: "file",
+      options: { accept: ".pdf,.doc,.docx" },
+    }),
+    defineField({
       name: "reportsIntro",
       title: "Plans and reports intro",
       type: "text",

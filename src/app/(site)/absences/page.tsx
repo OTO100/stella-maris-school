@@ -1,8 +1,9 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
 import { PlaceholderPanel } from "@/components/placeholder-panel";
+import { PortableTextBlock } from "@/components/portable-text";
+import { ABSENCE_EMAIL_FALLBACK } from "@/lib/app-links";
 import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
 import { ABSENCES_PAGE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
@@ -10,6 +11,13 @@ import { ABSENCES_PAGE_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/lib/queries";
 export const revalidate = 60;
 
 export const metadata: Metadata = PAGE_META.absences;
+
+const WHAT_TO_TELL_FALLBACK = [
+  "Your child's full name and class",
+  "The date or dates they will be away",
+  "The reason — illness, appointment, bereavement, family travel",
+  "For appointments during the day, the pick-up and return times",
+];
 
 export default async function AbsencesPage() {
   let copy: Record<string, unknown> | null = null;
@@ -26,9 +34,11 @@ export default async function AbsencesPage() {
   }
 
   const phone = (settings?.contactPhone as string | undefined) ?? "09 427 9189";
-  const email = (settings?.contactEmail as string | undefined) ?? "achieve@stellamaris.school.nz";
+  const email = (settings?.absenceEmail as string | undefined) || ABSENCE_EMAIL_FALLBACK;
   const hours = (settings?.officeHours as string | undefined) ?? "8:00am – 3:30pm";
-  const heroAppUrl = settings?.heroAppUrl as string | undefined;
+  const attendancePlanUrl = copy?.attendancePlanUrl as string | undefined;
+  const whatToTell =
+    (copy?.whatToTell as string[] | undefined)?.filter(Boolean) ?? WHAT_TO_TELL_FALLBACK;
 
   return (
     <>
@@ -43,46 +53,10 @@ export default async function AbsencesPage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad">
-          <h2 className="text-[36px] leading-[1.12]">Three ways to report an absence</h2>
-          <ul className="mt-9 grid gap-5 min-[901px]:grid-cols-3">
-            <li>
-              {heroAppUrl ? (
-                <a
-                  href={heroAppUrl}
-                  className="flex h-full flex-col rounded-[20px] bg-[var(--color-brand)] px-[30px] py-8 text-[var(--color-cream)] hover:bg-[var(--color-brand-hover)] hover:text-[var(--color-cream)]"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
-                    Fastest
-                  </span>
-                  <span className="mt-3 font-display text-[28px] leading-[1.2]">
-                    In the Hero app
-                  </span>
-                  <span className="mt-2.5 text-base leading-[1.68] text-[rgba(250,248,245,.9)]">
-                    Log the absence yourself, any time of day or night.
-                  </span>
-                  <span className="mt-auto pt-5 text-[15px] font-semibold text-[var(--color-gold-light)]">
-                    Open Hero ↗
-                  </span>
-                </a>
-              ) : (
-                <div className="flex h-full flex-col rounded-[20px] bg-[var(--color-brand)] px-[30px] py-8 text-[var(--color-cream)]">
-                  <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
-                    Fastest
-                  </span>
-                  <span className="mt-3 font-display text-[28px] leading-[1.2]">
-                    In the Hero app
-                  </span>
-                  <span className="mt-2.5 text-base leading-[1.68] text-[rgba(250,248,245,.9)]">
-                    Log the absence yourself, any time of day or night.
-                  </span>
-                  <span className="mt-auto pt-5 text-[15px] font-semibold text-[var(--color-gold-light)]">
-                    Hero app link to come
-                  </span>
-                </div>
-              )}
-            </li>
+          <h2 className="text-[36px] leading-[1.12]">
+            {(copy?.methodsTitle as string | undefined) ?? "Two ways to report an absence"}
+          </h2>
+          <ul className="mt-9 grid gap-5 min-[781px]:grid-cols-2">
             <li className="flex flex-col rounded-[20px] border border-[var(--color-border)] bg-[var(--color-cream)] px-[30px] py-8">
               <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Before 9:00am
@@ -127,16 +101,11 @@ export default async function AbsencesPage() {
             <h2 className="mt-3.5 text-[34px] leading-[1.15]">What to tell us</h2>
           </div>
           <ul>
-            {[
-              "Your child's full name and class",
-              "The date or dates they will be away",
-              "The reason — illness, appointment, bereavement, family travel",
-              "For appointments during the day, the pick-up and return times",
-            ].map((item, index) => (
+            {whatToTell.map((item, index) => (
               <li
                 key={item}
                 className={`border-t border-[#D6CCBA] py-[18px] text-[17px] text-[var(--color-ink)] ${
-                  index === 3 ? "border-b" : ""
+                  index === whatToTell.length - 1 ? "border-b" : ""
                 }`}
               >
                 {item}
@@ -156,11 +125,21 @@ export default async function AbsencesPage() {
               {(copy?.attendanceTitle as string | undefined) ??
                 "Why every day matters"}
             </h2>
-            <PlaceholderPanel className="mt-[26px]" label="To upload">
-              Our attendance management plan will be published here.
-            </PlaceholderPanel>
+            {attendancePlanUrl ? (
+              <a href={attendancePlanUrl} className="btn-brand mt-[26px]" target="_blank" rel="noreferrer noopener">
+                Attendance Management Plan <span aria-hidden>↓</span>
+              </a>
+            ) : (
+              <PlaceholderPanel className="mt-[26px]" label="To upload">
+                Our attendance management plan will be published here.
+              </PlaceholderPanel>
+            )}
           </div>
           <div className="flex max-w-[62ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+            {Array.isArray(copy?.attendanceBody) ? (
+              <PortableTextBlock value={copy.attendanceBody} />
+            ) : (
+              <>
             <p>
               {(copy?.attendanceDescription as string | undefined) ??
                 "Student attendance at school plays an important role in student progress and achievement. Lifting school attendance is a shared responsibility."}
@@ -180,6 +159,8 @@ export default async function AbsencesPage() {
               with care, following our attendance management plan and Ministry
               of Education guidance.
             </p>
+              </>
+            )}
           </div>
         </div>
       </section>

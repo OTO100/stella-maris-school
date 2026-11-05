@@ -8,6 +8,7 @@ export const siteSettings = defineType({
     { name: "branding", title: "Branding", default: true },
     { name: "home", title: "Homepage" },
     { name: "contact", title: "Contact & social" },
+    { name: "termDates", title: "Term dates" },
     { name: "alert", title: "Site alert" },
     { name: "seo", title: "SEO defaults" },
   ],
@@ -163,6 +164,30 @@ export const siteSettings = defineType({
       group: "contact",
     }),
     defineField({
+      name: "absenceEmail",
+      title: "Absences email",
+      type: "string",
+      group: "contact",
+      description: "Where families report an absence.",
+      initialValue: "absences@stellamaris.school.nz",
+    }),
+    defineField({
+      name: "ptfaEmail",
+      title: "PTFA email",
+      type: "string",
+      group: "contact",
+      description: "Used for “Get in touch about helping” on Our Community.",
+      initialValue: "stellaptfa@stellamaris.school.nz",
+    }),
+    defineField({
+      name: "boardEmail",
+      title: "Board email",
+      type: "string",
+      group: "contact",
+      description: "Used for Board queries and attending meetings.",
+      initialValue: "BOT@stellamaris.school.nz",
+    }),
+    defineField({
       name: "contactPhone",
       title: "Phone",
       type: "string",
@@ -184,7 +209,22 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: "heroAppUrl",
-      title: "Hero / app URL",
+      title: "Hero / app URL (retired)",
+      type: "url",
+      group: "contact",
+      hidden: true,
+      description: "Replaced by the App Store and Google Play links.",
+    }),
+    defineField({
+      name: "heroAppStoreUrl",
+      title: "Hero app — App Store URL",
+      type: "url",
+      group: "contact",
+      description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "heroPlayStoreUrl",
+      title: "Hero app — Google Play URL",
       type: "url",
       group: "contact",
       description: "Leave blank to hide this link on the site.",
@@ -217,6 +257,13 @@ export const siteSettings = defineType({
       type: "url",
       group: "contact",
       description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "kindoDescription",
+      title: "What Kindo is used for",
+      type: "string",
+      group: "contact",
+      initialValue: "PTFA payments, orders and lunches",
     }),
     defineField({
       name: "termDatesUrl",
@@ -253,6 +300,61 @@ export const siteSettings = defineType({
       type: "url",
       group: "contact",
       description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "termDates",
+      title: "Term dates",
+      type: "array",
+      group: "termDates",
+      description:
+        "The homepage shows the current and upcoming terms. Past terms disappear automatically.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "year",
+              title: "Year",
+              type: "number",
+              validation: (Rule) => Rule.required().integer().min(2024),
+            }),
+            defineField({
+              name: "term",
+              title: "Term",
+              type: "number",
+              options: { list: [1, 2, 3, 4] },
+              validation: (Rule) => Rule.required().integer().min(1).max(4),
+            }),
+            defineField({
+              name: "start",
+              title: "First day",
+              type: "date",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "end",
+              title: "Last day",
+              type: "date",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "note",
+              title: "Note",
+              type: "string",
+              description: "Optional, e.g. “Teacher only day 2 Feb”.",
+            }),
+          ],
+          preview: {
+            select: { year: "year", term: "term", start: "start", end: "end" },
+            prepare({ year, term, start, end }) {
+              return {
+                title: `${year ?? ""} Term ${term ?? ""}`,
+                subtitle: `${start ?? ""} → ${end ?? ""}`,
+              };
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "alertEnabled",

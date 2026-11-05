@@ -9,7 +9,6 @@ import type { ResolvedLink, ResolvedNavPrimaryItem } from "@/lib/nav-href";
 export type SiteHeaderLinks = {
   phone?: string | null;
   email?: string | null;
-  heroAppUrl?: string | null;
   newsletterUrl?: string | null;
   termDatesUrl?: string | null;
 };
@@ -380,11 +379,9 @@ export function SiteHeader({
             <Link href="/absences" className={utilityLinkClass}>
               Report an absence
             </Link>
-            {links?.heroAppUrl ? (
-              <a href={links.heroAppUrl} className={utilityLinkClass} target="_blank" rel="noreferrer noopener">
-                Hero app
-              </a>
-            ) : null}
+            <Link href="/about#apps" className={utilityLinkClass}>
+              Hero app
+            </Link>
             {links?.newsletterUrl ? (
               <a href={links.newsletterUrl} className={utilityLinkClass} target="_blank" rel="noreferrer noopener">
                 Newsletters

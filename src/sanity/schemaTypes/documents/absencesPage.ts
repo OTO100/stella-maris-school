@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const absencesPage = defineType({
   name: "absencesPage",
@@ -18,6 +18,18 @@ export const absencesPage = defineType({
       rows: 4,
     }),
     defineField({
+      name: "methodsTitle",
+      title: "Ways to report heading",
+      type: "string",
+      description: "Defaults to “Two ways to report an absence”.",
+    }),
+    defineField({
+      name: "whatToTell",
+      title: "What to tell us (checklist)",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+    }),
+    defineField({
       name: "attendanceTitle",
       title: "Attendance section title",
       type: "string",
@@ -27,6 +39,12 @@ export const absencesPage = defineType({
       title: "Attendance section text",
       type: "text",
       rows: 4,
+    }),
+    defineField({
+      name: "attendanceBody",
+      title: "Attendance section body",
+      type: "blockContent",
+      description: "Replaces the built-in paragraphs under the attendance heading.",
     }),
     defineField({
       name: "ctaHeading",

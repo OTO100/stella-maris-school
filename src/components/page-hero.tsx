@@ -16,6 +16,7 @@ type Props = {
   backgroundImageSrc?: string | null;
   backgroundImageAlt?: string;
   size?: "default" | "home";
+  layout?: "overlay" | "split";
   actions?: ReactNode;
   pills?: Pill[];
 };
@@ -27,11 +28,58 @@ export function PageHero({
   backgroundImageSrc,
   backgroundImageAlt = "",
   size = "default",
+  layout = "overlay",
   actions,
   pills,
 }: Props) {
   const isPhoto = Boolean(backgroundImageSrc);
   const isHome = size === "home";
+
+  if (layout === "split" && isPhoto) {
+    return (
+      <section
+        id="main"
+        className="relative isolate overflow-hidden bg-[var(--color-brand)] text-[var(--color-cream)]"
+      >
+        <div className="grid min-[901px]:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+          <div className="relative aspect-[4/3] min-[901px]:order-2 min-[901px]:aspect-auto min-[901px]:min-h-[560px]">
+            <Image
+              src={backgroundImageSrc!}
+              alt={backgroundImageAlt}
+              fill
+              className="object-cover"
+              sizes="(min-width: 901px) 48vw, 100vw"
+              priority
+            />
+          </div>
+          <div className="relative flex items-center overflow-hidden bg-[var(--color-brand)] min-[901px]:order-1">
+            <StarMark
+              size={260}
+              opacity={0.08}
+              className="pointer-events-none absolute -bottom-16 -left-14"
+            />
+            <div className="relative w-full px-6 py-14 min-[621px]:px-10 min-[621px]:py-20 min-[901px]:ml-auto min-[901px]:max-w-[36rem] min-[901px]:px-12 min-[901px]:py-24 min-[1400px]:px-16">
+              {eyebrow ? (
+                <Eyebrow className="text-[var(--color-gold-light)]">{eyebrow}</Eyebrow>
+              ) : null}
+              <h1 className="mt-[18px] max-w-[17ch] font-display text-[44px] leading-[1.03] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[56px] min-[1200px]:text-[62px]">
+                {title}
+              </h1>
+              {subtitle ? (
+                <p className="mt-6 max-w-[46ch] text-[19px] leading-[1.68] text-[rgb(250_248_245/0.94)]">
+                  {subtitle}
+                </p>
+              ) : null}
+              {actions ? (
+                <div className="mt-9 flex flex-wrap gap-3.5">{actions}</div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+        <div className="hero-gold-rule relative" aria-hidden />
+      </section>
+    );
+  }
 
   return (
     <section

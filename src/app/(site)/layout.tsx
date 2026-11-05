@@ -74,7 +74,6 @@ export default async function SiteLayout({
         links={{
           phone: (settings?.contactPhone as string | null) ?? null,
           email: (settings?.contactEmail as string | null) ?? null,
-          heroAppUrl: (settings?.heroAppUrl as string | null) ?? null,
           newsletterUrl: (settings?.newsletterUrl as string | null) ?? null,
           termDatesUrl: (settings?.termDatesUrl as string | null) ?? null,
         }}
@@ -90,7 +89,8 @@ export default async function SiteLayout({
           hours: (settings?.officeHours as string | null) ?? null,
         }}
         familyLinks={{
-          heroAppUrl: (settings?.heroAppUrl as string | null) ?? null,
+          heroAppStoreUrl: (settings?.heroAppStoreUrl as string | null) ?? null,
+          heroPlayStoreUrl: (settings?.heroPlayStoreUrl as string | null) ?? null,
           kindoUrl: (settings?.kindoUrl as string | null) ?? null,
           newsletterUrl: (settings?.newsletterUrl as string | null) ?? null,
           policiesUrl: (settings?.policiesUrl as string | null) ?? null,

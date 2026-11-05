@@ -81,6 +81,21 @@ const siteSettingsDoc = {
   contactAddress: "50 Silverdale Street\nSilverdale 0944",
   contactPhone: "09 427 9189",
   contactEmail: "achieve@stellamaris.school.nz",
+  absenceEmail: "absences@stellamaris.school.nz",
+  ptfaEmail: "stellaptfa@stellamaris.school.nz",
+  boardEmail: "BOT@stellamaris.school.nz",
+  heroAppStoreUrl: "https://apps.apple.com/nz/app/hero-by-linc-ed/id1470011260",
+  heroPlayStoreUrl: "https://play.google.com/store/apps/details?id=com.linced.hero",
+  kindoDescription: "PTFA payments, orders and lunches",
+  parishUrl: "https://hbcparish.org.nz/",
+  dioceseUrl: "https://www.aucklandcatholic.org.nz/",
+  termDates: [
+    { _key: "t2026-4", year: 2026, term: 4, start: "2026-10-12", end: "2026-12-18", note: "Latest possible finish — the school may finish earlier." },
+    { _key: "t2027-1", year: 2027, term: 1, start: "2027-02-03", end: "2027-04-09", note: "Start date may be earlier (28 Jan – 3 Feb) — confirm with the office." },
+    { _key: "t2027-2", year: 2027, term: 2, start: "2027-04-27", end: "2027-07-02" },
+    { _key: "t2027-3", year: 2027, term: 3, start: "2027-07-19", end: "2027-09-24" },
+    { _key: "t2027-4", year: 2027, term: 4, start: "2027-10-11", end: "2027-12-17", note: "Latest possible finish — the school may finish earlier." }
+  ],
   officeHours: "8:00am – 3:30pm",
   homeHeroEyebrow: "Silverdale, Auckland · Years 1–6",
   homeHeroTitle: "Stella Maris Catholic Primary School",
@@ -92,11 +107,11 @@ const siteSettingsDoc = {
 
 const staffMembers = [
   { id: "catherine-cyprian", name: "Catherine Cyprian", role: "Principal", email: "principal@stellamaris.school.nz", group: ["slt"], showOnContact: true, sortOrder: 10 },
-  { id: "olwyn-hobman", name: "Olwyn Hobman", role: "Associate Principal Years 4–6 · Curriculum Leader", email: "olwyn@stellamaris.school.nz", group: ["slt"], sortOrder: 20 },
+  { id: "olwyn-hobman", name: "Olwyn Hobman", role: "Associate Principal Years 4–6 · Curriculum Leader", email: "olwyn@stellamaris.school.nz", group: ["slt"], showOnContact: true, sortOrder: 20 },
   { id: "mel-hogg", name: "Mel Hogg", role: "Associate Principal Years 0–3 · SENCo", email: "melh@stellamaris.school.nz", group: ["slt", "marama"], showOnContact: true, sortOrder: 30 },
   { id: "karl-hobman", name: "Karl Hobman", role: "Director of Religious Studies", email: "karl@stellamaris.school.nz", group: ["slt", "marama"], className: "St Mary", yearLevel: "Year 2", sortOrder: 40 },
   { id: "katherine-craig", name: "Katherine Craig", role: "School Administrator", email: "achieve@stellamaris.school.nz", group: ["office"], showOnContact: true, sortOrder: 50 },
-  { id: "colleen-smith", name: "Colleen Smith", role: "Office Administrator", email: "colleen@stellamaris.school.nz", group: ["office"], showOnContact: true, sortOrder: 60 },
+  { id: "colleen-smith", name: "Colleen Smith", role: "Office Administrator", email: "colleen@stellamaris.school.nz", group: ["office"], sortOrder: 60 },
   { id: "isla-macdiarmid", name: "Isla MacDiarmid", role: "Teacher", email: "isla.macdiarmid@stellamaris.school.nz", group: ["marama"], className: "St Anne", yearLevel: "Year 1", sortOrder: 110 },
   { id: "erica-mainwaring", name: "Erica Mainwaring", role: "Teacher", email: "erica@stellamaris.school.nz", group: ["marama"], className: "St Benedict", yearLevel: "Year 1", sortOrder: 120 },
   { id: "monica-allemann", name: "Monica Allemann", role: "Teacher", email: "monica@stellamaris.school.nz", group: ["marama"], className: "St Clare", yearLevel: "Year 1", sortOrder: 130 },
@@ -223,6 +238,10 @@ const communityPageDoc = {
   boardTitle: "School board",
   boardDescription:
     "The board sets the strategic direction of the school alongside the principal, safeguards our special character, and is accountable for how the school's resources are used.",
+  ptfaHelpText: "Get in touch about helping",
+  boardMinutesText: "Email the Board for a copy of board minutes —",
+  boardMeetingText:
+    "Board meetings are open to the public. To attend a meeting, or with any queries for the Board, please email",
   reportsIntro:
     "Published by the board for our community, as required by the Education and Training Act 2020.",
 };
@@ -257,11 +276,11 @@ const enrolmentPageDoc = {
     { _key: "curriculum", title: "Curriculum charges", body: "For specific activities such as trips, camp and swimming, charged as they arise." },
     { _key: "voluntary", title: "Voluntary contributions", body: "Genuinely voluntary — they help fund resources beyond what the school's operational grant covers." },
     { _key: "assist", title: "Financial assistance", body: "Cost should never be the reason a child misses out. Speak to the office in confidence about payment plans or assistance." },
-    { _key: "kindo", title: "Paying through Kindo", body: "Dues, charges and permission slips are handled online through Kindo." },
+    { _key: "paying", title: "Paying fees", body: "School fees are paid online or at the school office. They are not paid through Kindo." },
   ],
   ctaHeading: "Still deciding? Ask us anything.",
   ctaBody:
-    "Katherine and Colleen in the office are the best first call — they'll answer your questions or put you in touch with our principal.",
+    "Our office team are the best first call — they'll answer your questions or put you in touch with our principal.",
 };
 
 const absencesPageDoc = {
@@ -269,10 +288,32 @@ const absencesPageDoc = {
   _type: "absencesPage",
   heroSubtitle:
     "Please tell us before 9:00am on any day your child will be absent — for illness, appointments, or family reasons.",
-  intro: "Three ways to report an absence: Hero app, phone, or email.",
+  intro: "Two ways to report an absence: phone or email.",
+  methodsTitle: "Two ways to report an absence",
+  whatToTell: [
+    "Your child's full name and class",
+    "The date or dates they will be away",
+    "The reason — illness, appointment, bereavement, family travel",
+    "For appointments during the day, the pick-up and return times",
+  ],
   attendanceTitle: "Why every day matters",
   attendanceDescription:
     "Student attendance at school plays an important role in student progress and achievement. Lifting school attendance is a shared responsibility.",
+  attendanceBody: [
+    paragraph(
+      "Student attendance at school plays an important role in student progress and achievement. Lifting school attendance is a shared responsibility.",
+    ),
+    paragraph(
+      "Parents, families and whānau working with teachers is key to helping young people stay engaged and motivated at school, which is important to help young people achieve their goals.",
+    ),
+    paragraph(
+      "The more often students attend school, the better they do at school, the happier they are, and the better they are set up for life.",
+      { style: "blockquote" },
+    ),
+    paragraph(
+      "If a pattern of absence needs attention, we'll work alongside you with care, following our attendance management plan and Ministry of Education guidance.",
+    ),
+  ],
 };
 
 const learningPageDoc = {
@@ -475,7 +516,6 @@ async function buildDocuments() {
 }
 
 const SETTINGS_URL_KEYS = [
-  "heroAppUrl",
   "kindoUrl",
   "newsletterUrl",
   "termDatesUrl",

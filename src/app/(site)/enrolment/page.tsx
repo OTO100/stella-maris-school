@@ -36,7 +36,7 @@ const FEE_FALLBACK = [
   { title: "Curriculum charges", body: "For specific activities such as trips, camp and swimming, charged as they arise." },
   { title: "Voluntary contributions", body: "Genuinely voluntary — they help fund resources beyond what the school's operational grant covers." },
   { title: "Financial assistance", body: "Cost should never be the reason a child misses out. Speak to the office in confidence about payment plans or assistance." },
-  { title: "Paying through Kindo", body: "Dues, charges and permission slips are handled online through Kindo." },
+  { title: "Paying fees", body: "School fees are paid online or at the school office. They are not paid through Kindo." },
 ];
 
 export default async function EnrolmentPage() {
@@ -249,7 +249,7 @@ export default async function EnrolmentPage() {
             </h2>
             <p className="mt-4 max-w-[48ch] text-[17.5px] leading-[1.72] text-[rgba(250,248,245,.92)]">
               {(copy?.ctaBody as string | undefined) ??
-                "Katherine and Colleen in the office are the best first call — they'll answer your questions or put you in touch with our principal."}
+                "Our office team are the best first call — they'll answer your questions or put you in touch with our principal."}
             </p>
             <ul className="mt-7 flex flex-col gap-3 text-[17px]">
               <li>

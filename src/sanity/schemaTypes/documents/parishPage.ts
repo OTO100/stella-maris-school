@@ -23,6 +23,13 @@ export const parishPage = defineType({
       rows: 8,
       description: "Separate paragraphs with a blank line.",
     }),
+    defineField({
+      name: "massTimes",
+      title: "Mass times",
+      type: "text",
+      rows: 5,
+      description: "One line per Mass.",
+    }),
   ],
   preview: {
     prepare() {
