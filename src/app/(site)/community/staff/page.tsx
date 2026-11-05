@@ -108,16 +108,16 @@ function TeamBlock({
     <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)] last:border-b-0 last:bg-[var(--color-cream)] [&:nth-of-type(even)]:bg-[var(--color-cream)]">
       <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[300px_1fr]">
         <div>
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             {yearRange}
           </p>
-          <h2 className="mt-3 text-[38px] leading-[1.1] text-[var(--color-brand)]">
+          <h2 className="mt-3 text-h2 leading-[1.1] text-[var(--color-brand)]">
             {title}
           </h2>
-          <p className="mt-3.5 text-[16.5px] leading-[1.72] text-[var(--color-ink-muted)]">
+          <p className="mt-3.5 text-copy leading-[1.65] text-[var(--color-ink-muted)]">
             {meaning}
           </p>
-          <div className="mt-[22px] border-t border-[var(--color-border)] pt-5 text-[15px] leading-[1.7] text-[var(--color-ink-muted)]">
+          <div className="mt-[22px] border-t border-[var(--color-border)] pt-5 text-copy leading-[1.65] text-[var(--color-ink-muted)]">
             {leader ? (
               <p>
                 <strong className="font-semibold text-[var(--color-heading)]">
@@ -147,23 +147,23 @@ function TeamBlock({
               }`}
             >
               <span>
-                <span className="block text-[19px] font-semibold text-[var(--color-heading)]">
+                <span className="block text-h4 font-semibold text-[var(--color-heading)]">
                   {person.name}
                 </span>
                 {person.email ? (
-                  <a href={`mailto:${person.email}`} className="mt-0.5 block break-all text-[14px]">
+                  <a href={`mailto:${person.email}`} className="mt-0.5 block break-all text-small">
                     {person.email}
                   </a>
                 ) : null}
               </span>
               <span className="flex items-center gap-2.5 whitespace-nowrap">
                 {person.className ? (
-                  <span className="font-display text-[19px] text-[var(--color-brand)]">
+                  <span className="font-display text-h4 text-[var(--color-brand)]">
                     {person.className}
                   </span>
                 ) : null}
                 {person.yearLevel ? (
-                  <span className="rounded-full bg-[var(--color-rose)] px-3 py-1 text-[13px] font-semibold text-[var(--color-brand-hover)]">
+                  <span className="rounded-full bg-[var(--color-rose)] px-3 py-1 text-small font-semibold text-[var(--color-brand-hover)]">
                     {person.yearLevel}
                   </span>
                 ) : null}
@@ -223,10 +223,10 @@ export default async function StaffPage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             Senior leadership team
           </p>
-          <h2 className="mt-3.5 text-[36px] leading-[1.12]">Leading our school</h2>
+          <h2 className="mt-3.5 text-h2 leading-[1.12]">Leading our school</h2>
           <ul className="mt-9 grid gap-5 min-[621px]:grid-cols-2 min-[901px]:grid-cols-4">
             {slt.map((person) => {
               const photoUrl = staffPhotoSrc(person);
@@ -251,12 +251,12 @@ export default async function StaffPage() {
                     )}
                   </div>
                   <div className="px-[22px] pt-[22px] pb-[26px]">
-                    <h3 className="text-[22px] leading-[1.2]">{person.name}</h3>
-                    <p className="mt-1.5 text-[14.5px] font-medium text-[var(--color-olive)]">
+                    <h3 className="text-h3 leading-[1.2]">{person.name}</h3>
+                    <p className="mt-1.5 text-small font-medium text-[var(--color-olive)]">
                       {person.role}
                     </p>
                     {person.email ? (
-                      <a href={`mailto:${person.email}`} className="mt-3 block break-all text-[14px]">
+                      <a href={`mailto:${person.email}`} className="mt-3 block break-all text-small">
                         {person.email}
                       </a>
                     ) : null}
@@ -271,10 +271,10 @@ export default async function StaffPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]">
         <div className="page-wrap grid items-center gap-12 py-14 min-[901px]:grid-cols-[1fr_1.6fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               First point of contact
             </p>
-            <h2 className="mt-3 text-[32px] leading-[1.15]">School office</h2>
+            <h2 className="mt-3 text-h2sm leading-[1.15]">School office</h2>
           </div>
           <ul className="grid gap-4 min-[621px]:grid-cols-2">
             {office.map((person) => (
@@ -282,12 +282,12 @@ export default async function StaffPage() {
                 key={person.name}
                 className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-[22px]"
               >
-                <h3 className="text-[20px] leading-[1.2]">{person.name}</h3>
-                <p className="mt-1 text-[14.5px] font-medium text-[var(--color-olive)]">
+                <h3 className="text-h4 leading-[1.2]">{person.name}</h3>
+                <p className="mt-1 text-small font-medium text-[var(--color-olive)]">
                   {person.role}
                 </p>
                 {person.email ? (
-                  <a href={`mailto:${person.email}`} className="mt-2.5 block break-all text-[14px]">
+                  <a href={`mailto:${person.email}`} className="mt-2.5 block break-all text-small">
                     {person.email}
                   </a>
                 ) : null}
@@ -323,10 +323,10 @@ export default async function StaffPage() {
       <section className="bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[300px_1fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Alongside our teachers
             </p>
-            <h2 className="mt-3 text-[38px] leading-[1.1] text-[var(--color-brand)]">
+            <h2 className="mt-3 text-h2 leading-[1.1] text-[var(--color-brand)]">
               Support staff
             </h2>
           </div>
@@ -337,24 +337,24 @@ export default async function StaffPage() {
                   key={person.name}
                   className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-6 py-[22px]"
                 >
-                  <h3 className="text-[20px] leading-[1.2]">{person.name}</h3>
-                  <p className="mt-1 text-[14.5px] font-medium text-[var(--color-olive)]">
+                  <h3 className="text-h4 leading-[1.2]">{person.name}</h3>
+                  <p className="mt-1 text-small font-medium text-[var(--color-olive)]">
                     {person.role}
                   </p>
                   {person.email ? (
-                    <a href={`mailto:${person.email}`} className="mt-2.5 block break-all text-[14px]">
+                    <a href={`mailto:${person.email}`} className="mt-2.5 block break-all text-small">
                       {person.email}
                     </a>
                   ) : null}
                 </li>
               ))}
             </ul>
-            <h3 className="mt-9 text-[24px] leading-[1.2]">Teacher aides</h3>
+            <h3 className="mt-9 text-h3 leading-[1.2]">Teacher aides</h3>
             <ul className="mt-[18px] flex flex-wrap gap-2.5">
               {aides.map((person) => (
                 <li
                   key={person.name}
-                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-cream)] px-[18px] py-[9px] text-[15.5px] text-[var(--color-ink)]"
+                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-cream)] px-[18px] py-[9px] text-copy text-[var(--color-ink)]"
                 >
                   {person.name}
                 </li>

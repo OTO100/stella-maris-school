@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+import { SHARED_LINK_OPTIONS } from "@/lib/shared-links";
+
 export const aboutPage = defineType({
   name: "aboutPage",
   title: "About page",
@@ -109,10 +111,24 @@ export const aboutPage = defineType({
                       validation: (Rule) => Rule.required(),
                     }),
                     defineField({
+                      name: "sharedLink",
+                      type: "string",
+                      title: "Shared link from Site settings",
+                      description:
+                        "Pick one to use the same link as the rest of the site — edit it once in Site settings. Overrides the URL below.",
+                      options: {
+                        list: SHARED_LINK_OPTIONS.map(({ title, value }) => ({
+                          title,
+                          value,
+                        })),
+                      },
+                    }),
+                    defineField({
                       name: "url",
                       type: "string",
                       title: "URL",
                       description: "A full https:// address or a /page path.",
+                      hidden: ({ parent }) => Boolean(parent?.sharedLink),
                     }),
                     defineField({
                       name: "file",

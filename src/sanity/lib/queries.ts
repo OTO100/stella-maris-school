@@ -48,7 +48,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     policiesUrl,
     kindoUrl,
     termDatesUrl,
-    eroUrl,
+    "eroUrl": coalesce(eroFile.asset->url, eroUrl),
     calendarUrl,
     parishUrl,
     dioceseUrl,
@@ -126,7 +126,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     specialCharacterQuoteCite,
     encounteringChrist[]{_key, title, body},
     ourLadyImage,
-    parentInfoCards[]{_key, key, title, body, links[]{_key, label, url, "fileUrl": file.asset->url}},
+    parentInfoCards[]{_key, key, title, body, links[]{_key, label, sharedLink, url, "fileUrl": file.asset->url}},
     ctaHeading,
     ctaBody
   }
@@ -140,6 +140,7 @@ export const COMMUNITY_PAGE_QUERY = defineQuery(`
     ptfaDescription,
     boardTitle,
     boardDescription,
+    boardMembers[]{_key, name, role},
     ptfaHelpText,
     boardMinutesText,
     boardMeetingText,
@@ -161,6 +162,17 @@ export const ENROLMENT_PAGE_QUERY = defineQuery(`
     feesTitle,
     feesDescription,
     feeRows[]{_key, title, body},
+    packTitle,
+    packIntro,
+    "packFileUrl": packFile.asset->url,
+    "packDocuments": packDocuments[]->{
+      _id,
+      title,
+      description,
+      "fileUrl": file.asset->url,
+      "fileName": file.asset->originalFilename,
+      "size": file.asset->size
+    },
     ctaHeading,
     ctaBody
   }

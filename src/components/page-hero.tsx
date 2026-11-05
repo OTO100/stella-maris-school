@@ -62,11 +62,11 @@ export function PageHero({
               {eyebrow ? (
                 <Eyebrow className="text-[var(--color-gold-light)]">{eyebrow}</Eyebrow>
               ) : null}
-              <h1 className="mt-[18px] max-w-[17ch] font-display text-[44px] leading-[1.03] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[56px] min-[1200px]:text-[62px]">
+              <h1 className="mt-[18px] max-w-[17ch] font-display text-[40px] leading-[1.03] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[56px] min-[1200px]:text-[62px]">
                 {title}
               </h1>
               {subtitle ? (
-                <p className="mt-6 max-w-[46ch] text-[19px] leading-[1.68] text-[rgb(250_248_245/0.94)]">
+                <p className="mt-6 max-w-[46ch] text-h4 leading-[1.65] text-[rgb(250_248_245/0.94)]">
                   {subtitle}
                 </p>
               ) : null}
@@ -144,15 +144,15 @@ export function PageHero({
         <h1
           className={`mt-[18px] font-display font-semibold tracking-[-0.02em] text-[var(--color-cream)] ${
             isHome
-              ? "max-w-[17ch] text-[44px] leading-[1.03] min-[621px]:text-[70px]"
-              : "max-w-[18ch] text-[42px] leading-[1.06] min-[621px]:text-[56px]"
+              ? "max-w-[17ch] text-[40px] leading-[1.03] min-[621px]:text-[70px]"
+              : "max-w-[18ch] text-[38px] leading-[1.06] min-[621px]:text-[56px]"
           }`}
         >
           {title}
         </h1>
         {subtitle ? (
           <p
-            className={`mt-6 max-w-[50ch] text-[19px] leading-[1.68] text-[rgb(250_248_245/0.94)] ${
+            className={`mt-6 max-w-[50ch] text-h4 leading-[1.65] text-[rgb(250_248_245/0.94)] ${
               isHome ? "min-[621px]:text-[19.5px]" : ""
             }`}
           >
@@ -168,7 +168,7 @@ export function PageHero({
               <li key={pill.href}>
                 <a
                   href={pill.href}
-                  className="inline-flex rounded-full border border-[rgb(250_248_245/0.35)] px-4 py-2 text-[13.5px] font-semibold text-[var(--color-cream)] hover:border-[var(--color-gold-light)] hover:text-[var(--color-gold-light)]"
+                  className="inline-flex rounded-full border border-[rgb(250_248_245/0.35)] px-4 py-2 text-small font-semibold text-[var(--color-cream)] hover:border-[var(--color-gold-light)] hover:text-[var(--color-gold-light)]"
                 >
                   {pill.label}
                 </a>

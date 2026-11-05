@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
-import { PlaceholderPanel } from "@/components/placeholder-panel";
 import { StarMark } from "@/components/star-mark";
 import { PAGE_META } from "@/lib/page-meta";
 import { resourceFileUrl } from "@/lib/resources";
@@ -39,6 +38,22 @@ const FEE_FALLBACK = [
   { title: "Paying fees", body: "School fees are paid online or at the school office. They are not paid through Kindo." },
 ];
 
+type PackDocument = {
+  _id: string;
+  title?: string | null;
+  description?: string | null;
+  fileUrl?: string | null;
+  fileName?: string | null;
+  size?: number | null;
+};
+
+function fileSize(bytes?: number | null) {
+  if (!bytes) return null;
+  return bytes >= 1_000_000
+    ? `${(bytes / 1_000_000).toFixed(1)} MB`
+    : `${Math.max(1, Math.round(bytes / 1000))} KB`;
+}
+
 export default async function EnrolmentPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
@@ -68,6 +83,10 @@ export default async function EnrolmentPage() {
   const address = (settings?.contactAddress as string | undefined) ?? "50 Silverdale Street, Silverdale 0944";
   const why = (copy?.whyCards as typeof WHY_FALLBACK | undefined)?.filter((item) => item.title) ?? WHY_FALLBACK;
   const steps = (copy?.applicationSteps as typeof STEPS_FALLBACK | undefined)?.filter((item) => item.title) ?? STEPS_FALLBACK;
+  const packDocuments = ((copy?.packDocuments as PackDocument[] | null) ?? []).filter(
+    (doc) => doc?.fileUrl,
+  );
+  const packFileUrl = copy?.packFileUrl as string | undefined;
   const fees = (copy?.feeRows as typeof FEE_FALLBACK | undefined)?.filter((item) => item.title) ?? FEE_FALLBACK;
 
   return (
@@ -94,16 +113,16 @@ export default async function EnrolmentPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.35fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Why families choose us
             </p>
-            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.valuePropositionTitle as string | undefined) ??
                 "The whole child, in a Catholic tradition"}
             </h2>
           </div>
           <div>
-            <p className="max-w-[62ch] text-[18.5px] leading-[1.78] text-[var(--color-ink)]">
+            <p className="max-w-[62ch] text-h4 leading-[1.65] text-[var(--color-ink)]">
               {(copy?.valueProposition as string | undefined) ??
                 "At Stella Maris we value the development of the whole person — integrating spiritual development, academic success, cultural prowess and awareness, and a high level of sporting participation and skill."}
             </p>
@@ -113,16 +132,16 @@ export default async function EnrolmentPage() {
                   key={card.title}
                   className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-6"
                 >
-                  <h3 className="text-[20px] leading-[1.25] text-[var(--color-brand)]">
+                  <h3 className="text-h4 leading-[1.25] text-[var(--color-brand)]">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
+                  <p className="mt-2 text-copy leading-[1.65] text-[var(--color-ink-muted)]">
                     {card.body}
                   </p>
                 </li>
               ))}
             </ul>
-            <Link href="/about#principal" className="mt-6 inline-flex items-center gap-2 text-[15.5px] font-semibold">
+            <Link href="/about#principal" className="mt-6 inline-flex items-center gap-2 text-copy font-semibold">
               Read the principal's message <span aria-hidden>→</span>
             </Link>
           </div>
@@ -134,35 +153,35 @@ export default async function EnrolmentPage() {
         className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]"
       >
         <div className="page-wrap section-pad">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             Three steps
           </p>
-          <h2 className="mt-3.5 text-[38px] leading-[1.12]">How to apply</h2>
+          <h2 className="mt-3.5 text-h2 leading-[1.12]">How to apply</h2>
           <ol className="mt-10 grid gap-5 min-[901px]:grid-cols-3">
             {steps.map((step, index) => (
               <li
                 key={step.title}
                 className="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] px-[30px] py-8"
               >
-                <span className="flex size-11 items-center justify-center rounded-full bg-[var(--color-brand)] font-display text-[21px] text-[var(--color-cream)]">
+                <span className="flex size-11 items-center justify-center rounded-full bg-[var(--color-brand)] font-display text-h4 text-[var(--color-cream)]">
                   {index + 1}
                 </span>
-                <h3 className="mt-[18px] text-[24px] leading-[1.2]">{step.title}</h3>
-                <p className="mt-2.5 text-base leading-[1.7] text-[var(--color-ink-muted)]">
+                <h3 className="mt-[18px] text-h3 leading-[1.2]">{step.title}</h3>
+                <p className="mt-2.5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
                   {step.body}
                 </p>
                 {index === 0 ? (
-                  <a href={scheme} className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold">
+                  <a href={scheme} className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
                     Enrolment scheme PDF <span aria-hidden>↓</span>
                   </a>
                 ) : null}
                 {index === 1 ? (
-                  <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold">
+                  <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
                     Arrange a visit <span aria-hidden>→</span>
                   </Link>
                 ) : null}
                 {index === 2 ? (
-                  <a href={`mailto:${email}`} className="mt-4 inline-flex items-center gap-1.5 text-[15px] font-semibold">
+                  <a href={`mailto:${email}`} className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
                     Request the forms <span aria-hidden>→</span>
                   </a>
                 ) : null}
@@ -175,15 +194,15 @@ export default async function EnrolmentPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.35fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               State-integrated
             </p>
-            <h2 className="mt-3.5 text-[36px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.preferenceTitle as string | undefined) ??
                 "Preference & non-preference places"}
             </h2>
           </div>
-          <div className="flex max-w-[62ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[62ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             {(
               (copy?.preferenceBody as string | undefined) ??
               "As a state-integrated Catholic school, most of our places are preference places for children whose families have an established connection with the Catholic faith. A smaller number of non-preference places may also be available.\n\nA preference certificate is signed by a parish priest. If you're unsure whether your family qualifies, please ask us — we will walk you through it, and we welcome enquiries from all families."
@@ -192,10 +211,6 @@ export default async function EnrolmentPage() {
               .map((para) => (
                 <p key={para.slice(0, 24)}>{para}</p>
               ))}
-            <PlaceholderPanel label="To confirm with SLT">
-              Exact preference categories, current non-preference availability,
-              and application closing dates.
-            </PlaceholderPanel>
           </div>
         </div>
       </section>
@@ -206,13 +221,13 @@ export default async function EnrolmentPage() {
       >
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.35fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Costs
             </p>
-            <h2 className="mt-3.5 text-[36px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.feesTitle as string | undefined) ?? "School fees"}
             </h2>
-            <p className="mt-[18px] text-[16.5px] leading-[1.72] text-[var(--color-ink-muted)]">
+            <p className="mt-[18px] text-copy leading-[1.65] text-[var(--color-ink-muted)]">
               {(copy?.feesDescription as string | undefined) ??
                 "We want cost to be clear from the start. Please confirm current amounts with the office before you apply."}
             </p>
@@ -225,8 +240,8 @@ export default async function EnrolmentPage() {
                   index === fees.length - 1 ? "border-b" : ""
                 }`}
               >
-                <p className="text-[19px] font-semibold">{row.title}</p>
-                <p className="mt-1.5 text-base leading-[1.7] text-[var(--color-ink-muted)]">
+                <p className="text-h4 font-semibold">{row.title}</p>
+                <p className="mt-1.5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
                   {row.body}
                 </p>
               </li>
@@ -235,23 +250,82 @@ export default async function EnrolmentPage() {
         </div>
       </section>
 
+      {packDocuments.length || packFileUrl ? (
+        <section
+          id="pack"
+          className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-surface)]"
+        >
+          <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.35fr]">
+            <div>
+              <h2 className="text-h2 leading-[1.12]">
+                {(copy?.packTitle as string | undefined) || "Enrolment pack"}
+              </h2>
+              <p className="mt-[18px] text-copy leading-[1.65] text-[var(--color-ink-muted)]">
+                {(copy?.packIntro as string | undefined) ??
+                  "Everything you need to read before applying, including preference of enrolment, attendance dues and financial assistance."}
+              </p>
+              {packFileUrl ? (
+                <a
+                  href={`${packFileUrl}?dl=`}
+                  className="btn-brand mt-[26px]"
+                >
+                  Download the whole pack <span aria-hidden>↓</span>
+                </a>
+              ) : null}
+            </div>
+            <ul>
+              {packDocuments.map((doc, index) => (
+                <li
+                  key={doc._id}
+                  className={`border-t border-[var(--color-border)] ${
+                    index === packDocuments.length - 1 ? "border-b" : ""
+                  }`}
+                >
+                  <a
+                    href={doc.fileUrl!}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="group flex items-start justify-between gap-6 py-5 text-[var(--color-ink)] hover:text-[var(--color-brand)]"
+                  >
+                    <span>
+                      <span className="block text-h4 font-semibold">{doc.title}</span>
+                      {doc.description ? (
+                        <span className="mt-1.5 block text-base leading-[1.65] text-[var(--color-ink-muted)]">
+                          {doc.description}
+                        </span>
+                      ) : null}
+                      <span className="mt-1.5 block text-small text-[var(--color-faint)]">
+                        {["PDF", fileSize(doc.size)].filter(Boolean).join(" · ")}
+                      </span>
+                    </span>
+                    <span aria-hidden className="pt-1 text-[var(--color-brand)]">
+                      ↓
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
       <section className="relative overflow-hidden border-t-[6px] border-[var(--color-gold)] bg-[var(--color-brand-muted)] text-[var(--color-cream)]">
         <StarMark
           size={260}
           opacity={0.12}
           className="pointer-events-none absolute -bottom-20 -left-[60px]"
         />
-        <div className="page-wrap relative grid items-center gap-14 py-[72px] min-[901px]:grid-cols-2">
+        <div className="page-wrap relative grid items-center gap-14 py-14 min-[900px]:py-[72px] min-[901px]:grid-cols-2">
           <div>
-            <h2 className="text-[36px] leading-[1.12] text-[var(--color-cream)]">
+            <h2 className="text-h2 leading-[1.12] text-[var(--color-cream)]">
               {(copy?.ctaHeading as string | undefined) ??
                 "Still deciding? Ask us anything."}
             </h2>
-            <p className="mt-4 max-w-[48ch] text-[17.5px] leading-[1.72] text-[rgba(250,248,245,.92)]">
+            <p className="mt-4 max-w-[48ch] text-body leading-[1.65] text-[rgba(250,248,245,.92)]">
               {(copy?.ctaBody as string | undefined) ??
                 "Our office team are the best first call — they'll answer your questions or put you in touch with our principal."}
             </p>
-            <ul className="mt-7 flex flex-col gap-3 text-[17px]">
+            <ul className="mt-7 flex flex-col gap-3 text-body">
               <li>
                 <a
                   href={`tel:${phone.replace(/[^\d+]/g, "")}`}
@@ -279,14 +353,14 @@ export default async function EnrolmentPage() {
               className="flex items-center justify-between gap-5 rounded-2xl border border-[rgba(250,248,245,.28)] bg-[rgba(255,255,255,.08)] px-7 py-6 text-[var(--color-cream)] hover:bg-[rgba(255,255,255,.16)] hover:text-[var(--color-cream)]"
             >
               <span>
-                <span className="block font-display text-[23px] leading-[1.2]">
+                <span className="block font-display text-h3 leading-[1.2]">
                   Enrolment scheme
                 </span>
-                <span className="mt-1 block text-[14.5px] text-[rgba(250,248,245,.82)]">
+                <span className="mt-1 block text-small text-[rgba(250,248,245,.82)]">
                   PDF
                 </span>
               </span>
-              <span aria-hidden className="text-[22px]">
+              <span aria-hidden className="text-h3">
                 ↓
               </span>
             </a>
@@ -295,20 +369,20 @@ export default async function EnrolmentPage() {
               className="flex items-center justify-between gap-5 rounded-2xl border border-[rgba(250,248,245,.28)] bg-[rgba(255,255,255,.08)] px-7 py-6 text-[var(--color-cream)] hover:bg-[rgba(255,255,255,.16)] hover:text-[var(--color-cream)]"
             >
               <span>
-                <span className="block font-display text-[23px] leading-[1.2]">
+                <span className="block font-display text-h3 leading-[1.2]">
                   Parent Information Handbook 2026
                 </span>
-                <span className="mt-1 block text-[14.5px] text-[rgba(250,248,245,.82)]">
+                <span className="mt-1 block text-small text-[rgba(250,248,245,.82)]">
                   PDF · everything in one place
                 </span>
               </span>
-              <span aria-hidden className="text-[22px]">
+              <span aria-hidden className="text-h3">
                 ↓
               </span>
             </a>
             <Link
               href="/contact"
-              className="flex items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-gold)] px-7 py-[18px] text-[16.5px] font-semibold text-[var(--color-heading)] hover:bg-[var(--color-gold-muted)] hover:text-[var(--color-heading)]"
+              className="flex items-center justify-center gap-2.5 rounded-2xl bg-[var(--color-gold)] px-7 py-[18px] text-copy font-semibold text-[var(--color-heading)] hover:bg-[var(--color-gold-muted)] hover:text-[var(--color-heading)]"
             >
               Book a school tour <span aria-hidden>→</span>
             </Link>

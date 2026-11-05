@@ -83,18 +83,18 @@ const siteSettingsDoc = {
   contactEmail: "achieve@stellamaris.school.nz",
   absenceEmail: "absences@stellamaris.school.nz",
   ptfaEmail: "stellaptfa@stellamaris.school.nz",
-  boardEmail: "BOT@stellamaris.school.nz",
+  boardEmail: "bot@stellamaris.school.nz",
   heroAppStoreUrl: "https://apps.apple.com/nz/app/hero-by-linc-ed/id1470011260",
   heroPlayStoreUrl: "https://play.google.com/store/apps/details?id=com.linced.hero",
   kindoDescription: "PTFA payments, orders and lunches",
   parishUrl: "https://hbcparish.org.nz/",
   dioceseUrl: "https://www.aucklandcatholic.org.nz/",
   termDates: [
-    { _key: "t2026-4", year: 2026, term: 4, start: "2026-10-12", end: "2026-12-18", note: "Latest possible finish — the school may finish earlier." },
-    { _key: "t2027-1", year: 2027, term: 1, start: "2027-02-03", end: "2027-04-09", note: "Start date may be earlier (28 Jan – 3 Feb) — confirm with the office." },
+    { _key: "t2026-4", year: 2026, term: 4, start: "2026-10-12", end: "2026-12-18" },
+    { _key: "t2027-1", year: 2027, term: 1, start: "2027-02-03", end: "2027-04-09" },
     { _key: "t2027-2", year: 2027, term: 2, start: "2027-04-27", end: "2027-07-02" },
     { _key: "t2027-3", year: 2027, term: 3, start: "2027-07-19", end: "2027-09-24" },
-    { _key: "t2027-4", year: 2027, term: 4, start: "2027-10-11", end: "2027-12-17", note: "Latest possible finish — the school may finish earlier." }
+    { _key: "t2027-4", year: 2027, term: 4, start: "2027-10-11", end: "2027-12-17" }
   ],
   officeHours: "8:00am – 3:30pm",
   homeHeroEyebrow: "Silverdale, Auckland · Years 1–6",

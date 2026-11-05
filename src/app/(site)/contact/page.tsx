@@ -65,57 +65,57 @@ export default async function ContactPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-2">
           <div>
-            <h2 className="text-[32px] leading-[1.15]">
+            <h2 className="text-h2sm leading-[1.15]">
               Stella Maris Catholic Primary School
             </h2>
             <ul className="mt-7">
               <li className="border-t border-[var(--color-border)] py-[18px]">
-                <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                   Address
                 </p>
-                <p className="mt-1.5 whitespace-pre-line text-[18px] text-[var(--color-heading)]">
+                <p className="mt-1.5 whitespace-pre-line text-body text-[var(--color-heading)]">
                   {address}
                 </p>
               </li>
               <li className="border-t border-[var(--color-border)] py-[18px]">
-                <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                   Phone
                 </p>
                 <a
                   href={`tel:${phone.replace(/[^\d+]/g, "")}`}
-                  className="mt-1.5 block text-[19px] font-semibold"
+                  className="mt-1.5 block text-h4 font-semibold"
                 >
                   {phone}
                 </a>
               </li>
               <li className="border-t border-[var(--color-border)] py-[18px]">
-                <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                   Email
                 </p>
-                <a href={`mailto:${email}`} className="mt-1.5 block break-all text-[18px] font-semibold">
+                <a href={`mailto:${email}`} className="mt-1.5 block break-all text-body font-semibold">
                   {email}
                 </a>
               </li>
               <li className="border-y border-[var(--color-border)] py-[18px]">
-                <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                   Office hours
                 </p>
-                <p className="mt-1.5 text-[18px] text-[var(--color-heading)]">{hours}</p>
+                <p className="mt-1.5 text-body text-[var(--color-heading)]">{hours}</p>
               </li>
             </ul>
-            <h3 className="mt-10 text-[24px] leading-[1.2]">Who to ask</h3>
+            <h3 className="mt-10 text-h3 leading-[1.2]">Who to ask</h3>
             <ul className="mt-[18px] grid gap-3.5 min-[621px]:grid-cols-2">
               {who.map((person) => (
                 <li
                   key={person.name}
                   className="rounded-[14px] border border-[var(--color-border)] bg-[var(--color-cream)] px-[22px] py-5"
                 >
-                  <p className="text-[17px] font-semibold">{person.name}</p>
-                  <p className="mt-1 text-[14px] text-[var(--color-olive)]">
+                  <p className="text-body font-semibold">{person.name}</p>
+                  <p className="mt-1 text-small text-[var(--color-olive)]">
                     {person.role}
                   </p>
                   {person.email ? (
-                    <a href={`mailto:${person.email}`} className="mt-2 block break-all text-[13.5px]">
+                    <a href={`mailto:${person.email}`} className="mt-2 block break-all text-small">
                       {person.email}
                     </a>
                   ) : null}
@@ -130,7 +130,7 @@ export default async function ContactPage() {
 
       <section className="bg-[var(--color-cream-deep)]">
         <div className="page-wrap flex flex-wrap items-center justify-between gap-6 py-14">
-          <p className="text-[18px] text-[var(--color-ink)]">
+          <p className="text-body text-[var(--color-ink)]">
             Reporting an absence instead?
           </p>
           <div className="flex flex-wrap gap-3">

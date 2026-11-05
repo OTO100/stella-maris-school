@@ -27,6 +27,15 @@
 }
 
 @theme inline {
+  /* Type scale: change a size here and it updates everywhere. */
+  --text-eyebrow: 12px;
+  --text-small: 14px;
+  --text-copy: 15.5px;
+  --text-body: 16.5px;
+  --text-h4: 19px;
+  --text-h3: 22px;
+  --text-h2sm: clamp(24px, 21px + 0.8vw, 28px);
+  --text-h2: clamp(30px, 24px + 1.2vw, 36px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-work-sans);
@@ -48,8 +57,8 @@ html {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-work-sans), system-ui, sans-serif;
-    font-size: 17px;
-    line-height: 1.78;
+    font-size: 16.5px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -97,12 +106,12 @@ html {
 }
 
 .section-pad {
-  padding-block: 72px;
+  padding-block: 56px;
 }
 
 @media (min-width: 900px) {
   .section-pad {
-    padding-block: 80px;
+    padding-block: 72px;
   }
 }
 
@@ -229,8 +238,8 @@ html {
 .prose-portable {
   max-width: 64ch;
   color: var(--color-ink);
-  font-size: 17.5px;
-  line-height: 1.78;
+  font-size: 16.5px;
+  line-height: 1.65;
 }
 
 .prose-portable > :first-child {

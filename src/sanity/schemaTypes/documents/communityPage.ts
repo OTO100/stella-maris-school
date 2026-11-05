@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const communityPage = defineType({
   name: "communityPage",
@@ -37,7 +37,34 @@ export const communityPage = defineType({
       name: "boardDescription",
       title: "School board text",
       type: "text",
-      rows: 4,
+      rows: 6,
+      description: "Leave an empty line between paragraphs.",
+    }),
+    defineField({
+      name: "boardMembers",
+      title: "Board members",
+      type: "array",
+      description: "Shown in the order listed here.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "name",
+              title: "Name",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "role",
+              title: "Role",
+              type: "string",
+              description: "Optional, e.g. Presiding Member.",
+            }),
+          ],
+          preview: { select: { title: "name", subtitle: "role" } },
+        }),
+      ],
     }),
     defineField({
       name: "ptfaHelpText",

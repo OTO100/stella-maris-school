@@ -168,10 +168,10 @@ export default async function HomePage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.2fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Haere mai
             </p>
-            <h2 className="mt-3.5 text-[36px] leading-[1.08] min-[621px]:text-[44px]">
+            <h2 className="mt-3.5 text-h2 leading-[1.08] min-[621px]:text-[44px]">
               A community based on family
             </h2>
             <Link href="/about#principal" className="btn-brand mt-7">
@@ -185,10 +185,10 @@ export default async function HomePage() {
             >
               ”
             </span>
-            <blockquote className="relative font-sans text-[21px] leading-[1.62] text-[var(--color-ink)] italic">
+            <blockquote className="relative font-sans text-h4 leading-[1.62] text-[var(--color-ink)] italic">
               {quote}
             </blockquote>
-            <p className="mt-5 text-[17px] leading-[1.72] text-[var(--color-ink-muted)]">
+            <p className="mt-5 text-body leading-[1.65] text-[var(--color-ink-muted)]">
               We value the development of the whole person — integrating
               spiritual development, academic success, cultural awareness, and a
               high level of sporting participation, in the context of our
@@ -204,15 +204,15 @@ export default async function HomePage() {
                   className="size-28 shrink-0 rounded-full object-cover"
                 />
               ) : (
-                <span className="flex size-28 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[28px] text-[var(--color-brand)]">
+                <span className="flex size-28 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-h2sm text-[var(--color-brand)]">
                   {personInitials("Catherine Cyprian")}
                 </span>
               )}
               <span>
-                <span className="block text-[15.5px] font-semibold text-[var(--color-heading)]">
+                <span className="block text-copy font-semibold text-[var(--color-heading)]">
                   Catherine Cyprian
                 </span>
-                <span className="block text-[13.5px] text-[var(--color-ink-muted)]">
+                <span className="block text-small text-[var(--color-ink-muted)]">
                   Principal
                 </span>
               </span>
@@ -225,14 +225,14 @@ export default async function HomePage() {
         <div className="page-wrap section-pad">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Ngā uara — our values
               </p>
-              <h2 className="mt-3.5 text-[40px] leading-[1.1]">The Marian Values</h2>
+              <h2 className="mt-3.5 text-h2 leading-[1.1]">The Marian Values</h2>
             </div>
             <Link
               href="/about#values"
-              className="inline-flex items-center gap-1.5 text-[15.5px] font-semibold"
+              className="inline-flex items-center gap-1.5 text-copy font-semibold"
             >
               What each value means <span aria-hidden>→</span>
             </Link>
@@ -252,10 +252,10 @@ export default async function HomePage() {
                     className="aspect-square w-full max-w-[120px] object-contain mix-blend-multiply"
                   />
                   <span>
-                    <span className="block font-display text-[20px] leading-[1.2] text-[var(--color-brand)]">
+                    <span className="block font-display text-h4 leading-[1.2] text-[var(--color-brand)]">
                       {value.name}
                     </span>
-                    <span className="mt-1 block text-[11.5px] font-semibold tracking-[0.14em] text-[var(--color-olive)] uppercase">
+                    <span className="mt-1 block text-eyebrow font-semibold tracking-[0.14em] text-[var(--color-olive)] uppercase">
                       {value.englishName}
                     </span>
                   </span>
@@ -268,7 +268,7 @@ export default async function HomePage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad">
-          <h2 className="text-[36px] leading-[1.12]">Find your way around</h2>
+          <h2 className="text-h2 leading-[1.12]">Find your way around</h2>
           <ul className="mt-9 grid gap-4 min-[621px]:grid-cols-2 min-[901px]:grid-cols-4">
             {explore.map((card) => (
               <li key={card.href}>
@@ -276,13 +276,13 @@ export default async function HomePage() {
                   href={card.href}
                   className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-cream)] px-7 py-7 shadow-[var(--shadow-card)] hover:bg-[#FFFDF9]"
                 >
-                  <span className="font-display text-[25px] leading-[1.2] text-[var(--color-heading)]">
+                  <span className="font-display text-h3 leading-[1.2] text-[var(--color-heading)]">
                     {card.title}
                   </span>
-                  <span className="mt-2.5 text-[15.5px] leading-[1.65] text-[var(--color-ink-muted)]">
+                  <span className="mt-2.5 text-copy leading-[1.65] text-[var(--color-ink-muted)]">
                     {card.body}
                   </span>
-                  <span className="mt-auto pt-[18px] text-[14.5px] font-semibold text-[var(--color-brand)]">
+                  <span className="mt-auto pt-[18px] text-small font-semibold text-[var(--color-brand)]">
                     Explore →
                   </span>
                 </Link>
@@ -295,31 +295,31 @@ export default async function HomePage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.4fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               For current families
             </p>
-            <h2 className="mt-3.5 text-[36px] leading-[1.12]">Everyday links</h2>
-            <p className="mt-4 text-[16.5px] leading-[1.72] text-[var(--color-ink-muted)]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">Everyday links</h2>
+            <p className="mt-4 text-copy leading-[1.65] text-[var(--color-ink-muted)]">
               Day-to-day notices and payments live in our apps. The handbook
               covers everything else.
             </p>
             {terms.length ? (
               <div className="mt-8 rounded-2xl border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-6 py-6">
-                <h3 className="font-display text-[22px] leading-[1.2] text-[var(--color-heading)]">
+                <h3 className="font-display text-h3 leading-[1.2] text-[var(--color-heading)]">
                   Term dates
                 </h3>
                 <ul className="mt-4 flex flex-col gap-4">
                   {terms.map((t) => (
                     <li key={`${t.year}-${t.term}`}>
-                      <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                      <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                         {t.year} · Term {t.term}
                         {isCurrentTerm(t) ? " · now" : ""}
                       </p>
-                      <p className="mt-1 text-[16.5px] text-[var(--color-ink)]">
+                      <p className="mt-1 text-copy text-[var(--color-ink)]">
                         {formatTermDate(t.start!)} – {formatTermDate(t.end!)}
                       </p>
                       {t.note ? (
-                        <p className="mt-0.5 text-[14px] text-[var(--color-ink-muted)]">{t.note}</p>
+                        <p className="mt-0.5 text-small text-[var(--color-ink-muted)]">{t.note}</p>
                       ) : null}
                     </li>
                   ))}
@@ -334,14 +334,14 @@ export default async function HomePage() {
               const inner = (
                 <>
                   <span>
-                    <span className="block text-[19px] font-semibold text-[var(--color-heading)]">
+                    <span className="block text-h4 font-semibold text-[var(--color-heading)]">
                       {item.title}
                     </span>
-                    <span className="mt-0.5 block text-[15px] text-[var(--color-ink-muted)]">
+                    <span className="mt-0.5 block text-copy text-[var(--color-ink-muted)]">
                       {item.detail}
                     </span>
                   </span>
-                  <span aria-hidden className="text-[19px] text-[var(--color-brand)]">
+                  <span aria-hidden className="text-h4 text-[var(--color-brand)]">
                     {item.download ? "↓" : item.external ? "↗" : "→"}
                   </span>
                 </>

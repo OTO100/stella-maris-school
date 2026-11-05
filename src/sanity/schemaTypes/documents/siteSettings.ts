@@ -185,7 +185,7 @@ export const siteSettings = defineType({
       type: "string",
       group: "contact",
       description: "Used for Board queries and attending meetings.",
-      initialValue: "BOT@stellamaris.school.nz",
+      initialValue: "bot@stellamaris.school.nz",
     }),
     defineField({
       name: "contactPhone",
@@ -277,7 +277,17 @@ export const siteSettings = defineType({
       title: "ERO report URL",
       type: "url",
       group: "contact",
-      description: "Leave blank to hide this link on the site.",
+      description:
+        "Link to the report on ero.govt.nz. Leave blank (and no file below) to hide the ERO link on the site.",
+    }),
+    defineField({
+      name: "eroFile",
+      title: "ERO report (PDF upload)",
+      type: "file",
+      group: "contact",
+      options: { accept: ".pdf" },
+      description:
+        "Optional. If uploaded, this PDF is used everywhere instead of the URL above.",
     }),
     defineField({
       name: "calendarUrl",

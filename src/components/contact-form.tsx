@@ -30,14 +30,14 @@ export function ContactForm({ officeEmail }: { officeEmail: string }) {
       className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-cream)] px-[34px] py-9"
       onSubmit={onSubmit}
     >
-      <h2 className="text-[30px] leading-[1.15]">Send us a message</h2>
-      <p className="mt-2.5 text-base leading-[1.68] text-[var(--color-ink-muted)]">
+      <h2 className="text-h2sm leading-[1.15]">Send us a message</h2>
+      <p className="mt-2.5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
         This opens your email app addressed to the office. We'll come back to
         you within one school day.
       </p>
       <div className="mt-[26px] flex flex-col gap-[18px]">
         <label className="block">
-          <span className="block text-[14px] font-semibold text-[var(--color-ink)]">
+          <span className="block text-small font-semibold text-[var(--color-ink)]">
             Your name
           </span>
           <input
@@ -49,7 +49,7 @@ export function ContactForm({ officeEmail }: { officeEmail: string }) {
           />
         </label>
         <label className="block">
-          <span className="block text-[14px] font-semibold text-[var(--color-ink)]">
+          <span className="block text-small font-semibold text-[var(--color-ink)]">
             Email
           </span>
           <input
@@ -61,7 +61,7 @@ export function ContactForm({ officeEmail }: { officeEmail: string }) {
           />
         </label>
         <label className="block">
-          <span className="block text-[14px] font-semibold text-[var(--color-ink)]">
+          <span className="block text-small font-semibold text-[var(--color-ink)]">
             Phone{" "}
             <span className="font-normal text-[var(--color-faint)]">(optional)</span>
           </span>
@@ -73,7 +73,7 @@ export function ContactForm({ officeEmail }: { officeEmail: string }) {
           />
         </label>
         <label className="block">
-          <span className="block text-[14px] font-semibold text-[var(--color-ink)]">
+          <span className="block text-small font-semibold text-[var(--color-ink)]">
             What's this about?
           </span>
           <select
@@ -89,7 +89,7 @@ export function ContactForm({ officeEmail }: { officeEmail: string }) {
           </select>
         </label>
         <label className="block">
-          <span className="block text-[14px] font-semibold text-[var(--color-ink)]">
+          <span className="block text-small font-semibold text-[var(--color-ink)]">
             Message
           </span>
           <textarea

@@ -29,22 +29,13 @@ const PROGRAMME_FALLBACK = [
   },
 ];
 
-const ROADMAP = [
-  "Religious education",
-  "Te Ao Māori & Te Tiriti o Waitangi",
-  "Sports",
-  "The arts — music, art, drama",
-  "E-learning & digital technology",
-  "Student wellbeing",
-  "EOTC — trips, swimming, camp",
-  "Shine Challenge",
-  "Stella Stars",
-];
-
 export default async function LearningPage() {
   let copy: Record<string, unknown> | null = null;
   try {
-    const result = await sanityFetch({ query: LEARNING_PAGE_QUERY, stega: false });
+    const result = await sanityFetch({
+      query: LEARNING_PAGE_QUERY,
+      stega: false,
+    });
     copy = result.data as Record<string, unknown> | null;
   } catch {
     /* CMS unavailable */
@@ -69,15 +60,15 @@ export default async function LearningPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               What we teach
             </p>
-            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.curriculumTitle as string | undefined) ??
                 "Two curricula, woven together"}
             </h2>
           </div>
-          <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             <p>
               {(copy?.curriculumIntro as string | undefined) ??
                 "At Stella Maris we follow the New Zealand Curriculum for our learners. The curriculum focuses on sequenced, coherent knowledge and practices that reflect how each learning area helps students to understand, interpret, and contribute in the world."}
@@ -106,13 +97,14 @@ export default async function LearningPage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream)]">
         <div className="page-wrap section-pad">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             Foundations
           </p>
-          <h2 className="mt-3.5 text-[38px] leading-[1.12]">
-            {(copy?.programmesTitle as string | undefined) ?? "Literacy and maths"}
+          <h2 className="mt-3.5 text-h2 leading-[1.12]">
+            {(copy?.programmesTitle as string | undefined) ??
+              "Literacy and maths"}
           </h2>
-          <p className="mt-[18px] max-w-[66ch] text-[17.5px] leading-[1.78] text-[var(--color-ink-muted)]">
+          <p className="mt-[18px] max-w-[66ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
             Developing students' literacy and maths knowledge and skills
             provides them with capabilities that are critical for communication,
             creativity, participating in society, and being lifelong learners.
@@ -123,19 +115,19 @@ export default async function LearningPage() {
                 key={item.title}
                 className="rounded-[20px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-[30px] py-8"
               >
-                <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                   {item.years}
                 </p>
-                <h3 className="mt-3 text-[25px] leading-[1.22] text-[var(--color-brand)]">
+                <h3 className="mt-3 text-h3 leading-[1.22] text-[var(--color-brand)]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-base leading-[1.72] text-[var(--color-ink-muted)]">
+                <p className="mt-3 text-base leading-[1.65] text-[var(--color-ink-muted)]">
                   {item.body}
                 </p>
               </li>
             ))}
           </ul>
-          <p className="mt-7 max-w-[72ch] text-[16.5px] leading-[1.75] text-[var(--color-ink-muted)]">
+          <p className="mt-7 max-w-[72ch] text-copy leading-[1.65] text-[var(--color-ink-muted)]">
             Reading, writing and vocabulary development are also embedded across
             all learning areas, so students apply that knowledge everywhere they
             learn.
@@ -146,15 +138,15 @@ export default async function LearningPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]">
         <div className="page-wrap section-pad grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               In the classroom
             </p>
-            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.environmentsTitle as string | undefined) ??
                 "Responsive learning environments"}
             </h2>
           </div>
-          <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             <p>
               {(copy?.environmentsBody as string | undefined) ??
                 "Students learn best when they feel a sense of belonging, are valued, and are supported to succeed. Responsive learning environments promote engagement, wellbeing, and equitable access to learning across all learning areas."}
@@ -184,18 +176,18 @@ export default async function LearningPage() {
         <div className="page-wrap section-pad">
           <div className="grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
             <div>
-              <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Progress
               </p>
-              <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+              <h2 className="mt-3.5 text-h2 leading-[1.12]">
                 Assessment & reporting
               </h2>
-              <p className="mt-5 rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-cream)] px-[22px] py-5 text-[16.5px] leading-[1.7] text-[var(--color-ink)]">
+              <p className="mt-5 rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-cream)] px-[22px] py-5 text-copy leading-[1.65] text-[var(--color-ink)]">
                 {(copy?.assessmentIntro as string | undefined) ??
                   "Parents receive a written report at mid-year and at the end of the year outlining their child's progress and achievement against the New Zealand Curriculum."}
               </p>
             </div>
-            <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+            <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
               <p>
                 Teachers actively assess student progress in relation to the
                 year-by-year teaching sequences of all learning areas, using
@@ -220,10 +212,10 @@ export default async function LearningPage() {
                   index === ASSESSMENT_DESCRIPTORS.length - 1 ? "border-b" : ""
                 }`}
               >
-                <p className="font-display text-[22px] text-[var(--color-brand)]">
+                <p className="font-display text-h3 text-[var(--color-brand)]">
                   {row.label}
                 </p>
-                <p className="text-[16.5px] leading-[1.7] text-[var(--color-ink-muted)]">
+                <p className="text-copy leading-[1.65] text-[var(--color-ink-muted)]">
                   {row.body}
                 </p>
               </li>
@@ -238,24 +230,24 @@ export default async function LearningPage() {
       >
         <div className="page-wrap section-pad grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Every learner
             </p>
-            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.supportTitle as string | undefined) ?? "Learning support"}
             </h2>
-            <p className="mt-5 text-base leading-[1.7] text-[var(--color-ink-muted)]">
+            <p className="mt-5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
               Our SENCo, Mel Hogg, coordinates learning support alongside
               classroom teachers and whānau.
             </p>
             <a
               href="mailto:melh@stellamaris.school.nz"
-              className="mt-3.5 inline-flex items-center gap-1.5 text-[15px] font-semibold"
+              className="mt-3.5 inline-flex items-center gap-1.5 text-copy font-semibold"
             >
               melh@stellamaris.school.nz <span aria-hidden>→</span>
             </a>
           </div>
-          <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             <p>
               {(copy?.supportBody as string | undefined) ??
                 "At Stella Maris Catholic Primary School, the board and staff ensure that every student is able to attain their highest possible standard in educational achievement and that the school is inclusive of, and caters for, students with differing needs."}
@@ -271,7 +263,7 @@ export default async function LearningPage() {
               approach and involve the student, their parents and caregivers,
               and others as needed, to best support the student.
             </p>
-            <p className="text-[14.5px] text-[var(--color-faint)]">
+            <p className="text-small text-[var(--color-faint)]">
               Education and Training Act 2020, s 127(1)(a), (c)
             </p>
           </div>
@@ -280,38 +272,16 @@ export default async function LearningPage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]">
         <div className="page-wrap flex flex-wrap items-center justify-between gap-8 py-14">
-          <p className="max-w-[70ch] text-[17.5px] leading-[1.75] text-[var(--color-ink)]">
+          <p className="max-w-[70ch] text-body leading-[1.65] text-[var(--color-ink)]">
             {(copy?.attendanceNote as string | undefined) ??
               "Student attendance plays an important role in progress and achievement, and lifting attendance is a shared responsibility. The more often students attend school, the better they do, the happier they are, and the better they are set up for life."}
           </p>
-          <Link href="/absences" className="btn-outline-surface whitespace-nowrap">
+          <Link
+            href="/absences"
+            className="btn-outline-surface whitespace-nowrap"
+          >
             Absences & attendance <span aria-hidden>→</span>
           </Link>
-        </div>
-      </section>
-
-      <section className="bg-[var(--color-surface)]">
-        <div className="page-wrap py-[72px]">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
-            Growing this section
-          </p>
-          <h2 className="mt-3.5 text-[34px] leading-[1.15]">
-            More of our learning, coming through the year
-          </h2>
-          <p className="mt-4 max-w-[64ch] text-[17px] leading-[1.75] text-[var(--color-ink-muted)]">
-            We'll add these as content and photography come together — each
-            becomes a section on this page rather than a new page in the menu.
-          </p>
-          <ul className="mt-8 grid gap-x-8 min-[621px]:grid-cols-2 min-[901px]:grid-cols-3">
-            {ROADMAP.map((item) => (
-              <li
-                key={item}
-                className="border-t border-[var(--color-border)] py-[15px] text-[16.5px] text-[var(--color-ink-muted)]"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
     </>
