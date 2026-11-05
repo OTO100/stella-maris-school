@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { BrandMark } from "@/components/brand-mark";
 import { heroStoreLinks } from "@/lib/app-links";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { keyDocument } from "@/lib/key-documents";
 
 export type SiteFooterLinks = {
   heroAppStoreUrl?: string | null;
@@ -32,7 +32,7 @@ export function SiteFooter({
   const address = contact.address?.trim() || "50 Silverdale Street\nSilverdale 0944";
   const phone = contact.phone?.trim() || "09 427 9189";
   const email = contact.email?.trim() || "achieve@stellamaris.school.nz";
-  const handbook = familyLinks?.handbookUrl || PUBLIC_DOCS.handbook;
+  const handbook = familyLinks?.handbookUrl || keyDocument(null, "handbook").url;
   const linkClass =
     "text-[rgba(250,248,245,.92)] transition-colors hover:text-[#FAF8F5]";
   const mutedLink =
@@ -69,23 +69,23 @@ export function SiteFooter({
   return (
     <footer className="mt-auto border-t-4 border-[var(--color-gold-muted)] bg-[var(--color-brand)] text-[var(--color-cream)]">
       <div className="page-wrap pt-14 pb-10">
-        <p className="mx-auto max-w-[70ch] text-center text-[14px] leading-[1.7] text-[rgba(250,248,245,.86)]">
+        <p className="mx-auto max-w-[70ch] text-center text-small leading-[1.65] text-[rgba(250,248,245,.86)]">
           {tagline?.trim() ||
             "Stella Maris, Star of the Sea — we ask Our Lady to guide and watch over our school, this land surrounded by the sea."}
         </p>
         <div className="mt-[52px] grid grid-cols-1 gap-10 min-[561px]:grid-cols-2 min-[861px]:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
             <BrandMark variant="footer" className="h-14 w-auto" />
-            <p className="mt-[18px] max-w-[34ch] text-[14px] leading-[1.7] text-[rgba(250,248,245,.86)]">
+            <p className="mt-[18px] max-w-[34ch] text-small leading-[1.65] text-[rgba(250,248,245,.86)]">
               A Catholic primary school in Silverdale — state integrated,
               co-educational, Years 1–6.
             </p>
           </div>
           <div>
-            <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
               Contact
             </p>
-            <ul className="mt-4 flex flex-col gap-2.5 text-[14px] text-[rgba(250,248,245,.92)]">
+            <ul className="mt-4 flex flex-col gap-2.5 text-small text-[rgba(250,248,245,.92)]">
               <li className="whitespace-pre-line">{address}</li>
               <li>
                 <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} className={linkClass}>
@@ -100,10 +100,10 @@ export function SiteFooter({
             </ul>
           </div>
           <div>
-            <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
               Pages
             </p>
-            <ul className="mt-4 flex flex-col gap-2.5 text-[14px]">
+            <ul className="mt-4 flex flex-col gap-2.5 text-small">
               {pages.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={linkClass}>
@@ -114,10 +114,10 @@ export function SiteFooter({
             </ul>
           </div>
           <div>
-            <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
               For families
             </p>
-            <ul className="mt-4 flex flex-col gap-2.5 text-[14px]">
+            <ul className="mt-4 flex flex-col gap-2.5 text-small">
               {family.map((item) => (
                 <li key={item.label}>
                   {item.external ? (
@@ -142,7 +142,7 @@ export function SiteFooter({
         </div>
       </div>
       <div className="border-t border-[rgb(255_255_255/0.14)]">
-        <div className="page-wrap flex flex-wrap items-center justify-between gap-x-7 gap-y-4 py-5 text-[13.5px] text-[rgba(250,248,245,.72)]">
+        <div className="page-wrap flex flex-wrap items-center justify-between gap-x-7 gap-y-4 py-5 text-small text-[rgba(250,248,245,.72)]">
           <p>
             © {new Date().getFullYear()} {schoolName}
           </p>

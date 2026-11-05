@@ -90,6 +90,39 @@ export const enrolmentPage = defineType({
       ],
     }),
     defineField({
+      name: "packTitle",
+      title: "Enrolment pack heading",
+      type: "string",
+      initialValue: "Enrolment pack",
+    }),
+    defineField({
+      name: "packIntro",
+      title: "Enrolment pack intro",
+      type: "text",
+      rows: 2,
+    }),
+    defineField({
+      name: "packFile",
+      title: "Whole pack (single PDF)",
+      type: "file",
+      options: { accept: ".pdf" },
+      description:
+        "Optional. One PDF with every document in the pack, for the “Download the whole pack” button.",
+    }),
+    defineField({
+      name: "packDocuments",
+      title: "Documents in the pack",
+      type: "array",
+      description:
+        "Pick from Resources / downloads, in the order parents should read them. Update a file once in Resources and it changes everywhere it is used.",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "downloadableResource" }],
+        }),
+      ],
+    }),
+    defineField({
       name: "ctaHeading",
       title: "Enquiry band heading",
       type: "string",

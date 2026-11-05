@@ -5,7 +5,7 @@ export const HERO_PLAY_STORE_FALLBACK =
 export const KINDO_DESCRIPTION_FALLBACK = "PTFA payments, orders and lunches";
 export const ABSENCE_EMAIL_FALLBACK = "absences@stellamaris.school.nz";
 export const PTFA_EMAIL_FALLBACK = "stellaptfa@stellamaris.school.nz";
-export const BOARD_EMAIL_FALLBACK = "BOT@stellamaris.school.nz";
+export const BOARD_EMAIL_FALLBACK = "bot@stellamaris.school.nz";
 
 type Settings = Record<string, unknown> | null | undefined;
 

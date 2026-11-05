@@ -57,11 +57,13 @@ export const downloadableResource = defineType({
       type: "boolean",
       description: "Show at the top of the Resources page.",
       initialValue: false,
+      hidden: true, // No Resources page is linked at the moment.
     }),
     defineField({
       name: "placement",
       title: "Show on",
       type: "array",
+      hidden: true, // Pages now link specific documents (Site settings → Key documents, Enrolment pack).
       of: [{ type: "string" }],
       options: {
         list: [

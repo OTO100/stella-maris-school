@@ -8,14 +8,14 @@ import { PortableTextBlock } from "@/components/portable-text";
 import { heroStoreLinks, KINDO_DESCRIPTION_FALLBACK } from "@/lib/app-links";
 import { MARIAN_VALUES } from "@/lib/marian-values";
 import { findPrincipal, principalPhoto } from "@/lib/principal";
-import { personInitials, resourceFileUrl } from "@/lib/resources";
+import { keyDocument } from "@/lib/key-documents";
+import { personInitials } from "@/lib/resources";
+import { sharedLinkForCard, sharedLinkUrl } from "@/lib/shared-links";
 import { urlForImage } from "@/sanity/lib/image";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   ABOUT_PAGE_QUERY,
-  DOWNLOADABLE_RESOURCES_QUERY,
   SITE_SETTINGS_QUERY,
   STAFF_MEMBERS_QUERY,
 } from "@/sanity/lib/queries";
@@ -55,19 +55,21 @@ const ENCOUNTERING_FALLBACK = [
   { title: "At assembly", body: "Special Character certificates" },
 ];
 
-type InfoLink = { label: string; href: string; external?: boolean; download?: boolean };
+type InfoLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  download?: boolean;
+};
 type InfoCard = {
   id?: string;
   title: string;
   body: string;
   links: InfoLink[];
-  pending?: string;
 };
 
 function linkProps(link: InfoLink) {
-  return link.external
-    ? { target: "_blank", rel: "noreferrer noopener" }
-    : {};
+  return link.external ? { target: "_blank", rel: "noreferrer noopener" } : {};
 }
 
 const OUR_LADY_CAPTION =
@@ -76,29 +78,28 @@ const OUR_LADY_CAPTION =
 export default async function AboutPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
-  let staff: Array<{ name?: string | null; role?: string | null; email?: string | null; photo?: unknown }> = [];
-  let resources: Array<{
-    title?: string | null;
-    placement?: string[] | null;
-    fileUrl?: string | null;
+  let staff: Array<{
+    name?: string | null;
+    role?: string | null;
+    email?: string | null;
+    photo?: unknown;
   }> = [];
 
   try {
-    const [about, site, downloads, people] = await Promise.all([
+    const [about, site, people] = await Promise.all([
       sanityFetch({ query: ABOUT_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
-      sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
       sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
     ]);
     copy = about.data as Record<string, unknown> | null;
     settings = site.data as Record<string, unknown> | null;
     staff = (people.data as typeof staff) ?? [];
-    resources = (downloads.data as typeof resources) ?? [];
   } catch {
     /* CMS unavailable */
   }
 
-  const handbook = resourceFileUrl(resources, "about", PUBLIC_DOCS.handbook, "handbook");
+  const handbookDoc = keyDocument(settings, "handbook");
+  const handbook = handbookDoc.url;
   const policiesUrl = settings?.policiesUrl as string | undefined;
   const eroUrl = settings?.eroUrl as string | undefined;
   const kindoUrl = settings?.kindoUrl as string | undefined;
@@ -110,7 +111,11 @@ export default async function AboutPage() {
     | { alt?: string | null; caption?: string | null }
     | undefined;
   const ourLadyUrl = ourLady
-    ? urlForImage(ourLady as never)?.width(640).fit("max").auto("format").url()
+    ? urlForImage(ourLady as never)
+        ?.width(640)
+        .fit("max")
+        .auto("format")
+        .url()
     : null;
   const ourLadyCaption = ourLady?.caption || OUR_LADY_CAPTION;
 
@@ -127,7 +132,6 @@ export default async function AboutPage() {
       links: policiesUrl
         ? [{ label: "Open SchoolDocs", href: policiesUrl, external: true }]
         : [],
-      pending: "SchoolDocs link to come",
     },
     {
       title: "ERO report",
@@ -135,24 +139,53 @@ export default async function AboutPage() {
       links: eroUrl
         ? [{ label: "Read the report", href: eroUrl, external: true }]
         : [],
-      pending: "ERO link to come",
     },
     {
       id: "apps",
       title: "School apps",
       body: `Hero is our app for notices, learning updates and reporting. Kindo is used for ${(
-        (settings?.kindoDescription as string | undefined) || KINDO_DESCRIPTION_FALLBACK
+        (settings?.kindoDescription as string | undefined) ||
+        KINDO_DESCRIPTION_FALLBACK
       ).toLowerCase()} — it is not used for school fees or permission slips.`,
       links: [
-        { label: "Hero for iPhone & iPad", href: stores.appStore, external: true },
+        {
+          label: "Hero for iPhone & iPad",
+          href: stores.appStore,
+          external: true,
+        },
         { label: "Hero for Android", href: stores.playStore, external: true },
-        ...(kindoUrl ? [{ label: "Open Kindo", href: kindoUrl, external: true }] : []),
+        ...(kindoUrl
+          ? [{ label: "Open Kindo", href: kindoUrl, external: true }]
+          : []),
       ],
     },
     {
-      title: "Buses & SKIDS",
-      body: "Information about school buses and SKIDS before- and after-school care is being prepared. In the meantime, please ask the office.",
-      links: [{ label: "Ask the office", href: "/contact" }],
+      id: "skids",
+      title: "sKids before & after school care",
+      body: "sKids runs before and after school care, and holiday care, from the school hall. Hours are 7:00am–8:30am and 2:45pm–6:00pm. Children need to be booked at least 24 hours in advance. For booking queries, phone 027 275 4377 during sKids hours.",
+      links: [
+        {
+          label: "Book with sKids",
+          href: "https://www.skids.co.nz/stellamaris",
+          external: true,
+        },
+        { label: "Call 027 275 4377", href: "tel:+64272754377" },
+      ],
+    },
+    {
+      id: "buses",
+      title: "School buses",
+      body: "Students can travel to and from school on bus routes run by Bayes Coachlines and Go Bus. Contact them directly about routes and charges.\n\nIf your child catches the bus on set days, please fill in a bus form, available from the school office.\n\nFor an occasional trip or a change to the usual schedule, call the office on 09 427 9189 before 2pm, or use the daily bus changes sheet at the office.\n\nThe bus bell rings at 2:40pm. Students meet in the school hall, where they are supervised and taken to their bus.",
+      links: [
+        {
+          label: "Bayes Coachlines school services",
+          href: "https://www.bayescoachlines.co.nz/schoolservices",
+          external: true,
+        },
+        { label: "Bayes Coachlines: 09 426 5504", href: "tel:+6494265504" },
+        { label: "Go Bus: 09 275 8811", href: "tel:+6492758811" },
+        { label: "auckland@gobus.co.nz", href: "mailto:auckland@gobus.co.nz" },
+      ],
     },
     {
       title: "Allergies & student safety",
@@ -168,6 +201,7 @@ export default async function AboutPage() {
           body?: string | null;
           links?: Array<{
             label?: string | null;
+            sharedLink?: string | null;
             url?: string | null;
             fileUrl?: string | null;
           }> | null;
@@ -175,12 +209,13 @@ export default async function AboutPage() {
       | undefined
   )?.filter((card) => card.title);
   const infoCards: InfoCard[] = cmsCards?.length
-    ? cmsCards.map((card) => ({
-        id: card.key || undefined,
-        title: card.title!,
-        body: card.body ?? "",
-        links: (card.links ?? []).flatMap((link) => {
-          const href = link.fileUrl || link.url || "";
+    ? cmsCards.map((card) => {
+        const links: InfoLink[] = (card.links ?? []).flatMap((link) => {
+          const href =
+            link.fileUrl ||
+            sharedLinkUrl(link.sharedLink, settings) ||
+            link.url ||
+            "";
           return href && link.label
             ? [
                 {
@@ -190,19 +225,37 @@ export default async function AboutPage() {
                 },
               ]
             : [];
-        }),
-      }))
+        });
+        // Cards like "policies" / "ero" fall back to the shared Site settings
+        // link, so they match the rest of the site without per-card setup.
+        const shared = sharedLinkForCard(card.key);
+        const sharedHref = shared
+          ? sharedLinkUrl(shared.value, settings)
+          : undefined;
+        if (!links.length && shared && sharedHref) {
+          links.push({ label: shared.label, href: sharedHref, external: true });
+        }
+        return {
+          id: card.key || undefined,
+          title: card.title!,
+          body: card.body ?? "",
+          links,
+        };
+      })
     : fallbackCards;
   const encountering =
-    (copy?.encounteringChrist as { title?: string; body?: string }[] | undefined)?.filter(
-      (item) => item.title,
-    ) ?? ENCOUNTERING_FALLBACK;
+    (
+      copy?.encounteringChrist as
+        | { title?: string; body?: string }[]
+        | undefined
+    )?.filter((item) => item.title) ?? ENCOUNTERING_FALLBACK;
 
   return (
     <>
       <PageHero
         eyebrow="Our School"
-        title="Stella Maris — Star of the Sea"
+        title="Stella Maris"
+        titleSuffix="Star of the Sea"
         subtitle={
           (copy?.heroSubtitle as string | undefined) ??
           "A state-integrated Catholic primary school in Silverdale for Years 1–6. Our school is founded on the Marian Values, and all we undertake is underpinned by them."
@@ -221,10 +274,12 @@ export default async function AboutPage() {
       >
         <div className="page-wrap section-pad grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
           <div className="min-[901px]:sticky min-[901px]:top-24">
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Welcome
             </p>
-            <h2 className="mt-3.5 text-[40px] leading-[1.1]">Principal's message</h2>
+            <h2 className="mt-3.5 text-h2 leading-[1.1]">
+              Principal's message
+            </h2>
             {principalImage ? (
               <Image
                 src={principalImage.src}
@@ -237,7 +292,7 @@ export default async function AboutPage() {
             ) : null}
             <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-5 py-[18px]">
               {principalImage ? null : (
-                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-[22px] text-[var(--color-brand)]">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-deep)] font-display text-h3 text-[var(--color-brand)]">
                   {personInitials(principalName)}
                 </span>
               )}
@@ -245,41 +300,42 @@ export default async function AboutPage() {
                 <span className="block text-base font-semibold text-[var(--color-heading)]">
                   {principalName}
                 </span>
-                <span className="block text-[14px] text-[var(--color-ink-muted)]">
+                <span className="block text-small text-[var(--color-ink-muted)]">
                   Principal
                 </span>
                 <a
                   href="mailto:principal@stellamaris.school.nz"
-                  className="mt-0.5 block text-[13.5px]"
+                  className="mt-0.5 block text-small"
                 >
                   principal@stellamaris.school.nz
                 </a>
               </span>
             </div>
           </div>
-          <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             {Array.isArray(copy?.principalWelcome) ? (
               <PortableTextBlock value={copy.principalWelcome} />
             ) : (
               <>
-                <p className="font-display text-[22px] leading-[1.6] text-[var(--color-heading)]">
+                <p className="font-display text-h3 leading-[1.6] text-[var(--color-heading)]">
                   {PRINCIPAL_FALLBACK[0]}
                 </p>
                 {PRINCIPAL_FALLBACK.slice(1).map((para) => (
                   <p key={para.slice(0, 40)}>{para}</p>
                 ))}
+                {/* Sign-off only for the built-in message; the CMS message carries its own. */}
+                <p className="mt-2 font-sans text-h4 text-[var(--color-brand)] italic">
+                  God Bless — Mā te Atua koe e manaaki
+                </p>
+                <p className="text-base text-[var(--color-ink-muted)]">
+                  <strong className="font-semibold text-[var(--color-heading)]">
+                    {principalName}
+                  </strong>
+                  <br />
+                  Principal
+                </p>
               </>
             )}
-            <p className="mt-2 font-sans text-[20px] text-[var(--color-brand)] italic">
-              God Bless — Mā te Atua koe e manaaki
-            </p>
-            <p className="text-base text-[var(--color-ink-muted)]">
-              <strong className="font-semibold text-[var(--color-heading)]">
-                Catherine Cyprian
-              </strong>
-              <br />
-              Principal
-            </p>
           </div>
         </div>
       </section>
@@ -291,10 +347,12 @@ export default async function AboutPage() {
         <div className="page-wrap section-pad">
           <div className="grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
             <div>
-              <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Special character
               </p>
-              <h2 className="mt-3.5 text-[40px] leading-[1.1]">Our name, our faith</h2>
+              <h2 className="mt-3.5 text-h2 leading-[1.1]">
+                Our name, our faith
+              </h2>
               {ourLadyUrl ? (
                 <figure className="mt-6 max-w-[320px]">
                   <Image
@@ -304,28 +362,30 @@ export default async function AboutPage() {
                     height={800}
                     className="h-auto w-full rounded-2xl border border-[var(--color-border)] shadow-[var(--shadow-card)]"
                   />
-                  <figcaption className="mt-2.5 text-[13.5px] leading-[1.5] text-[var(--color-faint)] italic">
+                  <figcaption className="mt-2.5 text-small leading-[1.5] text-[var(--color-faint)] italic">
                     {ourLadyCaption}
                   </figcaption>
                 </figure>
               ) : null}
-              <p className="mt-5 text-[17px] leading-[1.75] text-[var(--color-ink-muted)]">
+              <p className="mt-5 text-body leading-[1.65] text-[var(--color-ink-muted)]">
                 Stella Maris, Star of the Sea, is one of the most ancient titles
                 for Our Lady. The name was chosen to honour her and acknowledge
                 her as our protector in Aotearoa, this land surrounded by the
                 sea.
               </p>
             </div>
-            <div className="flex max-w-[64ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+            <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
               {Array.isArray(copy?.specialCharacter) ? (
                 <PortableTextBlock value={copy.specialCharacter} />
               ) : (
-                CHARACTER_FALLBACK.map((para) => <p key={para.slice(0, 32)}>{para}</p>)
+                CHARACTER_FALLBACK.map((para) => (
+                  <p key={para.slice(0, 32)}>{para}</p>
+                ))
               )}
-              <blockquote className="rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-6 text-[19px] leading-[1.65] italic">
+              <blockquote className="rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-6 text-h4 leading-[1.65] italic">
                 {(copy?.specialCharacterQuote as string | undefined) ??
-                  'Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school\'s Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”'}
-                <cite className="mt-3.5 block font-sans text-[13.5px] font-semibold tracking-[0.04em] text-[var(--color-faint)] not-italic">
+                  "Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school's Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”"}
+                <cite className="mt-3.5 block font-sans text-small font-semibold tracking-[0.04em] text-[var(--color-faint)] not-italic">
                   {(copy?.specialCharacterQuoteCite as string | undefined) ??
                     "Tō Tātou Whakapono — Our Faith, 2021"}
                 </cite>
@@ -333,8 +393,10 @@ export default async function AboutPage() {
             </div>
           </div>
           <div className="mt-16">
-            <h3 className="text-[28px] tracking-[-0.015em]">Encountering Christ</h3>
-            <p className="mt-3 max-w-[62ch] text-[17px] leading-[1.75] text-[var(--color-ink-muted)]">
+            <h3 className="text-h2sm tracking-[-0.015em]">
+              Encountering Christ
+            </h3>
+            <p className="mt-3 max-w-[62ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
               Alongside the Religious Education lessons that occur most days, we
               provide our students with opportunities to encounter Christ.
             </p>
@@ -344,14 +406,15 @@ export default async function AboutPage() {
                   key={item.title}
                   className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-6"
                 >
-                  <p className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                  <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                     {item.title}
                   </p>
-                  <p className="mt-2.5 font-display text-[21px] leading-[1.3] text-[var(--color-heading)]">
+                  <p className="mt-2.5 font-display text-h4 leading-[1.3] text-[var(--color-heading)]">
                     {item.body?.split(" — ")[0] ?? item.body}
                   </p>
-                  {(item as { extra?: string }).extra || item.body?.includes(" — ") ? (
-                    <p className="mt-2 text-[14.5px] leading-[1.6] text-[var(--color-ink-muted)]">
+                  {(item as { extra?: string }).extra ||
+                  item.body?.includes(" — ") ? (
+                    <p className="mt-2 text-small leading-[1.6] text-[var(--color-ink-muted)]">
                       {(item as { extra?: string }).extra ??
                         item.body?.split(" — ").slice(1).join(" — ")}
                     </p>
@@ -368,11 +431,11 @@ export default async function AboutPage() {
         className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-surface)]"
       >
         <div className="page-wrap section-pad">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             Ngā uara — our values
           </p>
-          <h2 className="mt-3.5 text-[40px] leading-[1.1]">The Marian Values</h2>
-          <p className="mt-[18px] max-w-[62ch] text-[17.5px] leading-[1.75] text-[var(--color-ink-muted)]">
+          <h2 className="mt-3.5 text-h2 leading-[1.1]">The Marian Values</h2>
+          <p className="mt-[18px] max-w-[62ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
             There is an expectation that the actions and behaviour of everyone
             in our school community is guided by these six values.
           </p>
@@ -390,22 +453,22 @@ export default async function AboutPage() {
                   className="size-24 object-contain mix-blend-multiply"
                 />
                 <div>
-                  <h3 className="text-[27px] leading-[1.2] text-[var(--color-brand)]">
+                  <h3 className="text-h2sm leading-[1.2] text-[var(--color-brand)]">
                     {value.name}
                   </h3>
-                  <p className="mt-0.5 text-[12px] font-semibold tracking-[0.16em] text-[var(--color-olive)] uppercase">
+                  <p className="mt-0.5 text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-olive)] uppercase">
                     {value.englishName}
                   </p>
-                  <p className="mt-3.5 font-sans text-[17.5px] leading-[1.55] text-[var(--color-ink)] italic">
+                  <p className="mt-3.5 font-sans text-body leading-[1.55] text-[var(--color-ink)] italic">
                     “{value.scripture}”{" "}
-                    <span className="font-sans text-[13.5px] text-[var(--color-faint)] not-italic">
+                    <span className="font-sans text-small text-[var(--color-faint)] not-italic">
                       {value.scriptureReference}
                     </span>
                   </p>
-                  <p className="mt-3.5 text-base leading-[1.72] text-[var(--color-ink-muted)]">
+                  <p className="mt-3.5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
                     {value.essence}
                   </p>
-                  <p className="mt-3.5 border-t border-[var(--color-border)] pt-3.5 text-[15px] text-[var(--color-brand)] italic">
+                  <p className="mt-3.5 border-t border-[var(--color-border)] pt-3.5 text-copy text-[var(--color-brand)] italic">
                     {value.intercession}
                   </p>
                 </div>
@@ -416,12 +479,12 @@ export default async function AboutPage() {
       </section>
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]">
-        <div className="page-wrap grid items-center gap-14 py-[72px] min-[901px]:grid-cols-[1fr_1.2fr]">
+        <div className="page-wrap grid items-center gap-14 py-14 min-[900px]:py-[72px] min-[901px]:grid-cols-[1fr_1.2fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Our learning
             </p>
-            <h2 className="mt-3.5 text-[38px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               Structured teaching, sequenced year by year
             </h2>
             <Link href="/about/our-learning" className="btn-brand mt-[26px]">
@@ -429,11 +492,11 @@ export default async function AboutPage() {
             </Link>
           </div>
           <div>
-            <p className="text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+            <p className="text-body leading-[1.65] text-[var(--color-ink)]">
               We follow the New Zealand Curriculum and, as a Catholic school,{" "}
-              <em>Tō Tātou Whakapono — Our Faith</em>. Literacy is taught through
-              Little Learners Love Literacy in Years 0–3 and The Code in Years
-              4–6; maths through Maths — No Problem!
+              <em>Tō Tātou Whakapono — Our Faith</em>. Literacy is taught
+              through Little Learners Love Literacy in Years 0–3 and The Code in
+              Years 4–6; maths through Maths — No Problem!
             </p>
             <ul className="mt-[22px] flex flex-wrap gap-2">
               {[
@@ -445,7 +508,7 @@ export default async function AboutPage() {
               ].map((label) => (
                 <li
                   key={label}
-                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-[14px] font-medium text-[var(--color-ink-muted)]"
+                  className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-1.5 text-small font-medium text-[var(--color-ink-muted)]"
                 >
                   {label}
                 </li>
@@ -460,11 +523,11 @@ export default async function AboutPage() {
         className="scroll-mt-28 bg-[var(--color-surface)]"
       >
         <div className="page-wrap section-pad">
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
             For current families
           </p>
-          <h2 className="mt-3.5 text-[40px] leading-[1.1]">Parent information</h2>
-          <p className="mt-[18px] max-w-[62ch] text-[17.5px] leading-[1.75] text-[var(--color-ink-muted)]">
+          <h2 className="mt-3.5 text-h2 leading-[1.1]">Parent information</h2>
+          <p className="mt-[18px] max-w-[62ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
             We keep one master Parent Information Handbook so there is a single,
             current source of everything families need — conduct, uniform and
             daily routines.
@@ -474,17 +537,17 @@ export default async function AboutPage() {
             className="mt-8 flex flex-wrap items-center justify-between gap-6 rounded-[20px] bg-[var(--color-brand)] px-8 py-7 text-[var(--color-cream)] hover:bg-[var(--color-brand-hover)] hover:text-[var(--color-cream)]"
           >
             <span>
-              <span className="block text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
+              <span className="block text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
                 Start here
               </span>
-              <span className="mt-2 block font-display text-[28px] leading-[1.2]">
-                Parent Information Handbook 2026
+              <span className="mt-2 block font-display text-h2sm leading-[1.2]">
+                {handbookDoc.title}
               </span>
-              <span className="mt-1.5 block text-[15px] text-[rgba(250,248,245,.88)]">
+              <span className="mt-1.5 block text-copy text-[rgba(250,248,245,.88)]">
                 PDF · everything in one place
               </span>
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-gold)] px-[26px] py-[13px] text-[15.5px] font-semibold whitespace-nowrap text-[var(--color-heading)]">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-gold)] px-[26px] py-[13px] text-copy font-semibold whitespace-nowrap text-[var(--color-heading)]">
               Download <span aria-hidden>↓</span>
             </span>
           </a>
@@ -495,8 +558,8 @@ export default async function AboutPage() {
                 id={card.id}
                 className="scroll-mt-28 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]"
               >
-                <h3 className="text-[21px] leading-[1.25]">{card.title}</h3>
-                <p className="mt-2.5 text-[15.5px] leading-[1.68] text-[var(--color-ink-muted)]">
+                <h3 className="text-h4 leading-[1.25]">{card.title}</h3>
+                <p className="mt-2.5 text-copy leading-[1.65] whitespace-pre-line text-[var(--color-ink-muted)]">
                   {card.body}
                 </p>
                 {card.links.length ? (
@@ -506,7 +569,7 @@ export default async function AboutPage() {
                         <Link
                           key={link.label}
                           href={link.href}
-                          className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
+                          className="inline-flex items-center gap-1.5 text-small font-semibold"
                         >
                           {link.label} <span aria-hidden>→</span>
                         </Link>
@@ -514,16 +577,15 @@ export default async function AboutPage() {
                         <a
                           key={link.label}
                           href={link.href}
-                          className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold"
+                          className="inline-flex items-center gap-1.5 text-small font-semibold"
                           {...linkProps(link)}
                         >
-                          {link.label} <span aria-hidden>{link.external ? "↗" : "→"}</span>
+                          {link.label}{" "}
+                          <span aria-hidden>{link.external ? "↗" : "→"}</span>
                         </a>
                       ),
                     )}
                   </div>
-                ) : card.pending ? (
-                  <p className="mt-3.5 text-[14.5px] text-[var(--color-faint)]">{card.pending}</p>
                 ) : null}
               </li>
             ))}
@@ -532,7 +594,10 @@ export default async function AboutPage() {
       </section>
 
       <CTASection
-        heading={(copy?.ctaHeading as string | undefined) ?? "Come and see learning in action"}
+        heading={
+          (copy?.ctaHeading as string | undefined) ??
+          "Come and see learning in action"
+        }
         body={
           (copy?.ctaBody as string | undefined) ??
           "Contact the office to arrange a visit, or start an enrolment enquiry."

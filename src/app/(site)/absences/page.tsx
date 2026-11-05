@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
-import { PlaceholderPanel } from "@/components/placeholder-panel";
 import { PortableTextBlock } from "@/components/portable-text";
 import { ABSENCE_EMAIL_FALLBACK } from "@/lib/app-links";
 import { PAGE_META } from "@/lib/page-meta";
@@ -34,11 +33,14 @@ export default async function AbsencesPage() {
   }
 
   const phone = (settings?.contactPhone as string | undefined) ?? "09 427 9189";
-  const email = (settings?.absenceEmail as string | undefined) || ABSENCE_EMAIL_FALLBACK;
-  const hours = (settings?.officeHours as string | undefined) ?? "8:00am – 3:30pm";
+  const email =
+    (settings?.absenceEmail as string | undefined) || ABSENCE_EMAIL_FALLBACK;
+  const hours =
+    (settings?.officeHours as string | undefined) ?? "8:00am – 3:30pm";
   const attendancePlanUrl = copy?.attendancePlanUrl as string | undefined;
   const whatToTell =
-    (copy?.whatToTell as string[] | undefined)?.filter(Boolean) ?? WHAT_TO_TELL_FALLBACK;
+    (copy?.whatToTell as string[] | undefined)?.filter(Boolean) ??
+    WHAT_TO_TELL_FALLBACK;
 
   return (
     <>
@@ -53,38 +55,42 @@ export default async function AbsencesPage() {
 
       <section className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
         <div className="page-wrap section-pad">
-          <h2 className="text-[36px] leading-[1.12]">
-            {(copy?.methodsTitle as string | undefined) ?? "Two ways to report an absence"}
+          <h2 className="text-h2 leading-[1.12]">
+            {(copy?.methodsTitle as string | undefined) ??
+              "Two ways to report an absence"}
           </h2>
           <ul className="mt-9 grid gap-5 min-[781px]:grid-cols-2">
             <li className="flex flex-col rounded-[20px] border border-[var(--color-border)] bg-[var(--color-cream)] px-[30px] py-8">
-              <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              <span className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Before 9:00am
               </span>
-              <span className="mt-3 font-display text-[28px] leading-[1.2]">
+              <span className="mt-3 font-display text-h2sm leading-[1.2]">
                 Phone the office
               </span>
               <a
                 href={`tel:${phone.replace(/[^\d+]/g, "")}`}
-                className="mt-2.5 text-[19px] font-semibold"
+                className="mt-2.5 text-h4 font-semibold"
               >
                 {phone}
               </a>
-              <span className="mt-auto pt-5 text-[15px] text-[var(--color-ink-muted)]">
+              <span className="mt-auto pt-5 text-copy text-[var(--color-ink-muted)]">
                 Office open {hours}
               </span>
             </li>
             <li className="flex flex-col rounded-[20px] border border-[var(--color-border)] bg-[var(--color-cream)] px-[30px] py-8">
-              <span className="text-[11.5px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+              <span className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Anytime
               </span>
-              <span className="mt-3 font-display text-[28px] leading-[1.2]">
+              <span className="mt-3 font-display text-h2sm leading-[1.2]">
                 Email the office
               </span>
-              <a href={`mailto:${email}`} className="mt-2.5 break-all text-[16.5px] font-semibold">
+              <a
+                href={`mailto:${email}`}
+                className="mt-2.5 break-all text-copy font-semibold"
+              >
                 {email}
               </a>
-              <span className="mt-auto pt-5 text-[15px] text-[var(--color-ink-muted)]">
+              <span className="mt-auto pt-5 text-copy text-[var(--color-ink-muted)]">
                 Include your child's name, class and the reason.
               </span>
             </li>
@@ -95,16 +101,18 @@ export default async function AbsencesPage() {
       <section className="border-b border-[var(--color-border)] bg-[var(--color-cream-deep)]">
         <div className="page-wrap grid items-start gap-14 py-16 min-[901px]:grid-cols-[1fr_1.35fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Helpful detail
             </p>
-            <h2 className="mt-3.5 text-[34px] leading-[1.15]">What to tell us</h2>
+            <h2 className="mt-3.5 text-h2 leading-[1.15]">
+              What to tell us
+            </h2>
           </div>
           <ul>
             {whatToTell.map((item, index) => (
               <li
                 key={item}
-                className={`border-t border-[#D6CCBA] py-[18px] text-[17px] text-[var(--color-ink)] ${
+                className={`border-t border-[#D6CCBA] py-[18px] text-body text-[var(--color-ink)] ${
                   index === whatToTell.length - 1 ? "border-b" : ""
                 }`}
               >
@@ -118,47 +126,48 @@ export default async function AbsencesPage() {
       <section id="plan" className="scroll-mt-28 bg-[var(--color-surface)]">
         <div className="page-wrap section-pad grid items-start gap-14 min-[901px]:grid-cols-[1fr_1.35fr]">
           <div>
-            <p className="text-[12px] font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+            <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Attendance
             </p>
-            <h2 className="mt-3.5 text-[36px] leading-[1.12]">
+            <h2 className="mt-3.5 text-h2 leading-[1.12]">
               {(copy?.attendanceTitle as string | undefined) ??
                 "Why every day matters"}
             </h2>
             {attendancePlanUrl ? (
-              <a href={attendancePlanUrl} className="btn-brand mt-[26px]" target="_blank" rel="noreferrer noopener">
+              <a
+                href={attendancePlanUrl}
+                className="btn-brand mt-[26px]"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 Attendance Management Plan <span aria-hidden>↓</span>
               </a>
-            ) : (
-              <PlaceholderPanel className="mt-[26px]" label="To upload">
-                Our attendance management plan will be published here.
-              </PlaceholderPanel>
-            )}
+            ) : null}
           </div>
-          <div className="flex max-w-[62ch] flex-col gap-5 text-[17.5px] leading-[1.78] text-[var(--color-ink)]">
+          <div className="flex max-w-[62ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
             {Array.isArray(copy?.attendanceBody) ? (
               <PortableTextBlock value={copy.attendanceBody} />
             ) : (
               <>
-            <p>
-              {(copy?.attendanceDescription as string | undefined) ??
-                "Student attendance at school plays an important role in student progress and achievement. Lifting school attendance is a shared responsibility."}
-            </p>
-            <p>
-              Parents, families and whānau working with teachers is key to
-              helping young people stay engaged and motivated at school, which
-              is important to help young people achieve their goals.
-            </p>
-            <p className="font-display text-[22px] leading-[1.55] text-[var(--color-brand)] italic">
-              The more often students attend school, the better they do at
-              school, the happier they are, and the better they are set up for
-              life.
-            </p>
-            <p>
-              If a pattern of absence needs attention, we'll work alongside you
-              with care, following our attendance management plan and Ministry
-              of Education guidance.
-            </p>
+                <p>
+                  {(copy?.attendanceDescription as string | undefined) ??
+                    "Student attendance at school plays an important role in student progress and achievement. Lifting school attendance is a shared responsibility."}
+                </p>
+                <p>
+                  Parents, families and whānau working with teachers is key to
+                  helping young people stay engaged and motivated at school,
+                  which is important to help young people achieve their goals.
+                </p>
+                <p className="font-display text-h3 leading-[1.55] text-[var(--color-brand)] italic">
+                  The more often students attend school, the better they do at
+                  school, the happier they are, and the better they are set up
+                  for life.
+                </p>
+                <p>
+                  If a pattern of absence needs attention, we'll work alongside
+                  you with care, following our attendance management plan and
+                  Ministry of Education guidance.
+                </p>
               </>
             )}
           </div>

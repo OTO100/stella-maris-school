@@ -2,7 +2,7 @@ import { SiteAlert } from "@/components/site-alert";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { isSiteAlertActive, siteAlertDismissKey } from "@/lib/site-alert";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { keyDocument } from "@/lib/key-documents";
 import {
   defaultPrimaryNavigation,
   resolvePrimaryNavigation,
@@ -94,7 +94,7 @@ export default async function SiteLayout({
           kindoUrl: (settings?.kindoUrl as string | null) ?? null,
           newsletterUrl: (settings?.newsletterUrl as string | null) ?? null,
           policiesUrl: (settings?.policiesUrl as string | null) ?? null,
-          handbookUrl: PUBLIC_DOCS.handbook,
+          handbookUrl: keyDocument(settings, "handbook").url,
         }}
       />
     </>

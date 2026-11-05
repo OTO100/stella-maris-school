@@ -8,6 +8,7 @@ export const siteSettings = defineType({
     { name: "branding", title: "Branding", default: true },
     { name: "home", title: "Homepage" },
     { name: "contact", title: "Contact & social" },
+    { name: "documents", title: "Key documents" },
     { name: "termDates", title: "Term dates" },
     { name: "alert", title: "Site alert" },
     { name: "seo", title: "SEO defaults" },
@@ -185,7 +186,7 @@ export const siteSettings = defineType({
       type: "string",
       group: "contact",
       description: "Used for Board queries and attending meetings.",
-      initialValue: "BOT@stellamaris.school.nz",
+      initialValue: "bot@stellamaris.school.nz",
     }),
     defineField({
       name: "contactPhone",
@@ -277,7 +278,17 @@ export const siteSettings = defineType({
       title: "ERO report URL",
       type: "url",
       group: "contact",
-      description: "Leave blank to hide this link on the site.",
+      description:
+        "Link to the report on ero.govt.nz. Leave blank (and no file below) to hide the ERO link on the site.",
+    }),
+    defineField({
+      name: "eroFile",
+      title: "ERO report (PDF upload)",
+      type: "file",
+      group: "contact",
+      options: { accept: ".pdf" },
+      description:
+        "Optional. If uploaded, this PDF is used everywhere instead of the URL above.",
     }),
     defineField({
       name: "calendarUrl",
@@ -300,6 +311,31 @@ export const siteSettings = defineType({
       type: "url",
       group: "contact",
       description: "Leave blank to hide this link on the site.",
+    }),
+    defineField({
+      name: "handbookDocument",
+      title: "Parent Information Handbook",
+      type: "reference",
+      to: [{ type: "downloadableResource" }],
+      group: "documents",
+      description:
+        "Linked from Home, Our School, Enrolment and the footer. Each year, replace the file and title on the linked document — every link updates.",
+    }),
+    defineField({
+      name: "financialsDocument",
+      title: "Annual Financial Statements",
+      type: "reference",
+      to: [{ type: "downloadableResource" }],
+      group: "documents",
+      description: "Shown under Plans, reports & policies on Our Community.",
+    }),
+    defineField({
+      name: "enrolmentSchemeDocument",
+      title: "Enrolment scheme",
+      type: "reference",
+      to: [{ type: "downloadableResource" }],
+      group: "documents",
+      description: "Linked from Enrolment and Our Community.",
     }),
     defineField({
       name: "termDates",
