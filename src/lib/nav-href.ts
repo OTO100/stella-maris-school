@@ -253,9 +253,7 @@ export function defaultPrimaryNavigation(): ResolvedNavPrimaryItem[] {
       link("/about#character", "Values & special character"),
       link("/about/our-learning", "Our learning"),
       link("/about#parent-information", "Parent information"),
-      link("/docs/Parent-Information-Handbook-2026.pdf", "Parent handbook", {
-        useAnchor: true,
-      }),
+      link("/about#parent-information", "Parent handbook"),
       link("/about#fees", "School fees"),
       link("/about#parent-information", "Policies & ERO report"),
       link("/about#apps", "School app"),
@@ -269,11 +267,7 @@ export function defaultPrimaryNavigation(): ResolvedNavPrimaryItem[] {
         link("/community#ptfa", "PTFA"),
         link("/community#board", "School board"),
         link("/community#reports", "Plans & reports"),
-        link(
-          "/docs/Annual-Financial-Statements-2025.pdf",
-          "Financial statements",
-          { useAnchor: true },
-        ),
+        link("/community#reports", "Financial statements"),
         link("/absences#plan", "Attendance management plan"),
       ],
     ),

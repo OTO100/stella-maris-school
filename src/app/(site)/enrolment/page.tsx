@@ -4,11 +4,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { StarMark } from "@/components/star-mark";
 import { PAGE_META } from "@/lib/page-meta";
-import { resourceFileUrl } from "@/lib/resources";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { keyDocument } from "@/lib/key-documents";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
-  DOWNLOADABLE_RESOURCES_QUERY,
   ENROLMENT_PAGE_QUERY,
   SITE_SETTINGS_QUERY,
 } from "@/sanity/lib/queries";
@@ -57,27 +55,22 @@ function fileSize(bytes?: number | null) {
 export default async function EnrolmentPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
-  let resources: Array<{
-    title?: string | null;
-    placement?: string[] | null;
-    fileUrl?: string | null;
-  }> = [];
 
   try {
-    const [page, site, downloads] = await Promise.all([
+    const [page, site] = await Promise.all([
       sanityFetch({ query: ENROLMENT_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
-      sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
     ]);
     copy = page.data as Record<string, unknown> | null;
     settings = site.data as Record<string, unknown> | null;
-    resources = (downloads.data as typeof resources) ?? [];
   } catch {
     /* CMS unavailable */
   }
 
-  const scheme = resourceFileUrl(resources, "enrolment", PUBLIC_DOCS.enrolmentScheme, "enrolment");
-  const handbook = resourceFileUrl(resources, "enrolment", PUBLIC_DOCS.handbook, "handbook");
+  const schemeDoc = keyDocument(settings, "enrolmentScheme");
+  const handbookDoc = keyDocument(settings, "handbook");
+  const scheme = schemeDoc.url;
+  const handbook = handbookDoc.url;
   const phone = (settings?.contactPhone as string | undefined) ?? "09 427 9189";
   const email = (settings?.contactEmail as string | undefined) ?? "achieve@stellamaris.school.nz";
   const address = (settings?.contactAddress as string | undefined) ?? "50 Silverdale Street, Silverdale 0944";
@@ -354,7 +347,7 @@ export default async function EnrolmentPage() {
             >
               <span>
                 <span className="block font-display text-h3 leading-[1.2]">
-                  Enrolment scheme
+                  {schemeDoc.title}
                 </span>
                 <span className="mt-1 block text-small text-[rgba(250,248,245,.82)]">
                   PDF
@@ -370,7 +363,7 @@ export default async function EnrolmentPage() {
             >
               <span>
                 <span className="block font-display text-h3 leading-[1.2]">
-                  Parent Information Handbook 2026
+                  {handbookDoc.title}
                 </span>
                 <span className="mt-1 block text-small text-[rgba(250,248,245,.82)]">
                   PDF · everything in one place

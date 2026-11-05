@@ -8,15 +8,14 @@ import { PortableTextBlock } from "@/components/portable-text";
 import { heroStoreLinks, KINDO_DESCRIPTION_FALLBACK } from "@/lib/app-links";
 import { MARIAN_VALUES } from "@/lib/marian-values";
 import { findPrincipal, principalPhoto } from "@/lib/principal";
-import { personInitials, resourceFileUrl } from "@/lib/resources";
+import { keyDocument } from "@/lib/key-documents";
+import { personInitials } from "@/lib/resources";
 import { sharedLinkForCard, sharedLinkUrl } from "@/lib/shared-links";
 import { urlForImage } from "@/sanity/lib/image";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   ABOUT_PAGE_QUERY,
-  DOWNLOADABLE_RESOURCES_QUERY,
   SITE_SETTINGS_QUERY,
   STAFF_MEMBERS_QUERY,
 } from "@/sanity/lib/queries";
@@ -77,28 +76,22 @@ export default async function AboutPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
   let staff: Array<{ name?: string | null; role?: string | null; email?: string | null; photo?: unknown }> = [];
-  let resources: Array<{
-    title?: string | null;
-    placement?: string[] | null;
-    fileUrl?: string | null;
-  }> = [];
 
   try {
-    const [about, site, downloads, people] = await Promise.all([
+    const [about, site, people] = await Promise.all([
       sanityFetch({ query: ABOUT_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
-      sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
       sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
     ]);
     copy = about.data as Record<string, unknown> | null;
     settings = site.data as Record<string, unknown> | null;
     staff = (people.data as typeof staff) ?? [];
-    resources = (downloads.data as typeof resources) ?? [];
   } catch {
     /* CMS unavailable */
   }
 
-  const handbook = resourceFileUrl(resources, "about", PUBLIC_DOCS.handbook, "handbook");
+  const handbookDoc = keyDocument(settings, "handbook");
+  const handbook = handbookDoc.url;
   const policiesUrl = settings?.policiesUrl as string | undefined;
   const eroUrl = settings?.eroUrl as string | undefined;
   const kindoUrl = settings?.kindoUrl as string | undefined;
@@ -504,7 +497,7 @@ export default async function AboutPage() {
                 Start here
               </span>
               <span className="mt-2 block font-display text-h2sm leading-[1.2]">
-                Parent Information Handbook 2026
+                {handbookDoc.title}
               </span>
               <span className="mt-1.5 block text-copy text-[rgba(250,248,245,.88)]">
                 PDF · everything in one place

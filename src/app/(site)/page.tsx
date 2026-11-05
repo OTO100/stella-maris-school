@@ -8,7 +8,7 @@ import { MARIAN_VALUES } from "@/lib/marian-values";
 import { principalPhoto } from "@/lib/principal";
 import { personInitials } from "@/lib/resources";
 import { formatTermDate, isCurrentTerm, upcomingTerms, type TermDate } from "@/lib/term-dates";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { keyDocument } from "@/lib/key-documents";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   COMMUNITY_PAGE_QUERY,
@@ -100,8 +100,8 @@ export default async function HomePage() {
         }
       : null,
     {
-      href: PUBLIC_DOCS.handbook,
-      title: "Parent Information Handbook 2026",
+      href: keyDocument(settings, "handbook").url,
+      title: keyDocument(settings, "handbook").title,
       detail: "One document, everything in it",
       external: true,
       download: true,

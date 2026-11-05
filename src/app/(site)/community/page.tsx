@@ -4,14 +4,13 @@ import type { Metadata } from "next";
 
 import { PageHero } from "@/components/page-hero";
 import { BOARD_EMAIL_FALLBACK, PTFA_EMAIL_FALLBACK } from "@/lib/app-links";
-import { personInitials, resourceFileUrl } from "@/lib/resources";
+import { keyDocument } from "@/lib/key-documents";
+import { personInitials } from "@/lib/resources";
 import { urlForImage } from "@/sanity/lib/image";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
 import { PAGE_META } from "@/lib/page-meta";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   COMMUNITY_PAGE_QUERY,
-  DOWNLOADABLE_RESOURCES_QUERY,
   SITE_SETTINGS_QUERY,
   STAFF_MEMBERS_QUERY,
 } from "@/sanity/lib/queries";
@@ -78,23 +77,16 @@ export default async function CommunityPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
   let staff: StaffMember[] = [];
-  let resources: Array<{
-    title?: string | null;
-    placement?: string[] | null;
-    fileUrl?: string | null;
-  }> = [];
 
   try {
-    const [page, site, people, downloads] = await Promise.all([
+    const [page, site, people] = await Promise.all([
       sanityFetch({ query: COMMUNITY_PAGE_QUERY, stega: false }),
       sanityFetch({ query: SITE_SETTINGS_QUERY, stega: false }),
       sanityFetch({ query: STAFF_MEMBERS_QUERY, stega: false }),
-      sanityFetch({ query: DOWNLOADABLE_RESOURCES_QUERY, stega: false }),
     ]);
     copy = page.data as Record<string, unknown> | null;
     settings = site.data as Record<string, unknown> | null;
     staff = (people.data as StaffMember[]) ?? [];
-    resources = (downloads.data as typeof resources) ?? [];
   } catch {
     /* CMS unavailable */
   }
@@ -112,18 +104,10 @@ export default async function CommunityPage() {
     .slice(0, 4);
   const preview = slt.length ? slt : SLT_FALLBACK;
 
-  const financials = resourceFileUrl(
-    resources,
-    "reports",
-    PUBLIC_DOCS.financials,
-    "financial",
-  );
-  const scheme = resourceFileUrl(
-    resources,
-    "reports",
-    PUBLIC_DOCS.enrolmentScheme,
-    "enrolment",
-  );
+  const financialsDoc = keyDocument(settings, "financials");
+  const schemeDoc = keyDocument(settings, "enrolmentScheme");
+  const financials = financialsDoc.url;
+  const scheme = schemeDoc.url;
   const policiesUrl = settings?.policiesUrl as string | undefined;
   const eroUrl = settings?.eroUrl as string | undefined;
   const ptfaEmail =
@@ -319,7 +303,7 @@ export default async function CommunityPage() {
                 className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
               >
                 <span className="font-display text-h3 leading-[1.22]">
-                  Annual Financial Statements 2025
+                  {financialsDoc.title}
                 </span>
                 <span className="mt-auto pt-[18px] text-small font-semibold text-[var(--color-brand)]">
                   Download PDF ↓
@@ -332,7 +316,7 @@ export default async function CommunityPage() {
                 className="card-lift flex h-full flex-col rounded-[18px] border border-[var(--color-border)] border-t-[3px] border-t-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-7 shadow-[var(--shadow-card)]"
               >
                 <span className="font-display text-h3 leading-[1.22]">
-                  Enrolment scheme
+                  {schemeDoc.title}
                 </span>
                 <span className="mt-auto pt-[18px] text-small font-semibold text-[var(--color-brand)]">
                   Download PDF ↓

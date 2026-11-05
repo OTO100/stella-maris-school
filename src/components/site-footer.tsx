@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { BrandMark } from "@/components/brand-mark";
 import { heroStoreLinks } from "@/lib/app-links";
-import { PUBLIC_DOCS } from "@/lib/sitemap-decisions";
+import { keyDocument } from "@/lib/key-documents";
 
 export type SiteFooterLinks = {
   heroAppStoreUrl?: string | null;
@@ -32,7 +32,7 @@ export function SiteFooter({
   const address = contact.address?.trim() || "50 Silverdale Street\nSilverdale 0944";
   const phone = contact.phone?.trim() || "09 427 9189";
   const email = contact.email?.trim() || "achieve@stellamaris.school.nz";
-  const handbook = familyLinks?.handbookUrl || PUBLIC_DOCS.handbook;
+  const handbook = familyLinks?.handbookUrl || keyDocument(null, "handbook").url;
   const linkClass =
     "text-[rgba(250,248,245,.92)] transition-colors hover:text-[#FAF8F5]";
   const mutedLink =
