@@ -1,5 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Bus,
+  ClipboardCheck,
+  Clock,
+  FileText,
+  Info,
+  ShieldCheck,
+  Smartphone,
+  Wallet,
+} from "lucide-react";
 import type { Metadata } from "next";
 
 import { CTASection } from "@/components/cta-section";
@@ -66,6 +76,17 @@ type InfoCard = {
   title: string;
   body: string;
   links: InfoLink[];
+};
+
+// Icon per parent-information card, by its anchor id.
+const INFO_CARD_ICONS: Record<string, typeof Info> = {
+  fees: Wallet,
+  policies: FileText,
+  ero: ClipboardCheck,
+  apps: Smartphone,
+  skids: Clock,
+  buses: Bus,
+  allergies: ShieldCheck,
 };
 
 function linkProps(link: InfoLink) {
@@ -173,6 +194,11 @@ export default async function AboutPage() {
       ],
     },
     {
+      title: "Allergies & student safety",
+      body: "Stella Maris is a nut-free school (no nuts or nut products) and a water-only school. Thank you for helping us keep every child safe.",
+      links: [],
+    },
+    {
       id: "buses",
       title: "School buses",
       body: "Students can travel to and from school on bus routes run by Bayes Coachlines and Go Bus. Contact them directly about routes and charges.\n\nIf your child catches the bus on set days, please fill in a bus form, available from the school office.\n\nFor an occasional trip or a change to the usual schedule, call the office on 09 427 9189 before 2pm, or use the daily bus changes sheet at the office.\n\nThe bus bell rings at 2:40pm. Students meet in the school hall, where they are supervised and taken to their bus.",
@@ -186,11 +212,6 @@ export default async function AboutPage() {
         { label: "Go Bus: 09 275 8811", href: "tel:+6492758811" },
         { label: "auckland@gobus.co.nz", href: "mailto:auckland@gobus.co.nz" },
       ],
-    },
-    {
-      title: "Allergies & student safety",
-      body: "Stella Maris is a nut-free school (no nuts or nut products) and a water-only school. Thank you for helping us keep every child safe.",
-      links: [],
     },
   ];
   const cmsCards = (
@@ -345,44 +366,52 @@ export default async function AboutPage() {
         className="scroll-mt-28 border-b border-[var(--color-border)] bg-[var(--color-cream)]"
       >
         <div className="page-wrap section-pad">
-          <div className="grid items-start gap-16 min-[901px]:grid-cols-[1fr_1.45fr]">
-            <div>
+          {/* Painting beside the text so both columns carry similar weight. */}
+          <div
+            className={`grid items-center gap-12 ${
+              ourLadyUrl
+                ? "min-[901px]:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] min-[901px]:gap-16"
+                : ""
+            }`}
+          >
+            {ourLadyUrl ? (
+              <figure className="order-2 mx-auto w-full max-w-[380px] min-[901px]:order-1 min-[901px]:mx-0">
+                <Image
+                  src={ourLadyUrl}
+                  alt={ourLady?.alt || "Our Lady, Star of the Sea"}
+                  width={640}
+                  height={800}
+                  sizes="(min-width: 901px) 380px, 90vw"
+                  className="h-auto w-full rounded-2xl border border-[var(--color-border)] shadow-[var(--shadow-card)]"
+                />
+                <figcaption className="mt-3 text-small leading-[1.5] text-[var(--color-faint)] italic">
+                  {ourLadyCaption}
+                </figcaption>
+              </figure>
+            ) : null}
+            <div className="order-1 max-w-[62ch] min-[901px]:order-2">
               <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Special character
               </p>
               <h2 className="mt-3.5 text-h2 leading-[1.1]">
                 Our name, our faith
               </h2>
-              {ourLadyUrl ? (
-                <figure className="mt-6 max-w-[320px]">
-                  <Image
-                    src={ourLadyUrl}
-                    alt={ourLady?.alt || "Our Lady, Star of the Sea"}
-                    width={640}
-                    height={800}
-                    className="h-auto w-full rounded-2xl border border-[var(--color-border)] shadow-[var(--shadow-card)]"
-                  />
-                  <figcaption className="mt-2.5 text-small leading-[1.5] text-[var(--color-faint)] italic">
-                    {ourLadyCaption}
-                  </figcaption>
-                </figure>
-              ) : null}
-              <p className="mt-5 text-body leading-[1.65] text-[var(--color-ink-muted)]">
+              <p className="mt-5 text-h4 leading-[1.6] text-[var(--color-ink)]">
                 Stella Maris, Star of the Sea, is one of the most ancient titles
                 for Our Lady. The name was chosen to honour her and acknowledge
                 her as our protector in Aotearoa, this land surrounded by the
                 sea.
               </p>
-            </div>
-            <div className="flex max-w-[64ch] flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink)]">
-              {Array.isArray(copy?.specialCharacter) ? (
-                <PortableTextBlock value={copy.specialCharacter} />
-              ) : (
-                CHARACTER_FALLBACK.map((para) => (
-                  <p key={para.slice(0, 32)}>{para}</p>
-                ))
-              )}
-              <blockquote className="rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-6 text-h4 leading-[1.65] italic">
+              <div className="mt-5 flex flex-col gap-5 text-body leading-[1.65] text-[var(--color-ink-muted)]">
+                {Array.isArray(copy?.specialCharacter) ? (
+                  <PortableTextBlock value={copy.specialCharacter} />
+                ) : (
+                  CHARACTER_FALLBACK.map((para) => (
+                    <p key={para.slice(0, 32)}>{para}</p>
+                  ))
+                )}
+              </div>
+              <blockquote className="mt-8 rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-6 text-h4 leading-[1.65] text-[var(--color-ink)] italic">
                 {(copy?.specialCharacterQuote as string | undefined) ??
                   "Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school's Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”"}
                 <cite className="mt-3.5 block font-sans text-small font-semibold tracking-[0.04em] text-[var(--color-faint)] not-italic">
@@ -392,7 +421,7 @@ export default async function AboutPage() {
               </blockquote>
             </div>
           </div>
-          <div className="mt-16">
+          <div className="mt-20 border-t border-[var(--color-border)] pt-14">
             <h3 className="text-h2sm tracking-[-0.015em]">
               Encountering Christ
             </h3>
@@ -523,72 +552,90 @@ export default async function AboutPage() {
         className="scroll-mt-28 bg-[var(--color-surface)]"
       >
         <div className="page-wrap section-pad">
-          <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
-            For current families
-          </p>
-          <h2 className="mt-3.5 text-h2 leading-[1.1]">Parent information</h2>
-          <p className="mt-[18px] max-w-[62ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
-            We keep one master Parent Information Handbook so there is a single,
-            current source of everything families need — conduct, uniform and
-            daily routines.
-          </p>
-          <a
-            href={handbook}
-            className="mt-8 flex flex-wrap items-center justify-between gap-6 rounded-[20px] bg-[var(--color-brand)] px-8 py-7 text-[var(--color-cream)] hover:bg-[var(--color-brand-hover)] hover:text-[var(--color-cream)]"
-          >
-            <span>
-              <span className="block text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
+          {/* Intro on the left, handbook beside it, so the top row is balanced. */}
+          <div className="grid items-end gap-8 min-[901px]:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] min-[901px]:gap-14">
+            <div>
+              <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
+                For current families
+              </p>
+              <h2 className="mt-3.5 text-h2 leading-[1.1]">
+                Parent information
+              </h2>
+              <p className="mt-[18px] max-w-[56ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
+                We keep one master Parent Information Handbook so there is a
+                single, current source of everything families need — conduct,
+                uniform and daily routines.
+              </p>
+            </div>
+            <a
+              href={handbook}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group flex flex-col rounded-[20px] bg-[var(--color-brand)] px-7 py-6 text-[var(--color-cream)] shadow-[0_18px_40px_-28px_rgb(108_20_44/0.6)] hover:bg-[var(--color-brand-hover)] hover:text-[var(--color-cream)]"
+            >
+              <span className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold-light)] uppercase">
                 Start here
               </span>
-              <span className="mt-2 block font-display text-h2sm leading-[1.2]">
+              <span className="mt-2 font-display text-h3 leading-[1.2]">
                 {handbookDoc.title}
               </span>
-              <span className="mt-1.5 block text-copy text-[rgba(250,248,245,.88)]">
-                PDF · everything in one place
+              <span className="mt-4 flex items-center justify-between gap-4">
+                <span className="text-small text-[rgba(250,248,245,.82)]">
+                  PDF · everything in one place
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-gold)] px-5 py-2.5 text-small font-semibold whitespace-nowrap text-[var(--color-heading)]">
+                  Download <span aria-hidden>↓</span>
+                </span>
               </span>
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-[var(--color-gold)] px-[26px] py-[13px] text-copy font-semibold whitespace-nowrap text-[var(--color-heading)]">
-              Download <span aria-hidden>↓</span>
-            </span>
-          </a>
-          <ul className="mt-9 grid gap-4 min-[621px]:grid-cols-2 min-[901px]:grid-cols-3">
-            {infoCards.map((card) => (
-              <li
-                key={card.title}
-                id={card.id}
-                className="scroll-mt-28 rounded-2xl border border-[var(--color-border)] bg-[var(--color-cream)] px-[26px] py-[26px]"
-              >
-                <h3 className="text-h4 leading-[1.25]">{card.title}</h3>
-                <p className="mt-2.5 text-copy leading-[1.65] whitespace-pre-line text-[var(--color-ink-muted)]">
-                  {card.body}
-                </p>
-                {card.links.length ? (
-                  <div className="mt-3.5 flex flex-col gap-1.5">
-                    {card.links.map((link) =>
-                      link.href.startsWith("/") ? (
-                        <Link
-                          key={link.label}
-                          href={link.href}
-                          className="inline-flex items-center gap-1.5 text-small font-semibold"
-                        >
-                          {link.label} <span aria-hidden>→</span>
-                        </Link>
-                      ) : (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          className="inline-flex items-center gap-1.5 text-small font-semibold"
-                          {...linkProps(link)}
-                        >
-                          {link.label}{" "}
-                          <span aria-hidden>{link.external ? "↗" : "→"}</span>
-                        </a>
-                      ),
-                    )}
+            </a>
+          </div>
+          {/* Columns (not a grid) so cards of different lengths pack without gaps. */}
+          <ul className="mt-10 gap-4 min-[621px]:columns-2 min-[901px]:columns-3">
+            {infoCards.map((card) => {
+              const Icon = (card.id && INFO_CARD_ICONS[card.id]) || Info;
+              return (
+                <li
+                  key={card.title}
+                  id={card.id}
+                  className="mb-4 scroll-mt-28 break-inside-avoid rounded-2xl border border-[var(--color-border)] bg-white px-6 py-6"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-rose)] text-[var(--color-brand)]">
+                      <Icon className="size-[17px]" aria-hidden />
+                    </span>
+                    <h3 className="text-h4 leading-[1.25]">{card.title}</h3>
                   </div>
-                ) : null}
-              </li>
-            ))}
+                  <p className="mt-2.5 text-copy leading-[1.65] whitespace-pre-line text-[var(--color-ink-muted)]">
+                    {card.body}
+                  </p>
+                  {card.links.length ? (
+                    <div className="mt-3.5 flex flex-col gap-1.5">
+                      {card.links.map((link) =>
+                        link.href.startsWith("/") ? (
+                          <Link
+                            key={link.label}
+                            href={link.href}
+                            className="inline-flex items-center gap-1.5 text-small font-semibold"
+                          >
+                            {link.label} <span aria-hidden>→</span>
+                          </Link>
+                        ) : (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            className="inline-flex items-center gap-1.5 text-small font-semibold"
+                            {...linkProps(link)}
+                          >
+                            {link.label}{" "}
+                            <span aria-hidden>{link.external ? "↗" : "→"}</span>
+                          </a>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
