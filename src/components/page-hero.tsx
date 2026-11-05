@@ -12,24 +12,30 @@ type Pill = {
 type Props = {
   eyebrow?: string;
   title: string;
+  /** Second, smaller line of the title (split layout), e.g. "Catholic Primary School". */
+  titleSuffix?: string | null;
   subtitle?: string | null;
   backgroundImageSrc?: string | null;
   backgroundImageAlt?: string;
   size?: "default" | "home";
   layout?: "overlay" | "split";
   actions?: ReactNode;
+  /** Small line under the actions (split layout), e.g. the next term date. */
+  footnote?: ReactNode;
   pills?: Pill[];
 };
 
 export function PageHero({
   eyebrow,
   title,
+  titleSuffix,
   subtitle,
   backgroundImageSrc,
   backgroundImageAlt = "",
   size = "default",
   layout = "overlay",
   actions,
+  footnote,
   pills,
 }: Props) {
   const isPhoto = Boolean(backgroundImageSrc);
@@ -58,12 +64,19 @@ export function PageHero({
               opacity={0.08}
               className="pointer-events-none absolute -bottom-16 -left-14"
             />
-            <div className="relative w-full px-6 py-14 min-[621px]:px-10 min-[621px]:py-20 min-[901px]:ml-auto min-[901px]:max-w-[36rem] min-[901px]:px-12 min-[901px]:py-24 min-[1400px]:px-16">
+            <div className="relative w-full px-6 py-14 min-[621px]:px-10 min-[621px]:py-20 min-[901px]:ml-auto min-[901px]:max-w-[38rem] min-[901px]:px-12 min-[901px]:py-24">
               {eyebrow ? (
-                <Eyebrow className="text-[var(--color-gold-light)]">{eyebrow}</Eyebrow>
+                <Eyebrow className="text-[var(--color-gold-light)]">
+                  {eyebrow}
+                </Eyebrow>
               ) : null}
               <h1 className="mt-[18px] max-w-[17ch] font-display text-[40px] leading-[1.03] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[56px] min-[1200px]:text-[62px]">
                 {title}
+                {titleSuffix ? (
+                  <span className="mt-2 block text-[24px] leading-[1.15] font-medium tracking-[-0.01em] text-[var(--color-gold-light)] min-[621px]:text-[30px]">
+                    {titleSuffix}
+                  </span>
+                ) : null}
               </h1>
               {subtitle ? (
                 <p className="mt-6 max-w-[46ch] text-h4 leading-[1.65] text-[rgb(250_248_245/0.94)]">
@@ -71,8 +84,11 @@ export function PageHero({
                 </p>
               ) : null}
               {actions ? (
-                <div className="mt-9 flex flex-wrap gap-3.5">{actions}</div>
+                <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3.5">
+                  {actions}
+                </div>
               ) : null}
+              {footnote ? <div className="mt-8">{footnote}</div> : null}
             </div>
           </div>
         </div>
@@ -118,22 +134,24 @@ export function PageHero({
         </>
       ) : (
         <>
-          <div className="absolute inset-0 -z-10 bg-[var(--color-brand)]" aria-hidden />
-          <StarMark
-            size={320}
-            opacity={0.07}
-            className="pointer-events-none absolute -top-16 -right-16 -z-10"
+          <div
+            className="absolute inset-0 -z-10 bg-[var(--color-brand)]"
+            aria-hidden
           />
+          {/* Same star as the home hero, bottom-left. */}
           <StarMark
-            size={140}
-            opacity={0.06}
-            className="pointer-events-none absolute bottom-8 left-1/3 -z-10"
+            size={260}
+            opacity={0.08}
+            className="pointer-events-none absolute -bottom-16 -left-14 -z-10"
           />
         </>
       )}
+      {/* Type, spacing and controls match the home hero's text column. */}
       <div
         className={`page-wrap relative ${
-          isHome ? "py-16 min-[621px]:py-24" : "py-16 min-[621px]:py-[72px]"
+          isHome
+            ? "py-16 min-[621px]:py-24"
+            : "py-14 min-[621px]:py-20 min-[901px]:py-24"
         }`}
       >
         {eyebrow ? (
@@ -141,26 +159,23 @@ export function PageHero({
             {eyebrow}
           </Eyebrow>
         ) : null}
-        <h1
-          className={`mt-[18px] font-display font-semibold tracking-[-0.02em] text-[var(--color-cream)] ${
-            isHome
-              ? "max-w-[17ch] text-[40px] leading-[1.03] min-[621px]:text-[70px]"
-              : "max-w-[18ch] text-[38px] leading-[1.06] min-[621px]:text-[56px]"
-          }`}
-        >
+        <h1 className="mt-[18px] max-w-[17ch] font-display text-[40px] leading-[1.03] font-semibold tracking-[-0.02em] text-[var(--color-cream)] min-[621px]:text-[56px] min-[1200px]:text-[62px]">
           {title}
+          {titleSuffix ? (
+            <span className="mt-2 block text-[24px] leading-[1.15] font-medium tracking-[-0.01em] text-[var(--color-gold-light)] min-[621px]:text-[30px]">
+              {titleSuffix}
+            </span>
+          ) : null}
         </h1>
         {subtitle ? (
-          <p
-            className={`mt-6 max-w-[50ch] text-h4 leading-[1.65] text-[rgb(250_248_245/0.94)] ${
-              isHome ? "min-[621px]:text-[19.5px]" : ""
-            }`}
-          >
+          <p className="mt-6 max-w-[52ch] text-h4 leading-[1.65] text-[rgb(250_248_245/0.94)]">
             {subtitle}
           </p>
         ) : null}
         {actions ? (
-          <div className="mt-9 flex flex-wrap gap-3.5">{actions}</div>
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3.5">
+            {actions}
+          </div>
         ) : null}
         {pills?.length ? (
           <ul className="mt-8 flex flex-wrap gap-2.5">
@@ -168,7 +183,7 @@ export function PageHero({
               <li key={pill.href}>
                 <a
                   href={pill.href}
-                  className="inline-flex rounded-full border border-[rgb(250_248_245/0.35)] px-4 py-2 text-small font-semibold text-[var(--color-cream)] hover:border-[var(--color-gold-light)] hover:text-[var(--color-gold-light)]"
+                  className="inline-flex items-center rounded-full border border-[rgb(250_248_245/0.28)] px-4 py-2 text-small text-[var(--color-cream)] hover:border-[var(--color-gold-light)] hover:text-[var(--color-cream)]"
                 >
                   {pill.label}
                 </a>
@@ -176,6 +191,7 @@ export function PageHero({
             ))}
           </ul>
         ) : null}
+        {footnote ? <div className="mt-8">{footnote}</div> : null}
       </div>
       <div className="hero-gold-rule relative" aria-hidden />
     </section>

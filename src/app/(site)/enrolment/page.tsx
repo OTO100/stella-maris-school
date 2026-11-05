@@ -16,24 +16,60 @@ export const revalidate = 60;
 export const metadata: Metadata = PAGE_META.enrolment;
 
 const WHY_FALLBACK = [
-  { title: "A strong academic focus", body: "Structured literacy and maths, sequenced year by year, with clear reporting twice a year." },
-  { title: "Founded on the Marian Values", body: "Faith, love, wisdom, belonging, guardianship and service, explicit in our environment every day." },
-  { title: "Support for every learner", body: "A collaborative approach with our SENCo, teachers and whānau to reduce barriers to learning." },
-  { title: "A community based on family", body: "Students, teachers, parents and extended family, committed together to our young people." },
+  {
+    title: "A strong academic focus",
+    body: "Structured literacy and maths, sequenced year by year, with clear reporting twice a year.",
+  },
+  {
+    title: "Founded on the Marian Values",
+    body: "Faith, love, wisdom, belonging, guardianship and service, explicit in our environment every day.",
+  },
+  {
+    title: "Support for every learner",
+    body: "A collaborative approach with our SENCo, teachers and whānau to reduce barriers to learning.",
+  },
+  {
+    title: "A community based on family",
+    body: "Students, teachers, parents and extended family, committed together to our young people.",
+  },
 ];
 
 const STEPS_FALLBACK = [
-  { title: "Read the enrolment scheme", body: "Our scheme sets out the home zone and the preference categories that apply to a state-integrated Catholic school." },
-  { title: "Visit us", body: "Come and see learning in action and meet our principal. Contact the office to arrange a time that suits." },
-  { title: "Submit your application", body: "Complete the enrolment application with your supporting documents. The office will confirm what's needed, including a preference certificate where it applies." },
+  {
+    title: "Read the enrolment scheme",
+    body: "Our scheme sets out the home zone and the preference categories that apply to a state-integrated Catholic school.",
+  },
+  {
+    title: "Visit us",
+    body: "Come and see learning in action and meet our principal. Contact the office to arrange a time that suits.",
+  },
+  {
+    title: "Submit your application",
+    body: "Complete the enrolment application with your supporting documents. The office will confirm what's needed, including a preference certificate where it applies.",
+  },
 ];
 
 const FEE_FALLBACK = [
-  { title: "Attendance dues", body: "Set by the proprietor and compulsory for state-integrated schools. They fund the buildings and property, not teaching." },
-  { title: "Curriculum charges", body: "For specific activities such as trips, camp and swimming, charged as they arise." },
-  { title: "Voluntary contributions", body: "Genuinely voluntary — they help fund resources beyond what the school's operational grant covers." },
-  { title: "Financial assistance", body: "Cost should never be the reason a child misses out. Speak to the office in confidence about payment plans or assistance." },
-  { title: "Paying fees", body: "School fees are paid online or at the school office. They are not paid through Kindo." },
+  {
+    title: "Attendance dues",
+    body: "Set by the proprietor and compulsory for state-integrated schools. They fund the buildings and property, not teaching.",
+  },
+  {
+    title: "Curriculum charges",
+    body: "For specific activities such as trips, camp and swimming, charged as they arise.",
+  },
+  {
+    title: "Voluntary contributions",
+    body: "Genuinely voluntary — they help fund resources beyond what the school's operational grant covers.",
+  },
+  {
+    title: "Financial assistance",
+    body: "Cost should never be the reason a child misses out. Speak to the office in confidence about payment plans or assistance.",
+  },
+  {
+    title: "Paying fees",
+    body: "School fees are paid online or at the school office. They are not paid through Kindo.",
+  },
 ];
 
 type PackDocument = {
@@ -72,15 +108,28 @@ export default async function EnrolmentPage() {
   const scheme = schemeDoc.url;
   const handbook = handbookDoc.url;
   const phone = (settings?.contactPhone as string | undefined) ?? "09 427 9189";
-  const email = (settings?.contactEmail as string | undefined) ?? "achieve@stellamaris.school.nz";
-  const address = (settings?.contactAddress as string | undefined) ?? "50 Silverdale Street, Silverdale 0944";
-  const why = (copy?.whyCards as typeof WHY_FALLBACK | undefined)?.filter((item) => item.title) ?? WHY_FALLBACK;
-  const steps = (copy?.applicationSteps as typeof STEPS_FALLBACK | undefined)?.filter((item) => item.title) ?? STEPS_FALLBACK;
-  const packDocuments = ((copy?.packDocuments as PackDocument[] | null) ?? []).filter(
-    (doc) => doc?.fileUrl,
-  );
+  const email =
+    (settings?.contactEmail as string | undefined) ??
+    "achieve@stellamaris.school.nz";
+  const address =
+    (settings?.contactAddress as string | undefined) ??
+    "50 Silverdale Street, Silverdale 0944";
+  const why =
+    (copy?.whyCards as typeof WHY_FALLBACK | undefined)?.filter(
+      (item) => item.title,
+    ) ?? WHY_FALLBACK;
+  const steps =
+    (copy?.applicationSteps as typeof STEPS_FALLBACK | undefined)?.filter(
+      (item) => item.title,
+    ) ?? STEPS_FALLBACK;
+  const packDocuments = (
+    (copy?.packDocuments as PackDocument[] | null) ?? []
+  ).filter((doc) => doc?.fileUrl);
   const packFileUrl = copy?.packFileUrl as string | undefined;
-  const fees = (copy?.feeRows as typeof FEE_FALLBACK | undefined)?.filter((item) => item.title) ?? FEE_FALLBACK;
+  const fees =
+    (copy?.feeRows as typeof FEE_FALLBACK | undefined)?.filter(
+      (item) => item.title,
+    ) ?? FEE_FALLBACK;
 
   return (
     <>
@@ -96,8 +145,11 @@ export default async function EnrolmentPage() {
             <a href="#apply" className="btn-gold">
               How to apply <span aria-hidden>→</span>
             </a>
-            <Link href="/contact" className="btn-outline-cream">
-              Book a school tour
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 py-2 font-semibold text-[var(--color-cream)] hover:text-[var(--color-gold-light)]"
+            >
+              Book a school tour <span aria-hidden>→</span>
             </Link>
           </>
         }
@@ -134,7 +186,10 @@ export default async function EnrolmentPage() {
                 </li>
               ))}
             </ul>
-            <Link href="/about#principal" className="mt-6 inline-flex items-center gap-2 text-copy font-semibold">
+            <Link
+              href="/about#principal"
+              className="mt-6 inline-flex items-center gap-2 text-copy font-semibold"
+            >
               Read the principal's message <span aria-hidden>→</span>
             </Link>
           </div>
@@ -159,22 +214,33 @@ export default async function EnrolmentPage() {
                 <span className="flex size-11 items-center justify-center rounded-full bg-[var(--color-brand)] font-display text-h4 text-[var(--color-cream)]">
                   {index + 1}
                 </span>
-                <h3 className="mt-[18px] text-h3 leading-[1.2]">{step.title}</h3>
+                <h3 className="mt-[18px] text-h3 leading-[1.2]">
+                  {step.title}
+                </h3>
                 <p className="mt-2.5 text-base leading-[1.65] text-[var(--color-ink-muted)]">
                   {step.body}
                 </p>
                 {index === 0 ? (
-                  <a href={scheme} className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
+                  <a
+                    href={scheme}
+                    className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold"
+                  >
                     Enrolment scheme PDF <span aria-hidden>↓</span>
                   </a>
                 ) : null}
                 {index === 1 ? (
-                  <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
+                  <Link
+                    href="/contact"
+                    className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold"
+                  >
                     Arrange a visit <span aria-hidden>→</span>
                   </Link>
                 ) : null}
                 {index === 2 ? (
-                  <a href={`mailto:${email}`} className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold">
+                  <a
+                    href={`mailto:${email}`}
+                    className="mt-4 inline-flex items-center gap-1.5 text-copy font-semibold"
+                  >
                     Request the forms <span aria-hidden>→</span>
                   </a>
                 ) : null}
@@ -258,10 +324,7 @@ export default async function EnrolmentPage() {
                   "Everything you need to read before applying, including preference of enrolment, attendance dues and financial assistance."}
               </p>
               {packFileUrl ? (
-                <a
-                  href={`${packFileUrl}?dl=`}
-                  className="btn-brand mt-[26px]"
-                >
+                <a href={`${packFileUrl}?dl=`} className="btn-brand mt-[26px]">
                   Download the whole pack <span aria-hidden>↓</span>
                 </a>
               ) : null}
@@ -281,17 +344,24 @@ export default async function EnrolmentPage() {
                     className="group flex items-start justify-between gap-6 py-5 text-[var(--color-ink)] hover:text-[var(--color-brand)]"
                   >
                     <span>
-                      <span className="block text-h4 font-semibold">{doc.title}</span>
+                      <span className="block text-h4 font-semibold">
+                        {doc.title}
+                      </span>
                       {doc.description ? (
                         <span className="mt-1.5 block text-base leading-[1.65] text-[var(--color-ink-muted)]">
                           {doc.description}
                         </span>
                       ) : null}
                       <span className="mt-1.5 block text-small text-[var(--color-faint)]">
-                        {["PDF", fileSize(doc.size)].filter(Boolean).join(" · ")}
+                        {["PDF", fileSize(doc.size)]
+                          .filter(Boolean)
+                          .join(" · ")}
                       </span>
                     </span>
-                    <span aria-hidden className="pt-1 text-[var(--color-brand)]">
+                    <span
+                      aria-hidden
+                      className="pt-1 text-[var(--color-brand)]"
+                    >
                       ↓
                     </span>
                   </a>

@@ -55,7 +55,12 @@ const ENCOUNTERING_FALLBACK = [
   { title: "At assembly", body: "Special Character certificates" },
 ];
 
-type InfoLink = { label: string; href: string; external?: boolean; download?: boolean };
+type InfoLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  download?: boolean;
+};
 type InfoCard = {
   id?: string;
   title: string;
@@ -64,9 +69,7 @@ type InfoCard = {
 };
 
 function linkProps(link: InfoLink) {
-  return link.external
-    ? { target: "_blank", rel: "noreferrer noopener" }
-    : {};
+  return link.external ? { target: "_blank", rel: "noreferrer noopener" } : {};
 }
 
 const OUR_LADY_CAPTION =
@@ -75,7 +78,12 @@ const OUR_LADY_CAPTION =
 export default async function AboutPage() {
   let copy: Record<string, unknown> | null = null;
   let settings: Record<string, unknown> | null = null;
-  let staff: Array<{ name?: string | null; role?: string | null; email?: string | null; photo?: unknown }> = [];
+  let staff: Array<{
+    name?: string | null;
+    role?: string | null;
+    email?: string | null;
+    photo?: unknown;
+  }> = [];
 
   try {
     const [about, site, people] = await Promise.all([
@@ -103,7 +111,11 @@ export default async function AboutPage() {
     | { alt?: string | null; caption?: string | null }
     | undefined;
   const ourLadyUrl = ourLady
-    ? urlForImage(ourLady as never)?.width(640).fit("max").auto("format").url()
+    ? urlForImage(ourLady as never)
+        ?.width(640)
+        .fit("max")
+        .auto("format")
+        .url()
     : null;
   const ourLadyCaption = ourLady?.caption || OUR_LADY_CAPTION;
 
@@ -132,12 +144,19 @@ export default async function AboutPage() {
       id: "apps",
       title: "School apps",
       body: `Hero is our app for notices, learning updates and reporting. Kindo is used for ${(
-        (settings?.kindoDescription as string | undefined) || KINDO_DESCRIPTION_FALLBACK
+        (settings?.kindoDescription as string | undefined) ||
+        KINDO_DESCRIPTION_FALLBACK
       ).toLowerCase()} — it is not used for school fees or permission slips.`,
       links: [
-        { label: "Hero for iPhone & iPad", href: stores.appStore, external: true },
+        {
+          label: "Hero for iPhone & iPad",
+          href: stores.appStore,
+          external: true,
+        },
         { label: "Hero for Android", href: stores.playStore, external: true },
-        ...(kindoUrl ? [{ label: "Open Kindo", href: kindoUrl, external: true }] : []),
+        ...(kindoUrl
+          ? [{ label: "Open Kindo", href: kindoUrl, external: true }]
+          : []),
       ],
     },
     {
@@ -145,7 +164,11 @@ export default async function AboutPage() {
       title: "sKids before & after school care",
       body: "sKids runs before and after school care, and holiday care, from the school hall. Hours are 7:00am–8:30am and 2:45pm–6:00pm. Children need to be booked at least 24 hours in advance. For booking queries, phone 027 275 4377 during sKids hours.",
       links: [
-        { label: "Book with sKids", href: "https://www.skids.co.nz/stellamaris", external: true },
+        {
+          label: "Book with sKids",
+          href: "https://www.skids.co.nz/stellamaris",
+          external: true,
+        },
         { label: "Call 027 275 4377", href: "tel:+64272754377" },
       ],
     },
@@ -154,7 +177,11 @@ export default async function AboutPage() {
       title: "School buses",
       body: "Students can travel to and from school on bus routes run by Bayes Coachlines and Go Bus. Contact them directly about routes and charges.\n\nIf your child catches the bus on set days, please fill in a bus form, available from the school office.\n\nFor an occasional trip or a change to the usual schedule, call the office on 09 427 9189 before 2pm, or use the daily bus changes sheet at the office.\n\nThe bus bell rings at 2:40pm. Students meet in the school hall, where they are supervised and taken to their bus.",
       links: [
-        { label: "Bayes Coachlines school services", href: "https://www.bayescoachlines.co.nz/schoolservices", external: true },
+        {
+          label: "Bayes Coachlines school services",
+          href: "https://www.bayescoachlines.co.nz/schoolservices",
+          external: true,
+        },
         { label: "Bayes Coachlines: 09 426 5504", href: "tel:+6494265504" },
         { label: "Go Bus: 09 275 8811", href: "tel:+6492758811" },
         { label: "auckland@gobus.co.nz", href: "mailto:auckland@gobus.co.nz" },
@@ -185,7 +212,10 @@ export default async function AboutPage() {
     ? cmsCards.map((card) => {
         const links: InfoLink[] = (card.links ?? []).flatMap((link) => {
           const href =
-            link.fileUrl || sharedLinkUrl(link.sharedLink, settings) || link.url || "";
+            link.fileUrl ||
+            sharedLinkUrl(link.sharedLink, settings) ||
+            link.url ||
+            "";
           return href && link.label
             ? [
                 {
@@ -199,7 +229,9 @@ export default async function AboutPage() {
         // Cards like "policies" / "ero" fall back to the shared Site settings
         // link, so they match the rest of the site without per-card setup.
         const shared = sharedLinkForCard(card.key);
-        const sharedHref = shared ? sharedLinkUrl(shared.value, settings) : undefined;
+        const sharedHref = shared
+          ? sharedLinkUrl(shared.value, settings)
+          : undefined;
         if (!links.length && shared && sharedHref) {
           links.push({ label: shared.label, href: sharedHref, external: true });
         }
@@ -212,15 +244,18 @@ export default async function AboutPage() {
       })
     : fallbackCards;
   const encountering =
-    (copy?.encounteringChrist as { title?: string; body?: string }[] | undefined)?.filter(
-      (item) => item.title,
-    ) ?? ENCOUNTERING_FALLBACK;
+    (
+      copy?.encounteringChrist as
+        | { title?: string; body?: string }[]
+        | undefined
+    )?.filter((item) => item.title) ?? ENCOUNTERING_FALLBACK;
 
   return (
     <>
       <PageHero
         eyebrow="Our School"
-        title="Stella Maris — Star of the Sea"
+        title="Stella Maris"
+        titleSuffix="Star of the Sea"
         subtitle={
           (copy?.heroSubtitle as string | undefined) ??
           "A state-integrated Catholic primary school in Silverdale for Years 1–6. Our school is founded on the Marian Values, and all we undertake is underpinned by them."
@@ -242,7 +277,9 @@ export default async function AboutPage() {
             <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
               Welcome
             </p>
-            <h2 className="mt-3.5 text-h2 leading-[1.1]">Principal's message</h2>
+            <h2 className="mt-3.5 text-h2 leading-[1.1]">
+              Principal's message
+            </h2>
             {principalImage ? (
               <Image
                 src={principalImage.src}
@@ -313,7 +350,9 @@ export default async function AboutPage() {
               <p className="text-eyebrow font-semibold tracking-[0.16em] text-[var(--color-gold)] uppercase">
                 Special character
               </p>
-              <h2 className="mt-3.5 text-h2 leading-[1.1]">Our name, our faith</h2>
+              <h2 className="mt-3.5 text-h2 leading-[1.1]">
+                Our name, our faith
+              </h2>
               {ourLadyUrl ? (
                 <figure className="mt-6 max-w-[320px]">
                   <Image
@@ -339,11 +378,13 @@ export default async function AboutPage() {
               {Array.isArray(copy?.specialCharacter) ? (
                 <PortableTextBlock value={copy.specialCharacter} />
               ) : (
-                CHARACTER_FALLBACK.map((para) => <p key={para.slice(0, 32)}>{para}</p>)
+                CHARACTER_FALLBACK.map((para) => (
+                  <p key={para.slice(0, 32)}>{para}</p>
+                ))
               )}
               <blockquote className="rounded-2xl border border-[var(--color-border)] border-l-4 border-l-[var(--color-gold)] bg-[var(--color-surface)] px-7 py-6 text-h4 leading-[1.65] italic">
                 {(copy?.specialCharacterQuote as string | undefined) ??
-                  'Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school\'s Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”'}
+                  "Religious Education in Catholic schools “provides a foundation of knowledge which works alongside the whole school's Catholic Special Character, which helps form their understanding of what it means to be a disciple of Jesus and a member of the Catholic Church.”"}
                 <cite className="mt-3.5 block font-sans text-small font-semibold tracking-[0.04em] text-[var(--color-faint)] not-italic">
                   {(copy?.specialCharacterQuoteCite as string | undefined) ??
                     "Tō Tātou Whakapono — Our Faith, 2021"}
@@ -352,7 +393,9 @@ export default async function AboutPage() {
             </div>
           </div>
           <div className="mt-16">
-            <h3 className="text-h2sm tracking-[-0.015em]">Encountering Christ</h3>
+            <h3 className="text-h2sm tracking-[-0.015em]">
+              Encountering Christ
+            </h3>
             <p className="mt-3 max-w-[62ch] text-body leading-[1.65] text-[var(--color-ink-muted)]">
               Alongside the Religious Education lessons that occur most days, we
               provide our students with opportunities to encounter Christ.
@@ -369,7 +412,8 @@ export default async function AboutPage() {
                   <p className="mt-2.5 font-display text-h4 leading-[1.3] text-[var(--color-heading)]">
                     {item.body?.split(" — ")[0] ?? item.body}
                   </p>
-                  {(item as { extra?: string }).extra || item.body?.includes(" — ") ? (
+                  {(item as { extra?: string }).extra ||
+                  item.body?.includes(" — ") ? (
                     <p className="mt-2 text-small leading-[1.6] text-[var(--color-ink-muted)]">
                       {(item as { extra?: string }).extra ??
                         item.body?.split(" — ").slice(1).join(" — ")}
@@ -450,9 +494,9 @@ export default async function AboutPage() {
           <div>
             <p className="text-body leading-[1.65] text-[var(--color-ink)]">
               We follow the New Zealand Curriculum and, as a Catholic school,{" "}
-              <em>Tō Tātou Whakapono — Our Faith</em>. Literacy is taught through
-              Little Learners Love Literacy in Years 0–3 and The Code in Years
-              4–6; maths through Maths — No Problem!
+              <em>Tō Tātou Whakapono — Our Faith</em>. Literacy is taught
+              through Little Learners Love Literacy in Years 0–3 and The Code in
+              Years 4–6; maths through Maths — No Problem!
             </p>
             <ul className="mt-[22px] flex flex-wrap gap-2">
               {[
@@ -536,7 +580,8 @@ export default async function AboutPage() {
                           className="inline-flex items-center gap-1.5 text-small font-semibold"
                           {...linkProps(link)}
                         >
-                          {link.label} <span aria-hidden>{link.external ? "↗" : "→"}</span>
+                          {link.label}{" "}
+                          <span aria-hidden>{link.external ? "↗" : "→"}</span>
                         </a>
                       ),
                     )}
@@ -549,7 +594,10 @@ export default async function AboutPage() {
       </section>
 
       <CTASection
-        heading={(copy?.ctaHeading as string | undefined) ?? "Come and see learning in action"}
+        heading={
+          (copy?.ctaHeading as string | undefined) ??
+          "Come and see learning in action"
+        }
         body={
           (copy?.ctaBody as string | undefined) ??
           "Contact the office to arrange a visit, or start an enrolment enquiry."
