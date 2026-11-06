@@ -36,7 +36,7 @@ export default async function AbsencesPage() {
   const email =
     (settings?.absenceEmail as string | undefined) || ABSENCE_EMAIL_FALLBACK;
   const hours =
-    (settings?.officeHours as string | undefined) ?? "8:00am – 3:30pm";
+    (settings?.officeHours as string | undefined) ?? "Monday – Friday, 8:15am – 3:30pm";
   const attendancePlanUrl = copy?.attendancePlanUrl as string | undefined;
   const whatToTell =
     (copy?.whatToTell as string[] | undefined)?.filter(Boolean) ??
