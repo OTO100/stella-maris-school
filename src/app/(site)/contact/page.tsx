@@ -52,7 +52,7 @@ export default async function ContactPage() {
   const email =
     (settings?.contactEmail as string | undefined) ?? "achieve@stellamaris.school.nz";
   const hours =
-    (settings?.officeHours as string | undefined) ?? "8:00am – 3:30pm, term time";
+    (settings?.officeHours as string | undefined) ?? "Monday – Friday, 8:15am – 3:30pm";
 
   return (
     <>

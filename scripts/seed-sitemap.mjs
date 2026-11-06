@@ -96,7 +96,7 @@ const siteSettingsDoc = {
     { _key: "t2027-3", year: 2027, term: 3, start: "2027-07-19", end: "2027-09-24" },
     { _key: "t2027-4", year: 2027, term: 4, start: "2027-10-11", end: "2027-12-17" }
   ],
-  officeHours: "8:00am – 3:30pm",
+  officeHours: "Monday – Friday, 8:15am – 3:30pm",
   homeHeroEyebrow: "Silverdale, Auckland · Years 1–6",
   homeHeroTitle: "Stella Maris Catholic Primary School",
   homeHeroSubtitle:
